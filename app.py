@@ -1,31 +1,27 @@
+import os
 import gradio as gr
 from google import genai
-import os
+from google.genai import types
 from dotenv import load_dotenv
+
 load_dotenv()
 
 # Configure the Gemini client
 client = genai.Client(api_key=os.environ.get("GEMINI_API_KEY"))
+chat = client.chats.create(
+        model="gemini-2.5-flash"
+    )
 
-def chat(user_message, history):
+def respond(user_message, history):
     """Send a message to Gemini and return the response."""
     
-    # Build the full conversation as a single prompt
-    conversation = ""
-    for human, assistant in history:
-        conversation += f"User: {human}\nAssistant: {assistant}\n"
-    conversation += f"User: {user_message}\nAssistant:"
-    
-    response = client.models.generate_content(
-        model="gemini-2.5-flash",
-        contents=conversation
-    )
-    
+    response = chat.send_message(user_message)
+
     return response.text
 
 # Build the Gradio interface
 demo = gr.ChatInterface(
-    fn=chat,
+    fn=respond,
     title="Gemini Chat",
     description="A simple chat interface powered by Google Gemini",
     examples=[
