@@ -19,7 +19,7 @@ except:
 
 # If set to False, it will use c files instead of pyx files.
 # IMPORTANT: The c files have to already exist before this works!
-USE_CYTHON = False
+USE_CYTHON = True
 
 # Setup the file extensions
 SOURCE_EXTENSION = ".pyx" if CYTHON_AVAILABLE and USE_CYTHON else ".c"
