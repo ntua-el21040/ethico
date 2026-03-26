@@ -1,5 +1,5 @@
 from ethics.plans.semantics import Situation
-sit = Situation("./cases/plans/flowers.yaml")
+sit = Situation("../cases/plans/flowers.yaml")
 
 from ethics.plans.principles import KantianHumanity, DoNoHarm, DoNoInstrumentalHarm, Utilitarianism, Deontology, GoalDeontology, DoubleEffectPrinciple, AvoidAnyHarm, AvoidAvoidableHarm
 

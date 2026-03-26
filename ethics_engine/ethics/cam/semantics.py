@@ -100,7 +100,7 @@ class CausalNetwork(Model):
         s.append(self.causal_network)
         for f in additional:
             s.append(f)
-        return set(satisfiable(Formula.makeConjunction(s), report_model = True))
+        return set(satisfiable(Formula.makeConjunction(s), report_model = True)) # pyright: ignore[reportArgumentType]
             
     def __represent_causal_model(self):
         formula = []

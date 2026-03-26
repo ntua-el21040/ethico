@@ -20,8 +20,6 @@ perm = sit.evaluate(Deontology)
 print("Deontology: ", perm)
 print("Deontology Explanation:", sit.explain(Deontology))
 
-
-
 perm = sit.evaluate(DoNoHarm)
 print("DoNoHarm: ", perm)
 print("DoNoHarm Explanation:", sit.explain(DoNoHarm))

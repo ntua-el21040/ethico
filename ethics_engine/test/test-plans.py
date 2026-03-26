@@ -67,7 +67,7 @@ print("DoubleEffectPrinciple: ", perm)
 planner = MoralPlanner(sit, DoNoHarm)
 p = planner.generate_plan()
 if p:
-    print("Plannedddd: ", p.plan)
+    print("Planned: ", p.plan)
 else:
     print("No Plan found")
 

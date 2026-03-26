@@ -2,7 +2,6 @@ from ethics.cam.semantics import *
 from ethics.language import *
 from ethics.tools import *
 from ethics.explanations import generate_reasons, generate_inus_reasons
-#from ethics.argumentation import ArgModel, ArgGraph, ArgSolver
 
 class Principle(object):
     """
@@ -49,8 +48,11 @@ class DoubleEffectPrinciple(Principle):
 
     # Condition 1 - The Act Itself Must Be Morally Good or Indifferent
     def _condition1(self):
-        for a in self.model.get_all_actions():
-            return GEq(U(a), 0)
+        actions = self.model.get_performed_actions()
+        print(actions)
+        if not actions:
+            return True
+        return Formula.makeConjunction([GEq(U(a), 0) for a in actions])
 
     # Condition 2a - The Positive Consequence Must Be Intended ...
     def _condition2a(self):
@@ -129,17 +131,21 @@ class UtilitarianPrinciple(Principle):
         self.label = "Utilitarianism"
 
     def _check(self):
-        u = U(Formula.makeConjunction(self.model.get_actual_consequences()))
-        v = []
-        for w in self.model.alternatives:
-            v.append(U(Formula.makeConjunction(w.get_actual_consequences())))
-        f = None
-        for w in v:
-            f = GEq(u, w) if f is None else And(f, GEq(u, w))
-        if f is None: # no alternatives
-            f = True
-        self.formulae = [f]
-        self.result = [self.model.models(f)]
+        utility = U(Formula.makeConjunction(self.model.get_actual_consequences()))
+        
+        alternatives_utility = []
+        for alternative in self.model.alternatives:
+            alternatives_utility.append(U(Formula.makeConjunction(alternative.get_actual_consequences())))
+            
+        formula = None
+        for alternative_utility in alternatives_utility:
+            formula = GEq(utility, alternative_utility) if formula is None else And(formula, GEq(utility, alternative_utility))
+        if formula is None: 
+            formula = True
+        
+        self.formulae = [formula]
+        self.result = [self.model.models(formula)]
+        
         return self.result
 
     def permissible(self):
@@ -397,11 +403,13 @@ class KantianHumanityPrincipleReading1(Principle):
         self.label = "KantianHumanityPrincipleReading1"
 
     def _check(self):
-        f1 = Impl(Means(self.model.patients[0]), End(self.model.patients[0]))
-        for p in self.model.patients[1:]:
-            f1 = And(f1, Impl(Means(p), End(p)))
-        self.formulae = [f1]
-        self.result = [self.model.models(f1)]
+        if not self.model.patients:
+            print("No moral patients provided for KantianHumanityPrinciple")
+            return True 
+
+        formulas = [Impl(Means(p), End(p)) for p in self.model.patients]
+        self.formulae = [formulas]
+        self.result = [self.model.models(formulas)]
         return self.result
 
     def permissible(self):
@@ -410,7 +418,7 @@ class KantianHumanityPrincipleReading1(Principle):
         self._check()
         self.is_permissible = self.result == [True]
         return self.is_permissible
-        
+
 
 class KantianHumanityPrinciple(KantianHumanityPrincipleReading1):
     """
@@ -558,49 +566,3 @@ class ParetoPrinciple(Principle):
         self._check()
         self.is_permissible = self.result == [True]
         return self.is_permissible
-
-"""
-class DiscoursePrinciple(Principle):
-
-    def __init__(self, model):
-        super(DiscoursePrinciple, self).__init__(model)
-        self.label = "DiscoursePrinciple"
-        
-        self.dialog = None
-        if isinstance(model, str):
-            self.dialog = ArgModel(model).dialog
-        elif isinstance(model, ArgGraph):
-            self.dialog = model
-        elif isinstance(model, ArgModel):
-            self.dialog = model.dialog
-        else:
-            print("Model ERROR, model type was: " + repr(type(model)))
-
-    def permissible(self):
-        if self.is_permissible is not None:
-            return self.is_permissible
-        self.is_permissible = self.dialog.satisfiesDiscoursePrinciple(ArgSolver.toConjunction(self.dialog.proposition))
-        return self.is_permissible
-
-class UniversalityPrinciple(Principle):
-
-    def __init__(self, model):
-        super(UniversalityPrinciple, self).__init__(model)
-        self.label = "UniversalityPrinciple"
-        
-        self.dialog = None
-        if isinstance(model, str):
-            self.dialog = ArgModel(model).dialog
-        elif isinstance(model, ArgGraph):
-            self.dialog = model
-        elif isinstance(model, ArgModel):
-            self.dialog = model.dialog
-        else:
-            print("Model ERROR, model type was: " + repr(type(model)))
-
-    def permissible(self):
-        if self.is_permissible is not None:
-            return self.is_permissible
-        self.is_permissible = self.dialog.satisfiesUniversalityPrinciple(ArgSolver.toConjunction(self.dialog.proposition))
-        return self.is_permissible
-"""

@@ -1,29 +1,24 @@
 {
-    "description": "Strategic bomber bombs an arms factory to weaken the enemy and win the war. The school next to the factory is inevitably hit.",
+    "description":"Terror bomber bombs a school to weaken the enemy morale and win the war.",
     "actions": ["bomb", "refrain"],
     "background": [],
-    "consequences": ["factory_hit", "school_hit", "children_die", "army_demoralized", "army_weak", "war_over"],
+    "consequences": ["school_hit", "children_die", "army_demoralized", "army_weak", "war_over"],
     "mechanisms": {
-        "factory_hit": "'bomb'",
         "school_hit": "'bomb'",
         "children_die": "'school_hit'",
         "army_demoralized": "'children_die'",
-        "army_weak": "'factory_hit'",
-        "war_over": "Or('army_demoralized', 'army_weak')"
+        "army_weak": "'army_demoralized",
+        "war_over": "'army_demoralized'"
     },
     "utilities": {
         "bomb": 0,
-        "refrain": 0,
-        "factory_hit": 10,
-        "school_hit": -1,
-        "children_die": -20,
-        "army_demoralized": 5,
-        "army_weak": 50,
-        "war_over": 100,
-        "Not('war_over')": -100
+        "school_hit": 0,
+        "children_die": -10,
+        "army_demoralized": 0,
+        "war_over": 100
     },
     "intentions": {
-        "bomb": ["bomb", "factory_hit", "army_weak", "war_over"],
+        "bomb": ["bomb", "children_die", "war_over"],
         "refrain": ["refrain"]
     },
     "goals": {
