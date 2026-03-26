@@ -403,14 +403,14 @@ class KantianHumanityPrincipleReading1(Principle):
         self.label = "KantianHumanityPrincipleReading1"
 
     def _check(self):
-        if not self.model.patients:
-            print("No moral patients provided for KantianHumanityPrinciple")
-            return True 
-
-        formulas = [Impl(Means(p), End(p)) for p in self.model.patients]
-        self.formulae = [formulas]
-        self.result = [self.model.models(formulas)]
+        f1 = True 
+        for p in self.model.patients:
+            f1 = And(f1, Impl(Means(p), End(p)))
+            
+        self.formulae = [f1]
+        self.result = [self.model.models(f1)]
         return self.result
+
 
     def permissible(self):
         if self.is_permissible is not None:
@@ -441,9 +441,10 @@ class KantianHumanityPrincipleReading2(Principle):
         self.label = "KantianHumanityPrincipleReading2"
 
     def _check(self):
-        f1 = Impl(Means2(self.model.patients[0]), End(self.model.patients[0]))
-        for p in self.model.patients[1:]:
+        f1 = True 
+        for p in self.model.patients:
             f1 = And(f1, Impl(Means2(p), End(p)))
+            
         self.formulae = [f1]
         self.result = [self.model.models(f1)]
         return self.result
