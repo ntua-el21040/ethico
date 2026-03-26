@@ -8,6 +8,9 @@ mechanisms:
 goals:
     giveflowers: [alicehappy]
     refraining: []
+utilities:
+    alicehappy: 1
+    celiahappy: 1
 affects:
     giveflowers: []
     celiahappy: [[celia, +]]

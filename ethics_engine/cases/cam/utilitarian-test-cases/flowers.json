@@ -1,0 +1,45 @@
+{
+  "description": "Flower Example",
+  "actions": [
+    "giveflowers",
+    "refrain"
+  ],
+  "background": [],
+  "patients": [
+    "celia",
+    "alice"
+  ],
+  "consequences": [
+    "celiahappy",
+    "alicehappy"
+  ],
+  "mechanisms": {
+    "celiahappy": "giveflowers",
+    "alicehappy": "celiahappy"
+  },
+  "goals": {
+    "giveflowers": [
+      "alicehappy"
+    ],
+    "refrain": []
+  },
+  "utilities": {
+    "alicehappy": 1,
+    "celiahappy": 1
+  },
+  "affects": {
+    "giveflowers": [],
+    "celiahappy": [
+      ["celia", "+"]
+    ],
+    "alicehappy": [
+      ["alice", "+"]
+    ],
+    "Not('celiahappy')": [
+      ["celia", "-"]
+    ],
+    "Not('alicehappy')": [
+      ["alice", "-"]
+    ]
+  }
+}

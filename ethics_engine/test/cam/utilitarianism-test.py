@@ -20,12 +20,16 @@ for filename in os.listdir(folder_path):
         model = json.load(f)
     
     action = [a for a in model["actions"] if a!="refrain"][0]
-    
+    background = model["background"]
+
     action_world = {action:1, "refrain":0}
     inaction_world = {action:0, "refrain":1}
+    for b in background:
+        action_world[b] = 1
+        inaction_world[b] = 1
+        
     action_situation = CausalModel(filepath, action_world)
     inaction_situation = CausalModel(filepath, inaction_world)
-
     action_situation.alternatives.append(inaction_situation)
     inaction_situation.alternatives.append(action_situation)    
     
