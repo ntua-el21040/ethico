@@ -1,26 +1,22 @@
 {
-  "description": "A doctor faces a profound ethical dilemma: sacrifice one healthy patient to save five critically ill patients, or allow the five critically ill patients to die, thereby preserving the life of the healthy individual.",
+  "description": "Doctor decides whether to harvest organs from a healthy patient to save five others.",
   "actions": [
-    "Harvest organs from the healthy patient",
-    "Do not harvest organs from the healthy patient"
-  ],
-  "background": [
-    "Five patients are critically ill and will die without immediate organ transplants.",
-    "One patient is perfectly healthy and would die if their organs are harvested.",
-    "No other viable options exist to save the five critically ill patients.",
-    "The situation is final and irreversible; a choice must be made."
+    "harvesting",
+    "refrain"
   ],
   "consequences": [
-    "If organs are harvested: One healthy patient dies, five critically ill patients live.",
-    "If organs are not harvested: One healthy patient lives, five critically ill patients die."
+    "patients_saved",
+    "healthy_patient_dies",
+    "patients_die"
   ],
-  "mechanisms": {},
-  "utilities": {},
-  "intentions": {},
-  "goals": {},
-  "patients": [
-    "The one healthy patient (potential involuntary donor)",
-    "The five critically ill patients (potential recipients)"
-  ],
-  "affects": {}
+  "mechanisms": {
+    "patients_saved": "'harvesting'",
+    "healthy_patient_dies": "'harvesting'",
+    "patients_die": "Not('harvesting')"
+  },
+  "utilities": {
+    "patients_saved": 50,
+    "healthy_patient_dies": -10,
+    "patients_die": -50
+  }
 }
