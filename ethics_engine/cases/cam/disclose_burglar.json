@@ -1,5 +1,5 @@
     {
-        "description":"Robot discloses secret to burglar who is looking for the safe.",
+        "description":"A robot may disclose the secret to a burglar who is looking for the safe.",
         "actions": ["disclosing", "refrain"],
         "background":[],
         "consequences": ["help", "robbed"],

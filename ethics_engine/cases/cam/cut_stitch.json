@@ -1,0 +1,19 @@
+{
+    "description": "Slice's perspective on the dilemma: Mr. Patient needs a life-saving operation from two surgeons, Ms. Slice and Mr. Patch. If left unattended, Patient will die, though not painfully. If Slice cuts and Patch stitches, then he will survive. But cutting without stitching would cause his death to be agonizing, as would stitching without cutting. As it happens, Slice and Patch will each go golfing, regardless of what the other does.",
+    "actions": [
+        "cut",
+        "refrain"
+    ],
+    "consequences": [
+        "agonizing"
+    ],
+    "mechanisms": {
+        "agonizing": "'cut'"
+    },
+    "utilities": {
+        "cut": 0,
+        "Not('cut')": 0,
+        "agonizing": -2,
+        "Not('agonizing')": 0
+    }
+}

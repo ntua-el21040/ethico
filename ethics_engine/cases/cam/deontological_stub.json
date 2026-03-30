@@ -1,6 +1,6 @@
     {
-        "description":"Test Deontological Principle",
-        "actions": ["a1"],
+        "description":"A test case for the Deontological Principle. Doing a1 would cause both c1 and c2, but only c1 is intended.",
+        "actions": ["a1", "refrain"],
         "background":[],
         "consequences": ["c1", "c2"],
         "mechanisms": {

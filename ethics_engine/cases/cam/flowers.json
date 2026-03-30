@@ -1,5 +1,5 @@
 {
-  "description": "Flower Example",
+  "description": "Bob gives Alice flowers in order to make Celia happy when she sees that Alice is thrilled about the flowers. Alice being happy is not part of the goal of Bob’s action.",
   "actions": [
     "giveflowers",
     "refrain"

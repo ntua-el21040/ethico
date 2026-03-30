@@ -11,6 +11,7 @@ mechanisms:
     alive_3: 'alive_2' 
     alive_4: Or(Not('die_3'), And('doc1_4', 'doc2_4')) 
 utilities:
+    die_3: -1
 intentions:
     arrive1_0: [arrive1_0]
     arrive2_2: [arrive2_2]
