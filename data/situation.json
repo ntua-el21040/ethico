@@ -1,22 +1,25 @@
 {
-  "description": "Doctor decides whether to harvest organs from a healthy patient to save five others.",
+  "description": "Doctor decides whether to harvest organs from a healthy patient to save 5 others.",
   "actions": [
     "harvesting",
     "refrain"
   ],
   "consequences": [
-    "patients_saved",
+    "5_patients_saved",
     "healthy_patient_dies",
-    "patients_die"
+    "5_patients_die"
   ],
   "mechanisms": {
-    "patients_saved": "'harvesting'",
+    "5_patients_saved": "'harvesting'",
     "healthy_patient_dies": "'harvesting'",
-    "patients_die": "Not('harvesting')"
+    "5_patients_die": "Not('harvesting')"
   },
   "utilities": {
-    "patients_saved": 50,
-    "healthy_patient_dies": -10,
-    "patients_die": -50
+    "5_patients_saved": 5,
+    "Not('5_patients_saved')": 0,
+    "healthy_patient_dies": -1,
+    "Not('healthy_patient_dies')": 1,
+    "5_patients_die": -5,
+    "Not('5_patients_die')": 5
   }
 }

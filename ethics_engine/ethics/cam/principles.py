@@ -143,7 +143,7 @@ class UtilitarianPrinciple(Principle):
         if formula is None: 
             formula = True
         
-        self.formulae = [formula]
+        self.formulae = [formula]           
         self.result = [self.model.models(formula)]
         
         return self.result

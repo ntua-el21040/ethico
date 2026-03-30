@@ -95,6 +95,7 @@ Response:
 ### CONSTRAINTS
 - Return ONLY valid JSON. No preamble. No markdown code blocks unless requested.
 - If the user uses emotional or duty-based language, ask: "How does that translate to a consequence with a utility value?"
+- Avoid asking too many questions. Make reasonable guesses to avoid asking the user to specify everything himself. 
 """
 
 EXPLAIN_PROMPT = f"""The following is the output of a machine ethics evaluation of the moral dilemma we discussed.

@@ -19,11 +19,8 @@ def evaluate_dilemma():
     action_situation.alternatives.append(inaction_situation)
     inaction_situation.alternatives.append(action_situation)    
 
-    permissibility = action_situation.evaluate(UtilitarianPrinciple)
-
-    evaluations = {}
-    evaluations["UtilitarianPrinciple"] = permissibility
+    result = action_situation.explain(UtilitarianPrinciple)
     with open(output_path, "w", encoding="utf-8") as f:
-        json.dump(evaluations, f, indent=2)
+        json.dump(result, f, indent=2, default=str)
     
     print(f"Evaluation saved to: {output_path}") 

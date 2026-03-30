@@ -38,8 +38,7 @@ def analyse(message):
     
     try:
         json_data = json.loads(reply_text)
-        cam = CausalAgencyModel.model_validate_json(reply_text)
-        print(cam)
+        CausalAgencyModel.model_validate_json(reply_text)
         
         file_path = "./data/situation.json" 
         with open(file_path, "w", encoding="utf-8") as f:
@@ -61,7 +60,8 @@ def explain():
         return "No evaluation found. Please run ANALYSE first."
             
     EXPLAIN_PROMPT = f"""The following is the output of a machine ethics evaluation of the moral dilemma we discussed.
-    Each key is an ethical principle and the value is whether the action is permissible according to it.
+    Each dictionary contains the permissibility of the action according to an ethical principle and the sufficient, 
+    necessary and inus reasons for this evaluation. Reasons are presented in a first-order logic predicate format. 
 
     {json.dumps(evaluation, indent=2)}
 
@@ -105,9 +105,9 @@ demo = gr.ChatInterface(
     description="Describe your moral dilemma. When ready, type **ANALYSE** to generate a JSON object that models the dilemma. \
                  When ready, type **EXPLAIN** to evaluate the dilemma and generate an explanation of the results.",
     examples=[
-        "A doctor can save 5 patients by harvesting organs from one healthy patient.",
+        "A doctor can save 5 patients by harvesting organs from one healthy patient. If he does, the 5 patients are saved and the healthy one dies. Else, the 5 patients die.",
     ]
 )
 
 if __name__ == "__main__":
-    demo.launch()
+    demo.launch(share=False)
