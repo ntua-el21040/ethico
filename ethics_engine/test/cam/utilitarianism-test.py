@@ -7,8 +7,23 @@ import os
 GROUND_TRUTH = {
     "trolley-problem.json": True,
     "fatman-trolley-problem.json": True,
+    "mixed_trolley.json": True,
+    "atom_bomb_trolley.json": True,
     "disclose-burglar.json": False,
+    "deontological_stub.json": True,
+    "disclose_doctor.json": True,
+    "flowers.json": True,
+    "flowers_permissible.json": True,
+    "hijacked-dilemma.json": True,
+    "indianer.json": True,
+    "lying-robot.json": True,
+    "minimal_test.json": True,
+    "slice_patch.json": False,
+    "strategic_bomber.json": True,
+    "terror_bomber.json": True
 }
+
+
 DILEMMA_DIR = "/mnt/d/source/ethico/ethics_engine/cases/cam"
 
 
