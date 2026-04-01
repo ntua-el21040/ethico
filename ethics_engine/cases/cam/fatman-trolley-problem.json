@@ -1,7 +1,6 @@
 {
     "description":"The Fatman Trolley Case",
     "actions": ["push", "refrain"],
-    "background": ["tram_approaches"],
     "consequences": ["man_on_track", "tram_hits_man", "tram_stops", "five_survive"],
     "mechanisms": {
                     "man_on_track": "'push'",
