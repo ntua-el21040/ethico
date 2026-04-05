@@ -6,7 +6,7 @@ from dotenv import load_dotenv
 
 from src.validator import CausalAgencyModel, response_schema
 from src.evaluator import evaluate_dilemma
-from src.prompts import SYSTEM_PROMPT
+from src.prompts import SYSTEM_PROMPT, EXPLAIN_PROMPT
 
 
 # You must have a valid GROQ_API_KEY set in your .env file
@@ -55,15 +55,8 @@ def evaluate(message):
             evaluation = json.load(f)
     except FileNotFoundError:
         return "Evaluation failed. Please try again."
-        
-    EXPLAIN_PROMPT = f"""The following is the output of a machine ethics evaluation of the moral dilemma we discussed.
-    Each dictionary contains the permissibility of the action according to an ethical principle and the sufficient, 
-    necessary and inus reasons for this evaluation. Reasons are presented in a first-order logic predicate format. 
-
-    {json.dumps(evaluation, indent=2)}
-
-    Explain what each result means in plain language, relate it back to the dilemma the user described."""
-
+    
+    EXPLAIN_PROMPT.format(evaluation=json.dumps(evaluation, indent=2))
     chat_messages.append({"role": "user", "content": EXPLAIN_PROMPT})
     
     response = client.chat.completions.create(
