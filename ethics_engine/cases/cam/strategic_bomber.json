@@ -12,8 +12,6 @@
         "war_over": "Or('army_demoralized', 'army_weak')"
     },
     "utilities": {
-        "bomb": 0,
-        "refrain": 0,
         "factory_hit": 10,
         "school_hit": -1,
         "children_die": -20,

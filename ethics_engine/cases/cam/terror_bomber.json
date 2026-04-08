@@ -11,7 +11,6 @@
         "war_over": "'army_demoralized'"
     },
     "utilities": {
-        "bomb": 0,
         "school_hit": 0,
         "children_die": -10,
         "army_demoralized": 0,

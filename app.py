@@ -1,54 +1,51 @@
 import os
 import json
 import gradio as gr
-from groq import Groq
+from anthropic import Anthropic
 from dotenv import load_dotenv
 
-from src.validator import CausalAgencyModel, response_schema
+from src.validator import CausalAgencyModel, UtilitarianModel, response_schema
 from src.evaluator import evaluate_dilemma
-from src.prompts import SYSTEM_PROMPT, EXPLAIN_PROMPT
+from src.prompts import SYSTEM_PROMPT, EXPLAIN_PROMPT, EXTRACTION_PROMPT
 
-
-# You must have a valid GROQ_API_KEY set in your .env file
+# You must have a valid ANTHROPIC_API_KEY set in your .env file
 load_dotenv()
 
-client = Groq(api_key=os.environ.get("GROQ_API_KEY"))
-MODEL_NAME = "meta-llama/llama-4-scout-17b-16e-instruct" 
-chat_messages = [
-    {"role": "system", "content": SYSTEM_PROMPT}
-]
+client = Anthropic(
+    api_key=os.environ.get("ANTHROPIC_API_KEY"),
+)
+MODEL_NAME = "claude-haiku-4-5" 
+
+chat_messages = []
 
 def evaluate(message):
     """Handles extraction, evaluation, and explanation in a single step."""
     
-    # Step 1: Extract JSON
-    response = client.chat.completions.create(
+    response = client.messages.create(
         model=MODEL_NAME,
+        max_tokens=4096,
+        system=EXTRACTION_PROMPT,
         messages=chat_messages,
-        response_format={
-            "type": "json_schema",
-            "json_schema": {
-                "name": "dilemma_analysis",
+        output_config={
+             "format": {
+                "type": "json_schema",
                 "schema": response_schema
             }
         }
     )
-    
-    reply_text = response.choices[0].message.content
+
+    reply_text = response.content[0].text
     chat_messages.append({"role": "assistant", "content": reply_text})
     
     try:
         json_data = json.loads(reply_text)
         CausalAgencyModel.model_validate_json(reply_text)
-        
-        file_path = "./data/situation.json"
-        with open(file_path, "w", encoding="utf-8") as f:
-            json.dump(json_data, f, indent=2)
-            
     except json.JSONDecodeError:
         return "Failed to parse valid JSON."
-
-    # Step 2: Evaluate and explain
+    file_path = "./data/situation.json"
+    with open(file_path, "w", encoding="utf-8") as f:
+        json.dump(json_data, f, indent=2) 
+    
     evaluate_dilemma()
     try:
         with open("./data/evaluation.json", "r", encoding="utf-8") as f:
@@ -56,15 +53,17 @@ def evaluate(message):
     except FileNotFoundError:
         return "Evaluation failed. Please try again."
     
-    EXPLAIN_PROMPT.format(evaluation=json.dumps(evaluation, indent=2))
-    chat_messages.append({"role": "user", "content": EXPLAIN_PROMPT})
+    formatted_explain_prompt = EXPLAIN_PROMPT.format(evaluation=json.dumps(evaluation, indent=2))
+    chat_messages.append({"role": "user", "content": formatted_explain_prompt})
     
-    response = client.chat.completions.create(
+    response = client.messages.create(
         model=MODEL_NAME,
+        max_tokens=4096,
+        system=SYSTEM_PROMPT,
         messages=chat_messages
     )
     
-    reply_text = response.choices[0].message.content
+    reply_text = response.content[0].text
     chat_messages.append({"role": "assistant", "content": reply_text})
     return reply_text.strip()
 
@@ -76,12 +75,14 @@ def respond(message, history):
     if command == "EVALUATE":
         return evaluate(message)
     else:
-        response = client.chat.completions.create(
+        response = client.messages.create(
             model=MODEL_NAME,
+            max_tokens=4096,
+            system=SYSTEM_PROMPT,
             messages=chat_messages
         )
         
-        reply_text = response.choices[0].message.content
+        reply_text = response.content[0].text
         chat_messages.append({"role": "assistant", "content": reply_text})
         return reply_text.strip()
 

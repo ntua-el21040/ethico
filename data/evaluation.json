@@ -1,7 +1,0 @@
-{
-  "permissible": true,
-  "principle": "Utilitarianism",
-  "sufficient": "{GEq(U(And(And(And('healthy_patient_dies', '5_patients_live'), Not('healthy_patient_lives')), Not('5_patients_die'))), U(And(And(And('healthy_patient_lives', '5_patients_die'), Not('healthy_patient_dies')), Not('5_patients_live'))))}",
-  "necessary": "{GEq(U(And(And(And('healthy_patient_dies', '5_patients_live'), Not('healthy_patient_lives')), Not('5_patients_die'))), U(And(And(And('healthy_patient_lives', '5_patients_die'), Not('healthy_patient_dies')), Not('5_patients_live'))))}",
-  "inus": "{GEq(U(And(And(And('healthy_patient_dies', '5_patients_live'), Not('healthy_patient_lives')), Not('5_patients_die'))), U(And(And(And('healthy_patient_lives', '5_patients_die'), Not('healthy_patient_dies')), Not('5_patients_live'))))}"
-}

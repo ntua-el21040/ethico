@@ -21,9 +21,7 @@
     "d2": -1,
     "d1": -1,
     "Not('d2')": 1,
-    "Not('d1')": 1,
-    "pull": 0,
-    "refrain": 0
+    "Not('d1')": 1
   },
   "intentions": {
     "pull": [

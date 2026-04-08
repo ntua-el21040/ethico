@@ -9,9 +9,10 @@
         "d1": "Not('pull')"
     },
     "utilities": {
-        "d2": -1, "d1": -5,
-        "Not('d2')": 1, "Not('d1')": 5,
-        "pull": 0, "refrain": 0
+        "d2": -1, 
+        "d1": -5,
+        "Not('d2')": 1, 
+        "Not('d1')": 5
     },
     "intentions": {
         "pull": ["pull", "Not('d1')"],

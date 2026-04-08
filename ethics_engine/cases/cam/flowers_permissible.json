@@ -14,8 +14,8 @@
     "alicehappy"
   ],
   "mechanisms": {
-    "celiahappy": "giveflowers",
-    "alicehappy": "celiahappy"
+    "celiahappy": "'giveflowers'",
+    "alicehappy": "'celiahappy'"
   },
   "goals": {
     "giveflowers": [

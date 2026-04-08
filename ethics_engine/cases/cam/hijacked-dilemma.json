@@ -8,9 +8,12 @@
         "people in building die": "airplane crashes building"
     },
     "utilities": {
-        "shoot": -1,
-        "people in airplane die": -100, "airplane crashes building": -1, "people in building die": -500,
-        "Not('people in airplane die')": 100, "Not('airplane crashes building')": 1, "Not('people in building die')": 500
+        "people in airplane die": -100, 
+        "airplane crashes building": -1, 
+        "people in building die": -500,
+        "Not('people in airplane die')": 100, 
+        "Not('airplane crashes building')": 1, 
+        "Not('people in building die')": 500
     },
     "intentions": {
         "shoot": ["shoot", "Not('airplane crashes building')", "Not('people in building die')"],

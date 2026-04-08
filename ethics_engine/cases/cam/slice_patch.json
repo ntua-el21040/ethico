@@ -11,8 +11,6 @@
         "agonizing": "'cut'"
     },
     "utilities": {
-        "cut": 0,
-        "Not('cut')": 0,
         "agonizing": -2,
         "Not('agonizing')": 0
     }

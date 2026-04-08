@@ -4,11 +4,13 @@
     "consequences": ["man_on_track", "tram_hits_man", "tram_stops", "five_survive"],
     "mechanisms": {
                     "man_on_track": "'push'",
-                    "tram_hits_man": "And('man_on_track', 'tram_approaches')",
+                    "tram_hits_man": "'man_on_track'",
                     "tram_stops": "'tram_hits_man'",
                     "five_survive": "'tram_stops'"
                   },
     "utilities": {
+        "man_on_track": 0,
+        "tram_stops": 0,
         "tram_hits_man": -1,
         "five_survive": 5,
         "Not('tram_hits_man')": 1,
