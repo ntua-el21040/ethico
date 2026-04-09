@@ -153,7 +153,7 @@ setup(name='ethics',
       url='http://www.hera-project.com',
       py_modules=['ethics.plans.semantics', 'ethics.plans.principles', 'ethics.plans.concepts', 'ethics.plans.planner',
                   'ethics.language', 'ethics.cam.semantics', 'ethics.cam.principles', 'ethics.tools', 'ethics.verbalizer',
-                  'ethics.explanations', 'ethics.solver', 'ethics.primes'],
+                  'ethics.explanations', 'ethics.solver', 'ethics.primes', 'ethics.argumentation'],
       packages=['ethics.extensions'],
       zip_safe=False,  # Cython documentation recommends this when using cythonize()
       install_requires=['PyYAML', 'pyeda'],

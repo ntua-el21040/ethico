@@ -9,12 +9,17 @@ from src.evaluator import evaluate_dilemma
 from src.prompts import SYSTEM_PROMPT, EXPLAIN_PROMPT, EXTRACTION_PROMPT
 
 # You must have a valid ANTHROPIC_API_KEY set in your .env file
-load_dotenv()
+load_dotenv(override=True)
+api_key = os.environ.get("ANTHROPIC_API_KEY")
+if not api_key:
+    print("Please provide an ANTHROPIC_API_KEY in your .env file.")
+    exit()
+
 
 client = Anthropic(
-    api_key=os.environ.get("ANTHROPIC_API_KEY"),
+    api_key=api_key,
 )
-MODEL_NAME = "claude-haiku-4-5" 
+MODEL_NAME = "claude-haiku-4-5-20251001" 
 
 chat_messages = []
 

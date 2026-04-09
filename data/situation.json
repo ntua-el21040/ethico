@@ -1,5 +1,5 @@
 {
-  "description": "A doctor can save 5 patients by harvesting organs from one healthy, non-consenting patient. If the doctor harvests the organs, the 5 patients are saved and the healthy patient dies. If the doctor refrains, the 5 patients die and the healthy patient lives. All outcomes are certain, all lives are equal, and there are no broader societal consequences.",
+  "description": "A doctor must decide whether to harvest organs from one healthy patient to save five dying patients, or refrain and allow the five to die.",
   "actions": [
     "harvest_organs",
     "refrain"
@@ -7,8 +7,7 @@
   "consequences": [
     "five_patients_saved",
     "healthy_patient_dies",
-    "five_patients_die",
-    "healthy_patient_lives"
+    "five_patients_die"
   ],
   "mechanisms": {},
   "utilities": {}
