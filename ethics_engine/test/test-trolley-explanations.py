@@ -1,10 +1,24 @@
+
+import os
 from ethics.cam.semantics import CausalModel
-from ethics.cam.principles import DeontologicalPrinciple, UtilitarianPrinciple, DoNoHarmPrinciple, KantianHumanityPrinciple, KantianHumanityPrincipleReading2, DeontologicalPrinciple, DoubleEffectPrinciple, DoNoInstrumentalHarmPrinciple, DoNoInstrumentalHarmPrincipleWithoutIntentions,IntentionFocusedDeontologicalPrinciple, ParetoPrinciple, GoalFocusedDeontologicalPrinciple
+from ethics.cam.principles import (
+    DeontologicalPrinciple, 
+    UtilitarianPrinciple, 
+    DoNoHarmPrinciple, 
+    KantianHumanityPrinciple, 
+    KantianHumanityPrincipleReading2, 
+    DeontologicalPrinciple, 
+    DoubleEffectPrinciple, 
+    DoNoInstrumentalHarmPrinciple, 
+    IntentionFocusedDeontologicalPrinciple, 
+    GoalFocusedDeontologicalPrinciple
+)
 from ethics.language import *
 
+folder_path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "cases", "cam")
 
-trolley1 = CausalModel("../cases/cam/trolley-problem.json", {"pull":0, "refrain":1})
-trolley2 = CausalModel("../cases/cam/trolley-problem.json", {"pull":1, "refrain":0})
+trolley1 = CausalModel(os.path.join(folder_path, "trolley-problem.json"), {"pull":0, "refrain":1})
+trolley2 = CausalModel(os.path.join(folder_path, "trolley-problem.json"), {"pull":1, "refrain":0})
 
 trolley1.alternatives.append(trolley2)
 trolley2.alternatives.append(trolley1)

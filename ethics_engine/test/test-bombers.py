@@ -1,18 +1,12 @@
 import os
 from ethics.cam.semantics import CausalModel
 from ethics.cam.principles import (
-    KantianHumanityPrinciple, 
-    DoNoHarmPrinciple, 
-    DoNoInstrumentalHarmPrinciple, 
-    UtilitarianPrinciple, 
-    DeontologicalPrinciple, 
-    GoalFocusedDeontologicalPrinciple, 
     DoubleEffectPrinciple, 
-    DoNoInstrumentalHarmPrincipleWithoutIntentions
 )
 
-filepaths = ["/mnt/d/source/ethico/ethics_engine/cases/cam/strategic_bomber.json", 
-             "/mnt/d/source/ethico/ethics_engine/cases/cam/terror_bomber.json"]
+folder_path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "cases", "cam")
+filepaths = [os.path.join(folder_path, "strategic_bomber.json"), 
+             os.path.join(folder_path, "terror_bomber.json")]
 
 for filepath in filepaths:
     if not os.path.isfile(filepath):

@@ -11,7 +11,7 @@ from ethics.cam.principles import (
     DoNoInstrumentalHarmPrincipleWithoutIntentions
 )
 
-folder_path = "/mnt/d/source/ethico/ethics_engine/cases/cam"
+folder_path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "cases", "cam")
 
 for filename in os.listdir(folder_path):
     filepath = os.path.join(folder_path, filename)

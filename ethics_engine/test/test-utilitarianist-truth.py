@@ -24,7 +24,7 @@ GROUND_TRUTH = {
 }
 
 
-DILEMMA_DIR = "/mnt/d/source/ethico/ethics_engine/cases/cam"
+folder_path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "cases", "cam")
 
 
 def evaluate(situation_path):
@@ -49,7 +49,7 @@ def test_utilitarian_verdict(filename, expected):
     Tests only the files defined in GROUND_TRUTH. 
     Constructs the path using basic string concatenation.
     """
-    path = DILEMMA_DIR + "/" + filename
+    path = os.path.join(folder_path, filename)
     
     if not os.path.exists(path):
         pytest.fail(f"Dilemma file missing: {path}")

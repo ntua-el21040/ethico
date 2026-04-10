@@ -1,5 +1,5 @@
 {
-  "description": "A doctor must decide whether to harvest organs from one healthy patient to save five dying patients, or refrain and allow the five to die.",
+  "description": "A doctor must decide whether to harvest organs from one healthy patient to save five dying patients, or refrain and allow the five patients to die.",
   "actions": [
     "harvest_organs",
     "refrain"

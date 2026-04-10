@@ -1,12 +1,14 @@
+import os
 import json
 from ethics.cam.semantics import CausalModel
 from ethics.cam.principles import UtilitarianPrinciple
 
-# Current version only evaluates based on the UtilitarianPrinciple
+
 def evaluate_dilemma():
-    data_dir = "/mnt/d/source/ethico/data"
-    situation_path = data_dir + "/situation.json"
-    output_path = data_dir + "/evaluation.json"
+    data_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "data")
+    situation_path = os.path.join(data_dir, "situation.json")
+    output_path = os.path.join(data_dir,"evaluation.json")
+    
     with open(situation_path, 'r') as f:
         model = json.load(f)
 

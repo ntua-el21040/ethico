@@ -34,18 +34,6 @@ class UtilitarianModel(BaseModel):
         for key in mechanisms.keys():
             if key not in consequences and not (key.startswith("Not('") and key.endswith("')")):
                 raise ValueError(f"Mechanism key '{key}' must be a consequence or its negation.")
-        
-        for value in mechanisms.values():
-            if value.startswith("Not('") and value.endswith("')"):
-                extracted_val = value[5:-2]
-            elif value.startswith("'") and value.endswith("'"):
-                extracted_val = value[1:-1]
-            else:
-                raise ValueError(f"Mechanism value '{value}' must be wrapped in single quotes.")
-
-            if extracted_val not in actions and extracted_val not in consequences:
-                raise ValueError(f"Mechanism value '{value}' contains '{extracted_val}', which is not a defined action or consequence.")
-        
         for consequence in consequences:
             negation = f"Not('{consequence}')"
             if consequence not in mechanisms and negation not in mechanisms:
