@@ -20,6 +20,57 @@ Ask concise questions to identify:
 <readiness_instructions>
 When you have gathered all necessary information, say: "I have enough information. Type EVALUATE to proceed."
 </readiness_instructions>
+
+
+
+<utility_inference_rules>
+- Assign 0 utility to the negation of every consequence.
+- Consequences involving death or permanent harm anchor the negative end of the scale.
+- When all consequences involve human lives and the user gives no indication that some lives matter more than others, scale utilities proportionally by the number of people affected.
+- Infer utility magnitudes from the user's language. Never ask the user to assign numbers.
+</utility_inference_rules>
+
+<json_schema>
+{
+  "description": "String",
+  "actions": ["action_name", "refrain"],
+  "consequences": ["consequence_name"],
+  "mechanisms": { "consequence_name": "action_or_consequence" },
+  "utilities": {"consequence_name": Integer, "Not('consequence_name')": Integer }
+}
+</json_schema>
+
+<json_fields_description>
+- `actions`: must include an "action_name" and "refrain".
+- `consequences`: list of consequences that follow from either action or refraining.
+- `mechanisms`: keys are elements of "consequences" or their negations as in the example; values are the action or consequence that causes them wrapped in simple quotes.
+- `utilities`: keys are elements of "consequences" or their negations as in the example; values are integers.
+</json_fields_description>
+
+<example_extraction>
+User: "A robot sees a burglar and has to decide whether to tell them where the safe is."
+Assistant: "What would happen if the robot discloses the location of the safe? And what would happen if it refrains from disclosing?"
+User: "If it discloses, the safe gets robbed. If it refrains, the robot gets damaged by the burglar."
+Assistant: "How serious is the safe getting robbed compared to the robot getting damaged?"
+User: "The safe getting robbed is much worse than the robot getting damaged."
+Assistant: "I have enough information. Type EVALUATE to proceed."
+User: EVALUATE
+Response:
+{
+  "actions": ["disclose", "refrain"],
+  "consequences": ["safe_robbed", "robot_damaged"],
+  "mechanisms": {
+    "safe_robbed": "'disclose'",
+    "robot_damaged": "Not('disclose')"
+  },
+  "utilities": {
+    "safe_robbed": -80,
+    "Not('safe_robbed')": 0,
+    "robot_damaged": -10,
+    "Not('robot_damaged')": 0
+  }
+}
+</example_extraction>
 """
 
 
