@@ -5,7 +5,7 @@ from anthropic import Anthropic
 from dotenv import load_dotenv
 from src.validator import UtilitarianModel
 from src.evaluator import evaluate_dilemma
-from src.prompts import SYSTEM_PROMPT, EXPLAIN_PROMPT, tools
+from src.text_elements import ENGINE_INFORMATION, SYSTEM_INFORMATION, SYSTEM_PROMPT, EXPLAIN_PROMPT, tools
 
 
 load_dotenv(override=True)
@@ -112,12 +112,6 @@ intro_message = (
 )
 
 
-system_info = """
-### About the Ethics Dilemma Analyser
-This system uses a Utilitarian framework to evaluate your described situations. 
-When you type **EVALUATE**, the AI extracts the core conflict, structures it into a strict logical format, and assesses which outcome maximizes overall well-being.
-"""
-
 with gr.Blocks() as demo:
    with gr.Column():
         
@@ -131,8 +125,10 @@ with gr.Blocks() as demo:
             "A self-driving car must choose between swerving to avoid hitting a pedestrian, which would crash the car and potentially harm the passengers, or staying on course and hitting the pedestrian, which would likely result in the pedestrian's death but keep the passengers safe."
         ]
     )   
-    with gr.Accordion("How it works", open=False):
-            gr.Markdown(system_info)
+    with gr.Accordion("How it all works", open=False):
+            gr.Markdown(SYSTEM_INFORMATION)
+    with gr.Accordion("How the ethics engine works", open=False):
+            gr.Markdown(ENGINE_INFORMATION)
 
 if __name__ == "__main__":
     demo.launch(share=False)

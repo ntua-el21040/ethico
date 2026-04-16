@@ -6,7 +6,7 @@ from dotenv import load_dotenv
 
 from src.validator import CausalAgencyModel, response_schema
 from src.evaluator import evaluate_dilemma
-from src.prompts import SYSTEM_PROMPT, EXPLAIN_PROMPT
+from text_elements import SYSTEM_PROMPT, EXPLAIN_PROMPT
 
 
 # You must have a valid GROQ_API_KEY set in your .env file
