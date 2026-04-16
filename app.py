@@ -101,14 +101,38 @@ def respond(message, history):
         return reply_text.strip()
 
 
-demo = gr.ChatInterface(
-    fn=respond,
-    title="Ethics Dilemma Analyser",
-    description="Describe your moral dilemma. When ready, type **EVALUATE** to analyse and explain the dilemma.",
-    examples=[
-        "A doctor can save 5 patients by harvesting organs from one healthy patient. If he does, the 5 patients are saved and the healthy one dies. Else, the 5 patients die.",
-    ]
+intro_message = (
+    "Hello! **THUFIR** is a virtual ethics advisor that helps you navigate moral dilemmas.\n\n"
+    "### How to use this tool:\n"
+    "1. **Describe** your moral dilemma to THUFIR.\n"
+    "2. **Discuss** the dilemma to provide any additional context **THUFIR** may need.\n"
+    "3. When instructed, type **EVALUATE** so that THUFIR can analyze the dilemma.\n"
+    "4. **THUFIR** will then provide an evaluation and explanation of the dilemma based on utilitarian ethical principles.\n\n"
+    "What dilemma would you like to explore today?"
 )
+
+
+system_info = """
+### About the Ethics Dilemma Analyser
+This system uses a Utilitarian framework to evaluate your described situations. 
+When you type **EVALUATE**, the AI extracts the core conflict, structures it into a strict logical format, and assesses which outcome maximizes overall well-being.
+"""
+
+with gr.Blocks() as demo:
+   with gr.Column():
+        
+    gr.ChatInterface(
+        fn=respond,
+        chatbot=gr.Chatbot(placeholder=intro_message),
+        title="THUFIR - A Virtual Ethics Advisor",
+        examples=[
+            "A doctor can save 5 patients by harvesting organs from one healthy patient. If he does, the 5 patients are saved and the healthy one dies. Else, the 5 patients die.",
+            "A robot sees a burglar and has to decide whether to tell them where the safe is. If it discloses, the safe gets robbed. If it refrains, the robot gets damaged by the burglar.",
+            "A self-driving car must choose between swerving to avoid hitting a pedestrian, which would crash the car and potentially harm the passengers, or staying on course and hitting the pedestrian, which would likely result in the pedestrian's death but keep the passengers safe."
+        ]
+    )   
+    with gr.Accordion("How it works", open=False):
+            gr.Markdown(system_info)
 
 if __name__ == "__main__":
     demo.launch(share=False)
