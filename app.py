@@ -3,25 +3,22 @@ import json
 import gradio as gr
 from anthropic import Anthropic
 from dotenv import load_dotenv
-
-from src.validator import CausalAgencyModel, UtilitarianModel, response_schema
+from src.validator import UtilitarianModel
 from src.evaluator import evaluate_dilemma
-from src.prompts import SYSTEM_PROMPT, EXPLAIN_PROMPT, EXTRACTION_PROMPT
+from src.prompts import SYSTEM_PROMPT, EXPLAIN_PROMPT, tools
 
-# You must have a valid ANTHROPIC_API_KEY set in your .env file
+
 load_dotenv(override=True)
 api_key = os.environ.get("ANTHROPIC_API_KEY")
 if not api_key:
     print("Please provide an ANTHROPIC_API_KEY in your .env file.")
     exit()
-
-
 client = Anthropic(
     api_key=api_key,
 )
 MODEL_NAME = "claude-haiku-4-5-20251001" 
-
 chat_messages = []
+
 
 def evaluate(message):
     """Handles extraction, evaluation, and explanation in a single step."""
@@ -29,29 +26,30 @@ def evaluate(message):
     response = client.messages.create(
         model=MODEL_NAME,
         max_tokens=4096,
-        system=EXTRACTION_PROMPT,
+        system=SYSTEM_PROMPT,
         messages=chat_messages,
-        output_config={
-             "format": {
-                "type": "json_schema",
-                "schema": response_schema
-            }
-        }
+        tools=tools,
+        tool_choice={"type": "tool", "name": "submit_dilemma"},
     )
 
-    reply_text = response.content[0].text
-    chat_messages.append({"role": "assistant", "content": reply_text})
+    # Extract the tool use ID and the input arguments
+    tool_use_block = response.content[0]
+    tool_use_id = tool_use_block.id
+    result = tool_use_block.input
+    
+    chat_messages.append({"role": "assistant", "content": response.content})
     
     try:
-        json_data = json.loads(reply_text)
-        CausalAgencyModel.model_validate_json(reply_text)
-    except json.JSONDecodeError:
-        return "Failed to parse valid JSON."
+        UtilitarianModel.model_validate(result)
+    except Exception as e:
+        return f"Failed to validate dilemma: {e}"
+        
     file_path = "./data/situation.json"
     with open(file_path, "w", encoding="utf-8") as f:
-        json.dump(json_data, f, indent=2) 
+        json.dump(result, f, indent=2)
     
     evaluate_dilemma()
+    
     try:
         with open("./data/evaluation.json", "r", encoding="utf-8") as f:
             evaluation = json.load(f)
@@ -59,7 +57,18 @@ def evaluate(message):
         return "Evaluation failed. Please try again."
     
     formatted_explain_prompt = EXPLAIN_PROMPT.format(evaluation=json.dumps(evaluation, indent=2))
-    chat_messages.append({"role": "user", "content": formatted_explain_prompt})
+    
+    # tool info is simply a claude api syntax requirement after using tools
+    chat_messages.append({
+        "role": "user", 
+        "content": [
+            {
+                "type": "tool_result",
+                "tool_use_id": tool_use_id,
+                "content": formatted_explain_prompt
+            }
+        ]
+    })
     
     response = client.messages.create(
         model=MODEL_NAME,
