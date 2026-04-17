@@ -1,7 +1,7 @@
 {
-  "permissible": true,
+  "permissible": false,
   "principle": "Utilitarianism",
-  "sufficient": "{GEq(U(And('five_patients_survive', 'healthy_patient_dies')), U(And(Not('five_patients_survive'), Not('healthy_patient_dies'))))}",
-  "necessary": "{GEq(U(And('five_patients_survive', 'healthy_patient_dies')), U(And(Not('five_patients_survive'), Not('healthy_patient_dies'))))}",
-  "inus": "{GEq(U(And('five_patients_survive', 'healthy_patient_dies')), U(And(Not('five_patients_survive'), Not('healthy_patient_dies'))))}"
+  "sufficient": "{Not(GEq(U(And('safe_robbed', Not('robot_damaged'))), U(And('robot_damaged', Not('safe_robbed')))))}",
+  "necessary": "{Not(GEq(U(And('safe_robbed', Not('robot_damaged'))), U(And('robot_damaged', Not('safe_robbed')))))}",
+  "inus": "{Not(GEq(U(And('safe_robbed', Not('robot_damaged'))), U(And('robot_damaged', Not('safe_robbed')))))}"
 }

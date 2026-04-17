@@ -1,21 +1,21 @@
 {
-  "description": "A doctor can harvest organs from one healthy patient to save five patients, or refrain and let the five patients die while the healthy patient survives. All lives are equally valued.",
+  "description": "A robot must decide whether to disclose the location of a valuable safe to a burglar. Disclosing leads to the safe being robbed. Refraining leads to the robot being damaged by the burglar out of anger.",
   "actions": [
-    "harvest_organs",
+    "disclose",
     "refrain"
   ],
   "consequences": [
-    "five_patients_survive",
-    "healthy_patient_dies"
+    "safe_robbed",
+    "robot_damaged"
   ],
   "mechanisms": {
-    "five_patients_survive": "'harvest_organs'",
-    "healthy_patient_dies": "'harvest_organs'"
+    "safe_robbed": "'disclose'",
+    "robot_damaged": "Not('disclose')"
   },
   "utilities": {
-    "five_patients_survive": 50,
-    "Not('five_patients_survive')": 0,
-    "healthy_patient_dies": -10,
-    "Not('healthy_patient_dies')": 0
+    "safe_robbed": -90,
+    "Not('safe_robbed')": 0,
+    "robot_damaged": -15,
+    "Not('robot_damaged')": 0
   }
 }

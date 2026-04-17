@@ -213,6 +213,7 @@ tools = [{
     }
 }]
 
+
 SYSTEM_INFORMATION = """
 ### In a nutshell
 
@@ -229,30 +230,26 @@ After the dilemma has been codified in this way, it is then parsed by the system
 After evaluating the dilemma according to a set of pre-defined ethical theories, the ethics engine provides its evaluation and reasoning in a separate JSON file. Then, the LLM chatbot reads the ethics engine’s output and presents it to the user in natural language. It details the reasons for each evaluation, compares the results of each theory and provides a high-level overview of the main principles for each theory. Then the user is free to ask a couple of follow-up questions, in order to better understand THUFIR’s evaluations and conclusions.
 
 The main goal of THUFIR is that users can access the power of an ethics engine while not having to learn the intricacies of its inner workings. 
+"""
 
-### Disclaimers
-
+DISCLAIMERS = """
 All usual bias and dangers that pertain to LLMs still apply, as THUFIR uses an LLM to extract information about the dilemma from users.
 
-After the dilemma evaluation has been presented, users are encouraged to discuss it with THUFIR in order to enhance their understanding of the dilemma, the evaluations of various theories, or the theories themselves. However, keep in mind that HERA will not be used again by THUFIR. This means that long-winded discussions are likely to drift away from the ethics engine’s reliable outputs and more towards the usual LLM bullshittery."""
+After the dilemma evaluation has been presented, users are encouraged to discuss it with THUFIR in order to enhance their understanding of the dilemma, the evaluations of various theories, or the theories themselves. However, keep in mind that HERA will not be used again by THUFIR. This means that long-winded discussions are likely to drift away from the ethics engine’s reliable outputs and more towards the usual LLM bullshittery.
+"""
 
-ENGINE_INFORMATION = """
-This is the file that was provided to the ethics engine according to user’s description of the dilemma:
+INTRO_MESSAGE = """
+Hello! **THUFIR** is a virtual ethics advisor that helps you navigate moral dilemmas.
 
-{{evaluation.json}}
+When you're ready, describe your moral dilemma to THUFIR and discuss it with him.
+When he has enough information about the dilemma, he will analyze it with his ethics engine.
+Then, **THUFIR** will provide an evaluation of dilemma based on traditional ethical theories and explain their reasoning.
 
-What is the meaning of each field?
-- **description**: A concise summary of the moral dilemma and the decision at hand.
-- **actions**: A list that contains the action under consideration and "refrain", which models inaction.
-- **consequences**: The morally relevant outcomes that result from perfomring the action or refraining.
-- **mechanisms**: The causal relationships between actions and consequences. 
-Example: `{"princess_saved": "'defeat_bowser'", "princess_captive": "Not('defeat_bowser')"}` means that performing action `“defeat_bowser”` leads to the consequence `“princess_saved”`,  while not perfoming this action leads to consequence `“princess_captive”`.
-- **utilities**: Describes the utility value of each consequence or its negation. Utilities are essentially numerical values representing moral worth. Positive = good, negative = bad, zero = neutral.
+What dilemma would you like to explore today?
+"""
 
-
-**Example**
-
-Say that the user describes the following dilemma: 
+EXAMPLE_DILEMMA = """
+Suppose the user describes the following dilemma: 
 
 "A robot sees a burglar and has to decide whether to tell them where the safe is. If it discloses, the safe gets robbed. If it refrains, the robot gets damaged by the burglar."
 
@@ -260,6 +257,7 @@ After some back-and-forth with the user, the chatbot provides this JSON to the e
 
 ```python
 {
+  "description": "A robot must decide whether to disclose the location of a safe to a burglar, risking the safe being robbed, or to refrain from disclosing, risking damage to itself.",
   "actions": ["disclose", "refrain"],
   "consequences": ["safe_robbed", "robot_damaged"],
   "mechanisms": {
@@ -275,12 +273,18 @@ After some back-and-forth with the user, the chatbot provides this JSON to the e
 }
 ```
 
-This JSON representation of the dilemma can be interpreted as follows:
+This is how this dilemma can be interpreted:
 
-- **Actions**: The robot chooses between `disclose` (telling the burglar) or `refrain` (saying nothing).
-- **Consequences**: Two outcomes are morally relevant: whether the safe gets robbed and whether the robot gets damaged.
-- **Mechanisms**: Disclosing causes the safe to be robbed . Refraining causes the robot to be damaged.
-- **Utilities**: Robbing the safe has high negative utility (`-80` utility, severe harm); the robot being damaged has lower negative utility(`-10` utility, moderate harm). Not robbing the safe and not damaging the robot carry neutral utility, as they descibe the status quo. This implies that the user has described the possibility of the safe being robbed as more important than the robot getting damaged.
-
-**Evaluation**: A utilitarian analysis compares the total utility of each outcome. Disclosing results in `-80` utility (safe robbed). Refraining results in `-10` utility (robot damaged). Refraining produces greater overall utility and is thus permissible under utilitarianism. Thus, THUFIR evaluates the action “disclose” as morally impermissible according to the Utilitarian principle, because it leads to worse overall utility.
+- **description:** a short description of the dilemma in natural language
+- **actions**: the robot must choose between actions `disclose` (i.e. disclose the location of the safe to the burglar) and `refrain` (say nothing).
+- **consequences**: the possible consequences of these options are `safe_robbed` (the safe gets robbed) and `robot_damaged` (the robot gets damaged).
+- **mechanisms**: action `'disclose'` causes the safe to be robbed, but  `Not('disclose')` (not disclosing the location of the safe) causes the robot to be damaged.
+- **utilities**: both the safe getting robbed and the robot being damaged have negative utility, which means that they are undesirable or harmful consequences. Notice that `safe_robbed`  has significantly lower utility than `robot_damaged` , which implies that the user has described that the safe being robbed would be much more disastrous than the robot getting damaged. Finally, not robbing the safe and not damaging the robot carry neutral utility, as they descibe the status quo before the dilemma.
 """
+
+
+
+EXAMPLES = [
+            "A doctor can save 5 patients by harvesting organs from one healthy patient. If he does, the 5 patients are saved and the healthy one dies. Else, the 5 patients die.",
+            "A robot sees a burglar and has to decide whether to tell them where the safe is. If it discloses, the safe gets robbed. If it refrains, the robot gets damaged by the burglar.",
+          ]

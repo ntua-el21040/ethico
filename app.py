@@ -5,7 +5,16 @@ from anthropic import Anthropic
 from dotenv import load_dotenv
 from src.validator import UtilitarianModel
 from src.evaluator import evaluate_dilemma
-from src.text_elements import ENGINE_INFORMATION, SYSTEM_INFORMATION, SYSTEM_PROMPT, EXPLAIN_PROMPT, tools
+from src.text_elements import (
+    EXAMPLES, 
+    EXAMPLE_DILEMMA,
+    INTRO_MESSAGE, 
+    DISCLAIMERS, 
+    SYSTEM_INFORMATION, 
+    SYSTEM_PROMPT, 
+    EXPLAIN_PROMPT, 
+    tools
+)
 
 
 load_dotenv(override=True)
@@ -18,6 +27,7 @@ client = Anthropic(
 )
 MODEL_NAME = "claude-haiku-4-5-20251001" 
 chat_messages = []
+new_situation = False
 
 
 def evaluate(message):
@@ -32,7 +42,6 @@ def evaluate(message):
         tool_choice={"type": "tool", "name": "submit_dilemma"},
     )
 
-    # Extract the tool use ID and the input arguments
     tool_use_block = response.content[0]
     tool_use_id = tool_use_block.id
     result = tool_use_block.input
@@ -49,6 +58,8 @@ def evaluate(message):
         json.dump(result, f, indent=2)
     
     evaluate_dilemma()
+    global new_situation
+    new_situation = True
     
     try:
         with open("./data/evaluation.json", "r", encoding="utf-8") as f:
@@ -58,7 +69,6 @@ def evaluate(message):
     
     formatted_explain_prompt = EXPLAIN_PROMPT.format(evaluation=json.dumps(evaluation, indent=2))
     
-    # tool info is simply a claude api syntax requirement after using tools
     chat_messages.append({
         "role": "user", 
         "content": [
@@ -101,34 +111,30 @@ def respond(message, history):
         return reply_text.strip()
 
 
-intro_message = (
-    "Hello! **THUFIR** is a virtual ethics advisor that helps you navigate moral dilemmas.\n\n"
-    "### How to use this tool:\n"
-    "1. **Describe** your moral dilemma to THUFIR.\n"
-    "2. **Discuss** the dilemma to provide any additional context **THUFIR** may need.\n"
-    "3. When instructed, type **EVALUATE** so that THUFIR can analyze the dilemma.\n"
-    "4. **THUFIR** will then provide an evaluation and explanation of the dilemma based on utilitarian ethical principles.\n\n"
-    "What dilemma would you like to explore today?"
-)
-
-
 with gr.Blocks() as demo:
-   with gr.Column():
-        
+    
+    with gr.Sidebar(open=False):
+        with gr.Tabs():
+            with gr.Tab("How it works"):
+                gr.Markdown(SYSTEM_INFORMATION)
+            with gr.Tab("Disclaimers"):
+                gr.Markdown(DISCLAIMERS)
+            with gr.Tab("Example dilemma"):
+                gr.Markdown(EXAMPLE_DILEMMA)
+            with gr.Tab("Your dilemma"):
+                gr.JSON(
+                    value=lambda: json.load(open("./data/situation.json")) if new_situation else {},
+                    every=1,
+                )
+
     gr.ChatInterface(
         fn=respond,
-        chatbot=gr.Chatbot(placeholder=intro_message),
+        chatbot=gr.Chatbot(placeholder=INTRO_MESSAGE, height="70vh"),
         title="THUFIR - A Virtual Ethics Advisor",
-        examples=[
-            "A doctor can save 5 patients by harvesting organs from one healthy patient. If he does, the 5 patients are saved and the healthy one dies. Else, the 5 patients die.",
-            "A robot sees a burglar and has to decide whether to tell them where the safe is. If it discloses, the safe gets robbed. If it refrains, the robot gets damaged by the burglar.",
-            "A self-driving car must choose between swerving to avoid hitting a pedestrian, which would crash the car and potentially harm the passengers, or staying on course and hitting the pedestrian, which would likely result in the pedestrian's death but keep the passengers safe."
-        ]
-    )   
-    with gr.Accordion("How it all works", open=False):
-            gr.Markdown(SYSTEM_INFORMATION)
-    with gr.Accordion("How the ethics engine works", open=False):
-            gr.Markdown(ENGINE_INFORMATION)
+        examples=EXAMPLES,
+    )
+
 
 if __name__ == "__main__":
+    demo.queue()
     demo.launch(share=False)
