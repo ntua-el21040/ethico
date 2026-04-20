@@ -1,28 +1,30 @@
 import os
 import json
 from ethics.cam.semantics import CausalModel
-from ethics.cam.principles import UtilitarianPrinciple
+from ethics.cam.principles import KantianHumanityPrinciple, UtilitarianPrinciple
 
 
 def evaluate_dilemma():
-    data_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "data")
+    data_dir = os.path.join(
+        os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "data"
+    )
     situation_path = os.path.join(data_dir, "situation.json")
-    output_path = os.path.join(data_dir,"evaluation.json")
-    
-    with open(situation_path, 'r') as f:
+    output_path = os.path.join(data_dir, "evaluation.json")
+
+    with open(situation_path, "r") as f:
         model = json.load(f)
 
-    action = [a for a in model["actions"] if a!="refrain"][0]
-    action_world = {action:1, "refrain":0}
-    inaction_world = {action:0, "refrain":1}
-    
+    action = [a for a in model["actions"] if a != "refrain"][0]
+    action_world = {action: 1, "refrain": 0}
+    inaction_world = {action: 0, "refrain": 1}
+
     action_situation = CausalModel(situation_path, action_world)
     inaction_situation = CausalModel(situation_path, inaction_world)
     action_situation.alternatives.append(inaction_situation)
-    inaction_situation.alternatives.append(action_situation)    
+    inaction_situation.alternatives.append(action_situation)
 
-    result = action_situation.explain(UtilitarianPrinciple)
+    result = action_situation.explain(KantianHumanityPrinciple)
     with open(output_path, "w", encoding="utf-8") as f:
         json.dump(result, f, indent=2, default=str)
-    
-    print(f"Evaluation saved to: {output_path}") 
+
+    print(f"Evaluation saved to: {output_path}")
