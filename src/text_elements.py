@@ -403,13 +403,11 @@ After the dilemma evaluation has been presented, users are encouraged to discuss
 """
 
 INTRO_MESSAGE = """
-Hello! **THUFIR** is a virtual ethics advisor that helps you navigate moral dilemmas.
+<span style="font-size: 20px; text-align: center;">
+Hello! THUFIR is a virtual ethics advisor that helps you navigate moral dilemmas.
 
-When you're ready, describe your moral dilemma to THUFIR and discuss it with him.
-When he has enough information about the dilemma, he will analyze it with his ethics engine.
-Then, **THUFIR** will provide an evaluation of dilemma based on traditional ethical theories and explain their reasoning.
-
-What dilemma would you like to explore today?
+To begin, describe your moral dilemma to THUFIR and discuss it with him.
+</span>
 """
 
 EXAMPLE_DILEMMA = """

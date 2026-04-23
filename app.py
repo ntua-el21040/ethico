@@ -1,4 +1,3 @@
-import json
 import gradio as gr
 from src.text_elements import (
     EXAMPLES,
@@ -10,7 +9,7 @@ from src.text_elements import (
 from src.chat import respond
 
 
-with gr.Blocks() as demo:
+with gr.Blocks(title="THUFIR") as demo:
 
     with gr.Sidebar(open=False):
         with gr.Tabs():
@@ -33,5 +32,4 @@ with gr.Blocks() as demo:
 
 
 if __name__ == "__main__":
-    demo.queue()
     demo.launch(share=False)
