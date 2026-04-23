@@ -1,7 +1,7 @@
 {
   "permissible": false,
-  "principle": "Utilitarianism",
-  "sufficient": "{Not(GEq(U(And('safe_robbed', Not('robot_damaged'))), U(And('robot_damaged', Not('safe_robbed')))))}",
-  "necessary": "{Not(GEq(U(And('safe_robbed', Not('robot_damaged'))), U(And('robot_damaged', Not('safe_robbed')))))}",
-  "inus": "{Not(GEq(U(And('safe_robbed', Not('robot_damaged'))), U(And('robot_damaged', Not('safe_robbed')))))}"
+  "principle": "KantianHumanityPrincipleReading1",
+  "sufficient": "{Not('True')}",
+  "necessary": "{Or(Not('True'), Not(End('burglar'))), Or(Or(Not('True'), Not(End('robot'))), Not(End('burglar'))), Or(Or(Not('True'), Not(End('burglar'))), Not(End('safe_owner'))), Not('True'), Or(Not('True'), Not(End('safe_owner'))), Or(Or(Not('True'), Not(End('robot'))), Not(End('safe_owner'))), Or(Not('True'), Not(End('robot'))), Or(Or(Or(Not('True'), Not(End('robot'))), Not(End('burglar'))), Not(End('safe_owner')))}",
+  "inus": "{Not('True')}"
 }

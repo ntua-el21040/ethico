@@ -1,7 +1,12 @@
 from typing import Optional
 from pydantic import BaseModel, field_validator, ValidationInfo
+from pydantic_settings import BaseSettings, SettingsConfigDict
 
-
+class Settings(BaseSettings):
+    anthropic_api_key: str
+    
+    model_config = SettingsConfigDict(env_file='.env', env_file_encoding='utf-8')
+    
 class KantianModel(BaseModel):
     description: str
     actions: list[str]

@@ -5,6 +5,10 @@ from ethics.cam.principles import KantianHumanityPrinciple, UtilitarianPrinciple
 
 
 def evaluate_dilemma():
+    """
+    Reads a dilemma from data/situation.json and evaluates it using the Kantian Humanity Principle.
+    The dilemma is always assumed to be valid.
+    """
     data_dir = os.path.join(
         os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "data"
     )

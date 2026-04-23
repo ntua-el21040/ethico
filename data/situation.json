@@ -1,21 +1,76 @@
 {
-  "description": "A robot must decide whether to disclose the location of a valuable safe to a burglar. Disclosing leads to the safe being robbed. Refraining leads to the robot being damaged by the burglar out of anger.",
+  "description": "A robot must decide whether to disclose the safe's location to a burglar. Disclosing results in the safe being robbed and the owner suffering a monetary loss. Refraining results in the burglar becoming angry and damaging the robot, but the safe remains unfound and protected.",
   "actions": [
     "disclose",
     "refrain"
   ],
   "consequences": [
     "safe_robbed",
-    "robot_damaged"
+    "owner_loses_money",
+    "burglar_angry",
+    "robot_damaged",
+    "safe_protected"
   ],
   "mechanisms": {
     "safe_robbed": "'disclose'",
-    "robot_damaged": "Not('disclose')"
+    "owner_loses_money": "'safe_robbed'",
+    "burglar_angry": "Not('disclose')",
+    "robot_damaged": "'burglar_angry'",
+    "safe_protected": "Not('disclose')"
   },
-  "utilities": {
-    "safe_robbed": -90,
-    "Not('safe_robbed')": 0,
-    "robot_damaged": -15,
-    "Not('robot_damaged')": 0
+  "patients": [
+    "robot",
+    "burglar",
+    "safe_owner"
+  ],
+  "goals": {
+    "disclose": [],
+    "refrain": [
+      "safe_protected"
+    ]
+  },
+  "affects": {
+    "disclose": [
+      [
+        "safe_owner",
+        "-"
+      ]
+    ],
+    "refrain": [
+      [
+        "robot",
+        "-"
+      ]
+    ],
+    "safe_robbed": [
+      [
+        "safe_owner",
+        "-"
+      ]
+    ],
+    "owner_loses_money": [
+      [
+        "safe_owner",
+        "-"
+      ]
+    ],
+    "burglar_angry": [
+      [
+        "robot",
+        "-"
+      ]
+    ],
+    "robot_damaged": [
+      [
+        "robot",
+        "-"
+      ]
+    ],
+    "safe_protected": [
+      [
+        "safe_owner",
+        "+"
+      ]
+    ]
   }
 }
