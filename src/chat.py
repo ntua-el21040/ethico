@@ -34,31 +34,34 @@ def evaluate(message):
             tool_choice={"type": "tool", "name": "extract_kantian_dilemma"},
         )
     except APIError as e:
-        raise RuntimeError(f"API request failed: {e}")
+        raise gr.Error(f"The model failed to extract the dilemma. Please try again.")
 
     tool_use_block = response.content[0]
+    if not tool_use_block:
+        raise gr.Error(
+            "The model failed to trigger the required tool. Please try again."
+        )
+
     tool_use_id = tool_use_block.id
-    result = tool_use_block.input
+    extracted_model = tool_use_block.input
 
     try:
-        KantianModel.model_validate(result)
+        KantianModel.model_validate(extracted_model)
     except Exception:
         raise gr.Error(
-            "There was an error creating the dilema. Please ensure your input is well-formed and try again."
+            "There was an error creating the dilemma. Please ensure your input is well-formed and try again."
         )
-    
-    chat_messages.append({"role": "assistant", "content": response.content})
 
     try:
         file_path = "./data/situation.json"
         with open(file_path, "w", encoding="utf-8") as f:
-            json.dump(result, f, indent=2)
-    except OSError as e:
+            json.dump(extracted_model, f, indent=2)
+    except OSError:
         raise gr.Error("Failed to save the dilemma. Check file permissions.")
 
     try:
         evaluate_dilemma()
-    except Exception as e:
+    except Exception:
         raise gr.Error(
             "The ethics engine could not evaluate this dilemma. Please ensure your input is well-formed and try again."
         )
@@ -66,15 +69,16 @@ def evaluate(message):
     try:
         with open("./data/evaluation.json", "r", encoding="utf-8") as f:
             evaluation = json.load(f)
-    except Exception as e:
+    except Exception:
         raise gr.Error(
-            "There awas an error loading the evaluation results. Please try again."
+            "There was an error loading the evaluation results. Please try again."
         )
 
     formatted_explain_prompt = EXPLAIN_PROMPT.format(
         evaluation=json.dumps(evaluation, indent=2)
     )
 
+    chat_messages.append({"role": "assistant", "content": response.content})
     chat_messages.append(
         {
             "role": "user",
@@ -94,13 +98,17 @@ def evaluate(message):
             max_tokens=4096,
             system=KANTIAN_PROMPT,
             messages=chat_messages,
+            tools=tools,
         )
-    except APIError as e:
-        raise RuntimeError(f"API request failed: {e}")
+    except APIError:
+        raise gr.Error("There was an error handling the evaluation. Please try again.")
 
-    reply_text = response.content[0].text
+    reply_text = next(
+        (block.text for block in response.content if block.type == "text"), ""
+    )
+
     chat_messages.append({"role": "assistant", "content": reply_text})
-    return reply_text.strip(), result
+    return reply_text.strip(), extracted_model
 
 
 def respond(message, history):

@@ -1,75 +1,75 @@
 {
-  "description": "A robot must decide whether to disclose the safe's location to a burglar. Disclosing results in the safe being robbed and the owner suffering a monetary loss. Refraining results in the burglar becoming angry and damaging the robot, but the safe remains unfound and protected.",
+  "description": "A doctor must decide whether to harvest organs from one healthy patient to save five other patients. The healthy patient has freely consented to the organ harvest, fully understanding that it will result in his death. By consenting, the healthy patient is fulfilling his own autonomous goal of self-sacrifice. The doctor's goal is to save the five patients while respecting the healthy patient's autonomous choice. If the doctor harvests the organs, the healthy patient dies (fulfilling his autonomous choice) and the five patients are saved. If the doctor refrains, the five patients die and the healthy patient survives.",
   "actions": [
-    "disclose",
+    "harvest_organs",
     "refrain"
   ],
   "consequences": [
-    "safe_robbed",
-    "owner_loses_money",
-    "burglar_angry",
-    "robot_damaged",
-    "safe_protected"
+    "five_patients_saved",
+    "healthy_patient_autonomous_choice_fulfilled",
+    "five_patients_die",
+    "healthy_patient_autonomous_choice_unfulfilled"
   ],
   "mechanisms": {
-    "safe_robbed": "'disclose'",
-    "owner_loses_money": "'safe_robbed'",
-    "burglar_angry": "Not('disclose')",
-    "robot_damaged": "'burglar_angry'",
-    "safe_protected": "Not('disclose')"
+    "five_patients_saved": "'harvest_organs'",
+    "healthy_patient_autonomous_choice_fulfilled": "'harvest_organs'",
+    "five_patients_die": "Not('harvest_organs')",
+    "healthy_patient_autonomous_choice_unfulfilled": "Not('harvest_organs')"
   },
   "patients": [
-    "robot",
-    "burglar",
-    "safe_owner"
+    "five_patients",
+    "healthy_patient"
   ],
   "goals": {
-    "disclose": [],
-    "refrain": [
-      "safe_protected"
-    ]
+    "harvest_organs": [
+      "five_patients_saved",
+      "healthy_patient_autonomous_choice_fulfilled"
+    ],
+    "refrain": []
   },
   "affects": {
-    "disclose": [
+    "harvest_organs": [
       [
-        "safe_owner",
-        "-"
+        "five_patients",
+        "+"
+      ],
+      [
+        "healthy_patient",
+        "+"
       ]
     ],
     "refrain": [
       [
-        "robot",
+        "five_patients",
+        "-"
+      ],
+      [
+        "healthy_patient",
         "-"
       ]
     ],
-    "safe_robbed": [
+    "five_patients_saved": [
       [
-        "safe_owner",
-        "-"
-      ]
-    ],
-    "owner_loses_money": [
-      [
-        "safe_owner",
-        "-"
-      ]
-    ],
-    "burglar_angry": [
-      [
-        "robot",
-        "-"
-      ]
-    ],
-    "robot_damaged": [
-      [
-        "robot",
-        "-"
-      ]
-    ],
-    "safe_protected": [
-      [
-        "safe_owner",
+        "five_patients",
         "+"
+      ]
+    ],
+    "healthy_patient_autonomous_choice_fulfilled": [
+      [
+        "healthy_patient",
+        "+"
+      ]
+    ],
+    "five_patients_die": [
+      [
+        "five_patients",
+        "-"
+      ]
+    ],
+    "healthy_patient_autonomous_choice_unfulfilled": [
+      [
+        "healthy_patient",
+        "-"
       ]
     ]
   }

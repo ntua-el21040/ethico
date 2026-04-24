@@ -2,6 +2,6 @@
   "permissible": false,
   "principle": "KantianHumanityPrincipleReading1",
   "sufficient": "{Not('True')}",
-  "necessary": "{Or(Not('True'), Not(End('burglar'))), Or(Or(Not('True'), Not(End('robot'))), Not(End('burglar'))), Or(Or(Not('True'), Not(End('burglar'))), Not(End('safe_owner'))), Not('True'), Or(Not('True'), Not(End('safe_owner'))), Or(Or(Not('True'), Not(End('robot'))), Not(End('safe_owner'))), Or(Not('True'), Not(End('robot'))), Or(Or(Or(Not('True'), Not(End('robot'))), Not(End('burglar'))), Not(End('safe_owner')))}",
+  "necessary": "{Or(Not('True'), Means('five_patients')), Or(Not('True'), Means('healthy_patient')), Or(Or(Not('True'), Means('five_patients')), Means('healthy_patient')), Not('True')}",
   "inus": "{Not('True')}"
 }
