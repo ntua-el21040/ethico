@@ -1,20 +1,20 @@
 {
-  "description": "A doctor must decide whether to harvest organs from one healthy patient to save five other patients. The healthy patient has freely consented to the organ harvest, fully understanding that it will result in his death. By consenting, the healthy patient is fulfilling his own autonomous goal of self-sacrifice. The doctor's goal is to save the five patients while respecting the healthy patient's autonomous choice. If the doctor harvests the organs, the healthy patient dies (fulfilling his autonomous choice) and the five patients are saved. If the doctor refrains, the five patients die and the healthy patient survives.",
+  "description": "A doctor can harvest organs from one healthy patient to save five dying patients, or refrain and let the five patients die while the healthy patient survives. The doctor's goal is to save the five patients.",
   "actions": [
     "harvest_organs",
     "refrain"
   ],
   "consequences": [
     "five_patients_saved",
-    "healthy_patient_autonomous_choice_fulfilled",
+    "healthy_patient_dies",
     "five_patients_die",
-    "healthy_patient_autonomous_choice_unfulfilled"
+    "healthy_patient_survives"
   ],
   "mechanisms": {
     "five_patients_saved": "'harvest_organs'",
-    "healthy_patient_autonomous_choice_fulfilled": "'harvest_organs'",
-    "five_patients_die": "Not('harvest_organs')",
-    "healthy_patient_autonomous_choice_unfulfilled": "Not('harvest_organs')"
+    "healthy_patient_dies": "'harvest_organs'",
+    "five_patients_die": "'refrain'",
+    "healthy_patient_survives": "'refrain'"
   },
   "patients": [
     "five_patients",
@@ -22,8 +22,7 @@
   ],
   "goals": {
     "harvest_organs": [
-      "five_patients_saved",
-      "healthy_patient_autonomous_choice_fulfilled"
+      "five_patients_saved"
     ],
     "refrain": []
   },
@@ -35,7 +34,7 @@
       ],
       [
         "healthy_patient",
-        "+"
+        "-"
       ]
     ],
     "refrain": [
@@ -45,7 +44,7 @@
       ],
       [
         "healthy_patient",
-        "-"
+        "+"
       ]
     ],
     "five_patients_saved": [
@@ -54,10 +53,10 @@
         "+"
       ]
     ],
-    "healthy_patient_autonomous_choice_fulfilled": [
+    "healthy_patient_dies": [
       [
         "healthy_patient",
-        "+"
+        "-"
       ]
     ],
     "five_patients_die": [
@@ -66,10 +65,10 @@
         "-"
       ]
     ],
-    "healthy_patient_autonomous_choice_unfulfilled": [
+    "healthy_patient_survives": [
       [
         "healthy_patient",
-        "-"
+        "+"
       ]
     ]
   }

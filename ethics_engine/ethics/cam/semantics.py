@@ -382,5 +382,5 @@ class CausalModel(CausalNetwork):
                 if self.models(Affects(i, f.f1)):
                     return True
             return False
-        #Everything else
+        
         return super().models(f)

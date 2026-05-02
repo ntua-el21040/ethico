@@ -36,14 +36,16 @@ def evaluate(message):
     except APIError as e:
         raise gr.Error(f"The model failed to extract the dilemma. Please try again.")
 
-    tool_use_block = response.content[0]
-    if not tool_use_block:
+    tool_use_blocks = [block for block in response.content if block.type == "tool_use"]
+
+    if not tool_use_blocks:
         raise gr.Error(
             "The model failed to trigger the required tool. Please try again."
         )
 
-    tool_use_id = tool_use_block.id
-    extracted_model = tool_use_block.input
+    first_tool_block = tool_use_blocks[0]
+    tool_use_id = first_tool_block.id
+    extracted_model = first_tool_block.input
 
     try:
         KantianModel.model_validate(extracted_model)
@@ -78,17 +80,29 @@ def evaluate(message):
         evaluation=json.dumps(evaluation, indent=2)
     )
 
+    # Multiple tool use calls may be present due to Anthropic conventions.
+    # Only the successful one is used, but all must be present. 
+    tool_results = []
+    for block in tool_use_blocks:
+        if block.id == tool_use_id:
+            tool_results.append({
+                "type": "tool_result",
+                "tool_use_id": block.id,
+                "content": formatted_explain_prompt,
+            })
+        else:
+            tool_results.append({
+                "type": "tool_result",
+                "tool_use_id": block.id,
+                "content": "Ignored. Evaluated the first dilemma successfully.",
+            })
+
     chat_messages.append({"role": "assistant", "content": response.content})
+    
     chat_messages.append(
         {
             "role": "user",
-            "content": [
-                {
-                    "type": "tool_result",
-                    "tool_use_id": tool_use_id,
-                    "content": formatted_explain_prompt,
-                }
-            ],
+            "content": tool_results,
         }
     )
 
