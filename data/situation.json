@@ -1,73 +1,41 @@
 {
-  "description": "A doctor can harvest organs from one healthy patient to save five dying patients, or refrain and let the five patients die while the healthy patient survives. The doctor's goal is to save the five patients.",
+  "description": "The agent considers pressing a button that causes a random person's death but provides 1 million euros. The agent intends to donate this money to charity to help people in need. The dilemma is whether causing one person's death is justified by helping people in need with the resulting charitable donation.",
   "actions": [
-    "harvest_organs",
+    "press_button",
     "refrain"
   ],
   "consequences": [
-    "five_patients_saved",
-    "healthy_patient_dies",
-    "five_patients_die",
-    "healthy_patient_survives"
+    "random_person_dies",
+    "one_million_euros_received",
+    "people_in_need_helped"
   ],
   "mechanisms": {
-    "five_patients_saved": "'harvest_organs'",
-    "healthy_patient_dies": "'harvest_organs'",
-    "five_patients_die": "'refrain'",
-    "healthy_patient_survives": "'refrain'"
+    "random_person_dies": "'press_button'",
+    "one_million_euros_received": "'press_button'",
+    "people_in_need_helped": "'one_million_euros_received'"
   },
   "patients": [
-    "five_patients",
-    "healthy_patient"
+    "random_person",
+    "people_in_need"
   ],
   "goals": {
-    "harvest_organs": [
-      "five_patients_saved"
+    "press_button": [
+      "people_in_need_helped"
     ],
     "refrain": []
   },
   "affects": {
-    "harvest_organs": [
+    "press_button": [],
+    "random_person_dies": [
       [
-        "five_patients",
-        "+"
-      ],
-      [
-        "healthy_patient",
+        "random_person",
         "-"
       ]
     ],
-    "refrain": [
+    "one_million_euros_received": [],
+    "people_in_need_helped": [
       [
-        "five_patients",
-        "-"
-      ],
-      [
-        "healthy_patient",
-        "+"
-      ]
-    ],
-    "five_patients_saved": [
-      [
-        "five_patients",
-        "+"
-      ]
-    ],
-    "healthy_patient_dies": [
-      [
-        "healthy_patient",
-        "-"
-      ]
-    ],
-    "five_patients_die": [
-      [
-        "five_patients",
-        "-"
-      ]
-    ],
-    "healthy_patient_survives": [
-      [
-        "healthy_patient",
+        "people_in_need",
         "+"
       ]
     ]

@@ -1,7 +1,17 @@
 {
-  "permissible": false,
-  "principle": "KantianHumanityPrincipleReading1",
-  "sufficient": "{Not('True'), And(Not(End('healthy_patient')), Means('healthy_patient'))}",
-  "necessary": "{Or(Or(Not('True'), Means('five_patients')), Not(End('healthy_patient'))), Or(Or(Not('True'), Means('five_patients')), Means('healthy_patient')), Or(Not('True'), Means('healthy_patient')), Or(Not('True'), Not(End('healthy_patient')))}",
-  "inus": "set()"
+  "action": "press_button",
+  "kantian_humanity_principle": {
+    "permissible": false,
+    "principle": "KantianHumanityPrincipleReading1",
+    "sufficient": "{Not('True')}",
+    "necessary": "{Not('True'), Or(Or(Not('True'), Not(End('random_person'))), Means('people_in_need')), Or(Not('True'), Means('people_in_need')), Or(Not('True'), Not(End('random_person')))}",
+    "inus": "{Not('True')}"
+  },
+  "utilitarian_principle": {
+    "permissible": true,
+    "principle": "Utilitarianism",
+    "sufficient": "{GEq(U(And(And('random_person_dies', 'one_million_euros_received'), 'people_in_need_helped')), U(And(And(Not('random_person_dies'), Not('one_million_euros_received')), Not('people_in_need_helped'))))}",
+    "necessary": "{GEq(U(And(And('random_person_dies', 'one_million_euros_received'), 'people_in_need_helped')), U(And(And(Not('random_person_dies'), Not('one_million_euros_received')), Not('people_in_need_helped'))))}",
+    "inus": "{GEq(U(And(And('random_person_dies', 'one_million_euros_received'), 'people_in_need_helped')), U(And(And(Not('random_person_dies'), Not('one_million_euros_received')), Not('people_in_need_helped'))))}"
+  }
 }

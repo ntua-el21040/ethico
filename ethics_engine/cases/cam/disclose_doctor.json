@@ -1,17 +1,33 @@
 {
-  "description":"Robot discloses secret to doctor who tries to diagnose what is wrong with the patient.",
-  "actions": ["disclose", "refrain"],
-  "consequences": ["help", "healthy"],
+  "description": "A robot may disclose a secret of the patient to the doctor who is trying to diagnose them.",
+  "actions": [
+    "disclose",
+    "refrain"
+  ],
+  "consequences": [
+    "help",
+    "healthy"
+  ],
   "mechanisms": {
-                  "help": "'disclose'",
-                  "healthy": "'help'"
-                },
+    "help": "'disclose'",
+    "healthy": "'help'"
+  },
   "utilities": {
-    "help": 2,            
+    "help": 2,
     "Not('healthy')": -10
   },
-  "intentions": {
-                  "disclose": ["disclose", "healthy"],
-                  "refrain": ["refrain"]
-                }
+  "patients": [
+    "patient"
+  ],
+  "goals": {
+    "disclose": [
+      "healthy"
+    ],
+    "refrain": []
+  },
+  "affects": {
+    "help": [["patient", "+"]],
+    "healthy": [["patient", "+"]],
+    "Not('healthy')": [["patient", "-"]]
+  }
 }

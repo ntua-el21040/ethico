@@ -364,13 +364,7 @@ class CausalModel(CausalNetwork):
                 return False
             return self.__affects(self.affects[str(f.f1)], f.f2, "-")  
         if isinstance(f, End):
-            foundPos = False
-            for i in self.get_actual_goals():
-                if self.models(AffectsNeg(i, f.f1)):
-                    return False
-                if not foundPos and self.models(AffectsPos(i, f.f1)):
-                    foundPos = True
-            return foundPos
+            return any(self.models(AffectsPos(i, f.f1)) for i in self.get_actual_goals())
         if isinstance(f, Means):
             for i in self.get_all_actions()+self.get_direct_consequences():
                 for g in self.get_actual_goals():
