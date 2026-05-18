@@ -10,7 +10,7 @@ from src.chat import respond
 
 
 with gr.Blocks(title="THUFIR") as demo:
-
+    
     with gr.Sidebar(open=False):
         with gr.Tabs():
             with gr.Tab("How it works"):
@@ -21,15 +21,20 @@ with gr.Blocks(title="THUFIR") as demo:
                 gr.Markdown(EXAMPLE_DILEMMA)
             with gr.Tab("Your dilemma"):
                 dilemma_json = gr.JSON(
-                    open=True, visible=True, label="Dilemma JSON", min_width=400
+                    open=True, visible=True, 
+                    label="Dilemma JSON", 
+                    min_width=400
                 )
 
     gr.ChatInterface(
         fn=respond,
-        chatbot=gr.Chatbot(placeholder=INTRO_MESSAGE, height="70vh"),
+        chatbot=gr.Chatbot(placeholder=INTRO_MESSAGE,
+                           height="70vh",
+                           buttons=['copy', 'copy_all']),
         title="THUFIR - A Virtual Ethics Advisor",
         examples=EXAMPLES,
         additional_outputs=[dilemma_json],
+        show_progress="hidden"
     )
 
 
