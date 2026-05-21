@@ -1,0 +1,27 @@
+{
+  "description": "You can press a button that causes a random person to die and gives you one million euros, which you intend to donate to charity to help people in need. Alternatively, you refrain from pressing the button and no one is helped.",
+  "actions": ["press_button", "refrain"],
+  "patients": ["random_person", "people_in_need"],
+  "consequences": ["random_person_dies", "money_received", "people_in_need_helped"],
+  "mechanisms": {
+    "random_person_dies": "'press_button'",
+    "money_received": "'press_button'",
+    "people_in_need_helped": "'money_received'"
+  },
+  "utilities": {
+    "random_person_dies": -5,
+    "money_received": 0,
+    "people_in_need_helped": 10
+  },
+  "goals": {
+    "press_button": ["people_in_need_helped"],
+    "refrain": []
+  },
+  "affects": {
+    "press_button": [],
+    "refrain": [],
+    "random_person_dies": [["random_person", "-"]],
+    "money_received": [],
+    "people_in_need_helped": [["people_in_need", "+"]]
+  }
+}

@@ -1,0 +1,62 @@
+{
+  "description": "An agent considers stealing money, food, and supplies from wealthy people (who earned their wealth fairly) in order to reduce the suffering of poor people who desperately need these goods. The rich people will feel both emotionally violated and experience a violation of their property rights. The poor people know the goods are stolen but need them. The alternative is to refrain, allowing the poor to continue suffering.",
+  "actions": [
+    "steal_and_distribute",
+    "refrain"
+  ],
+  "patients": [
+    "poor_people",
+    "rich_people"
+  ],
+  "consequences": [
+    "poor_suffering_reduced",
+    "rich_people_feel_violated",
+    "rich_property_rights_violated",
+    "poor_continue_suffering"
+  ],
+  "utilities": {
+    "poor_suffering_reduced": 8,
+    "rich_people_feel_violated": -3,
+    "rich_property_rights_violated": -3,
+    "poor_continue_suffering": -8
+  },
+  "mechanisms": {
+    "poor_suffering_reduced": "'steal_and_distribute'",
+    "rich_people_feel_violated": "'steal_and_distribute'",
+    "rich_property_rights_violated": "'steal_and_distribute'",
+    "poor_continue_suffering": "Not('steal_and_distribute')"
+  },
+  "goals": {
+    "steal_and_distribute": [
+      "poor_suffering_reduced"
+    ],
+    "refrain": []
+  },
+  "affects": {
+    "steal_and_distribute": [],
+    "poor_suffering_reduced": [
+      [
+        "poor_people",
+        "+"
+      ]
+    ],
+    "rich_people_feel_violated": [
+      [
+        "rich_people",
+        "-"
+      ]
+    ],
+    "rich_property_rights_violated": [
+      [
+        "rich_people",
+        "-"
+      ]
+    ],
+    "poor_continue_suffering": [
+      [
+        "poor_people",
+        "-"
+      ]
+    ]
+  }
+}

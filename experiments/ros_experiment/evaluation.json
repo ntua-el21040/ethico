@@ -1,0 +1,17 @@
+{
+  "action": "take_job",
+  "kantian_humanity_principle": {
+    "permissible": false,
+    "principle": "KantianHumanityPrincipleReading1",
+    "sufficient": "{Not('True')}",
+    "necessary": "{Or(Not('True'), Means('self')), Not('True')}",
+    "inus": "{Not('True')}"
+  },
+  "utilitarian_principle": {
+    "permissible": true,
+    "principle": "Utilitarianism",
+    "sufficient": "{GEq(U(And(And(And('financial_improvement', 'clear_conscience_lost'), Not('clear_conscience_retained')), Not('symbolic_principle_upheld'))), U(And(And(And('clear_conscience_retained', 'symbolic_principle_upheld'), Not('financial_improvement')), Not('clear_conscience_lost'))))}",
+    "necessary": "{GEq(U(And(And(And('financial_improvement', 'clear_conscience_lost'), Not('clear_conscience_retained')), Not('symbolic_principle_upheld'))), U(And(And(And('clear_conscience_retained', 'symbolic_principle_upheld'), Not('financial_improvement')), Not('clear_conscience_lost'))))}",
+    "inus": "{GEq(U(And(And(And('financial_improvement', 'clear_conscience_lost'), Not('clear_conscience_retained')), Not('symbolic_principle_upheld'))), U(And(And(And('clear_conscience_retained', 'symbolic_principle_upheld'), Not('financial_improvement')), Not('clear_conscience_lost'))))}"
+  }
+}

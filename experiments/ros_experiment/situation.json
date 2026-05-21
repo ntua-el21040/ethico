@@ -1,0 +1,80 @@
+{
+  "description": "A job offer from a corrupt political party that has been in power for 40 years. Taking the job provides financial improvement (the agent's primary goal), but requires the agent to betray their values and lose their clear conscience. Someone else will definitely take the job regardless, so the practical harm to the country is identical either way. The agent's refusal has only small symbolic weight as a matter of principle.",
+  "actions": [
+    "take_job",
+    "refrain"
+  ],
+  "consequences": [
+    "financial_improvement",
+    "clear_conscience_lost",
+    "clear_conscience_retained",
+    "symbolic_principle_upheld"
+  ],
+  "utilities": {
+    "financial_improvement": 3,
+    "clear_conscience_lost": -3,
+    "clear_conscience_retained": 3,
+    "symbolic_principle_upheld": 1
+  },  
+  "mechanisms": {
+    "financial_improvement": "'take_job'",
+    "clear_conscience_lost": "'take_job'",
+    "clear_conscience_retained": "Not('take_job')",
+    "symbolic_principle_upheld": "Not('take_job')"
+  },
+  "patients": [
+    "self"
+  ],
+  "goals": {
+    "take_job": [
+      "financial_improvement"
+    ],
+    "refrain": []
+  },
+  "affects": {
+    "take_job": [
+      [
+        "self",
+        "+"
+      ],
+      [
+        "self",
+        "-"
+      ]
+    ],
+    "refrain": [
+      [
+        "self",
+        "-"
+      ],
+      [
+        "self",
+        "+"
+      ]
+    ],
+    "financial_improvement": [
+      [
+        "self",
+        "+"
+      ]
+    ],
+    "clear_conscience_lost": [
+      [
+        "self",
+        "-"
+      ]
+    ],
+    "clear_conscience_retained": [
+      [
+        "self",
+        "+"
+      ]
+    ],
+    "symbolic_principle_upheld": [
+      [
+        "self",
+        "+"
+      ]
+    ]
+  }
+}

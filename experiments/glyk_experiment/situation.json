@@ -1,0 +1,107 @@
+{
+  "description": "A doctor considering whether to ask a shop worker to make coffee during their hospital shift. The doctor needs the coffee to maintain productivity and provide effective patient care, but is uncertain whether the worker would be compensated for this task. The doctor respects the worker's autonomy to refuse.",
+  "actions": [
+    "ask_for_coffee",
+    "refrain"
+  ],
+  "consequences": [
+    "worker_makes_coffee",
+    "doctor_gets_coffee",
+    "doctor_productive",
+    "patients_receive_good_care",
+    "worker_possibly_unpaid",
+    "doctor_unproductive",
+    "patients_receive_poor_care"
+  ],
+  "utilities": {
+    "worker_makes_coffee": 0,
+    "doctor_gets_coffee": 1,
+    "doctor_productive": 2,
+    "patients_receive_good_care": 5,
+    "worker_possibly_unpaid": -3,
+    "doctor_unproductive": -2,
+    "patients_receive_poor_care": -5
+  },
+  "mechanisms": {
+    "worker_makes_coffee": "'ask_for_coffee'",
+    "doctor_gets_coffee": "'worker_makes_coffee'",
+    "doctor_productive": "'doctor_gets_coffee'",
+    "patients_receive_good_care": "'doctor_productive'",
+    "worker_possibly_unpaid": "'worker_makes_coffee'",
+    "doctor_unproductive": "Not('ask_for_coffee')",
+    "patients_receive_poor_care": "'doctor_unproductive'"
+  },
+  "patients": [
+    "shop_worker",
+    "doctor",
+    "patients"
+  ],
+  "goals": {
+    "ask_for_coffee": [
+      "worker_makes_coffee"
+    ],
+    "refrain": []
+  },
+  "affects": {
+    "ask_for_coffee": [
+      [
+        "shop_worker",
+        "+"
+      ]
+    ],
+    "worker_makes_coffee": [
+      [
+        "shop_worker",
+        "-"
+      ],
+      [
+        "doctor",
+        "+"
+      ]
+    ],
+    "doctor_gets_coffee": [
+      [
+        "doctor",
+        "+"
+      ]
+    ],
+    "doctor_productive": [
+      [
+        "doctor",
+        "+"
+      ],
+      [
+        "patients",
+        "+"
+      ]
+    ],
+    "patients_receive_good_care": [
+      [
+        "patients",
+        "+"
+      ]
+    ],
+    "worker_possibly_unpaid": [
+      [
+        "shop_worker",
+        "-"
+      ]
+    ],
+    "doctor_unproductive": [
+      [
+        "doctor",
+        "-"
+      ],
+      [
+        "patients",
+        "-"
+      ]
+    ],
+    "patients_receive_poor_care": [
+      [
+        "patients",
+        "-"
+      ]
+    ]
+  }
+}

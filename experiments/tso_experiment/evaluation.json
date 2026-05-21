@@ -1,0 +1,17 @@
+{
+  "action": "steal_and_distribute",
+  "kantian_humanity_principle": {
+    "permissible": false,
+    "principle": "KantianHumanityPrincipleReading1",
+    "sufficient": "{Not('True')}",
+    "necessary": "{Not('True'), Or(Not('True'), Not(End('rich_people'))), Or(Not('True'), Means('poor_people')), Or(Or(Not('True'), Means('poor_people')), Not(End('rich_people')))}",
+    "inus": "{Not('True')}"
+  },
+  "utilitarian_principle": {
+    "permissible": true,
+    "principle": "Utilitarianism",
+    "sufficient": "{GEq(U(And(And(And('poor_suffering_reduced', 'rich_people_feel_violated'), 'rich_property_rights_violated'), Not('poor_continue_suffering'))), U(And(And(And('poor_continue_suffering', Not('poor_suffering_reduced')), Not('rich_people_feel_violated')), Not('rich_property_rights_violated'))))}",
+    "necessary": "{GEq(U(And(And(And('poor_suffering_reduced', 'rich_people_feel_violated'), 'rich_property_rights_violated'), Not('poor_continue_suffering'))), U(And(And(And('poor_continue_suffering', Not('poor_suffering_reduced')), Not('rich_people_feel_violated')), Not('rich_property_rights_violated'))))}",
+    "inus": "{GEq(U(And(And(And('poor_suffering_reduced', 'rich_people_feel_violated'), 'rich_property_rights_violated'), Not('poor_continue_suffering'))), U(And(And(And('poor_continue_suffering', Not('poor_suffering_reduced')), Not('rich_people_feel_violated')), Not('rich_property_rights_violated'))))}"
+  }
+}

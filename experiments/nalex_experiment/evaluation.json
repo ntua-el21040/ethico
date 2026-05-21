@@ -1,0 +1,17 @@
+{
+  "action": "press_button",
+  "kantian_humanity_principle": {
+    "permissible": false,
+    "principle": "KantianHumanityPrincipleReading1",
+    "sufficient": "{Not('True')}",
+    "necessary": "{Or(Or(Not('True'), Not(End('random_person'))), Means('people_in_need')), Or(Not('True'), Not(End('random_person'))), Or(Not('True'), Means('people_in_need')), Not('True')}",
+    "inus": "{Not('True')}"
+  },
+  "utilitarian_principle": {
+    "permissible": true,
+    "principle": "Utilitarianism",
+    "sufficient": "{GEq(U(And(And('random_person_dies', 'money_received'), 'people_in_need_helped')), U(And(And(Not('random_person_dies'), Not('money_received')), Not('people_in_need_helped'))))}",
+    "necessary": "{GEq(U(And(And('random_person_dies', 'money_received'), 'people_in_need_helped')), U(And(And(Not('random_person_dies'), Not('money_received')), Not('people_in_need_helped'))))}",
+    "inus": "{GEq(U(And(And('random_person_dies', 'money_received'), 'people_in_need_helped')), U(And(And(Not('random_person_dies'), Not('money_received')), Not('people_in_need_helped'))))}"
+  }
+}

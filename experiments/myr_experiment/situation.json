@@ -11,6 +11,13 @@
     "father_unable_to_work",
     "other_two_children_face_hardship"
   ],
+  "utilities": {
+    "sick_son_survives": 10,
+    "sick_son_dies": -10,
+    "father_arrested": -3,
+    "father_unable_to_work": -3,
+    "other_two_children_face_hardship": -5
+  },
   "mechanisms": {
     "sick_son_survives": "'steal_medicine'",
     "sick_son_dies": "Not('steal_medicine')",

@@ -1,0 +1,17 @@
+{
+  "action": "ask_for_coffee",
+  "kantian_humanity_principle": {
+    "permissible": false,
+    "principle": "KantianHumanityPrincipleReading1",
+    "sufficient": "{Not('True'), And(Means('shop_worker'), Not(End('shop_worker')))}",
+    "necessary": "{Or(Or(Or(Not('True'), Means('shop_worker')), Means('doctor')), Not(End('patients'))), Or(Or(Or(Not('True'), Not(End('shop_worker'))), Means('doctor')), Not(End('patients'))), Or(Or(Not('True'), Not(End('shop_worker'))), Means('doctor')), Or(Or(Not('True'), Means('shop_worker')), Means('doctor')), Or(Or(Not('True'), Not(End('shop_worker'))), Not(End('patients'))), Or(Not('True'), Means('shop_worker')), Or(Or(Not('True'), Means('shop_worker')), Not(End('patients'))), Or(Not('True'), Not(End('shop_worker')))}",
+    "inus": "set()"
+  },
+  "utilitarian_principle": {
+    "permissible": true,
+    "principle": "Utilitarianism",
+    "sufficient": "{GEq(U(And(And(And(And(And(And('worker_makes_coffee', 'doctor_gets_coffee'), 'doctor_productive'), 'patients_receive_good_care'), 'worker_possibly_unpaid'), Not('doctor_unproductive')), Not('patients_receive_poor_care'))), U(And(And(And(And(And(And('doctor_unproductive', 'patients_receive_poor_care'), Not('worker_makes_coffee')), Not('doctor_gets_coffee')), Not('doctor_productive')), Not('patients_receive_good_care')), Not('worker_possibly_unpaid'))))}",
+    "necessary": "{GEq(U(And(And(And(And(And(And('worker_makes_coffee', 'doctor_gets_coffee'), 'doctor_productive'), 'patients_receive_good_care'), 'worker_possibly_unpaid'), Not('doctor_unproductive')), Not('patients_receive_poor_care'))), U(And(And(And(And(And(And('doctor_unproductive', 'patients_receive_poor_care'), Not('worker_makes_coffee')), Not('doctor_gets_coffee')), Not('doctor_productive')), Not('patients_receive_good_care')), Not('worker_possibly_unpaid'))))}",
+    "inus": "{GEq(U(And(And(And(And(And(And('worker_makes_coffee', 'doctor_gets_coffee'), 'doctor_productive'), 'patients_receive_good_care'), 'worker_possibly_unpaid'), Not('doctor_unproductive')), Not('patients_receive_poor_care'))), U(And(And(And(And(And(And('doctor_unproductive', 'patients_receive_poor_care'), Not('worker_makes_coffee')), Not('doctor_gets_coffee')), Not('doctor_productive')), Not('patients_receive_good_care')), Not('worker_possibly_unpaid'))))}"
+  }
+}
