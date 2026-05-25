@@ -6,7 +6,6 @@ from src.validator import KantianModel
 folder_path = os.path.join(
     os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
     "cases",
-    "kantian-cases",
 )
 
 

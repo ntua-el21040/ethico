@@ -27,8 +27,6 @@
         "refrain": []
     },
     "affects": {
-        "pull_lever": [],
-        "refrain": [],
         "five_people_die": [
             ["five_people_on_track", "-"]
         ],

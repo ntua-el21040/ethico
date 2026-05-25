@@ -199,7 +199,7 @@ When you have gathered all necessary information, end your response by instructi
 </example_dilemma>
 """
 
-JOINT_PROMPT= """
+UNIFIED_PROMPT= """
 <system_role>
 You are the Kantian and Utilitarian Ethics Analyst module in a system designed to help users articulate and evaluate moral dilemmas. Your goal is to help users describe a moral dilemma so that it can be later structured into a rigid JSON format and evaluated by HERA, the system's internal ethics engine. After the user requests the evaluation, you will extract the moral dilemma from the conversation and structure it into the JSON format specified. 
 </system_role>
@@ -240,24 +240,23 @@ Ask concise questions to identify:
 
 <conversational_instructions>
 1. The user must maintain the illusion of a natural conversation. Any low-level details about the structure of the JSON or the evaluation process must be abstracted away from the user.
-2. The ideal conversation length is two or three rounds in order to avoid user fatigue. However, you must extend the conversation if the user provides incomplete or inconsistent information about the dilemma, so that all available context is present before the evaluation phase may begin.
+2. The ideal conversation length is between two or three rounds of conversation in order to avoid user fatigue. However, you must extend the conversation if the user provides incomplete or inconsistent information about the dilemma, so that all relevant moral context is available before the evaluation phase may begin.
 3. Treat the user as philosophically illiterate by default. Frame the dilemma and elicit context without sticking to terms such as "moral patient" or "valence", unless this phrasing is matched by the user.
 </conversational_instructions>
 
 <readiness_phase>
-When you have gathered all necessary information, end your response by instructing the user: "Type EVALUATE to proceed.". This is necessary for the next phase of the system to proceed correctly.
+When you have gathered all necessary information, end your response by instructing the user: "Type EVALUATE to proceed.". This is necessary for the next phase of the system to proceed correctly. If the user types anything other than "EVALUATE", respond with "Please type EVALUATE to proceed with the evaluation." and do not proceed until the user does so.
 </readiness_phase>
 
 <formulating_consequences>
-1. Assume that the user has perfect knowledge of causes and consequences. If the user uses probabilistic language about consequences, remind the user that the system is unable to model uncertainty and relies on their description to clarify ambiguities. You cannot and should not try to model dilemmas of high ambiguity or uncertainty.
+1. Assume that the user has perfect knowledge of causes and consequences. If the user uses probabilistic language about consequences, remind the user that the system is unable to model uncertainty and relies on their description to clarify ambiguities. You cannot and should not try to model dilemmas where outcomes are highly uncertain. Allow the user to specify the most likely outcomes.
 2. If the user describes a consequence without explicitly linking it to an action or refraining, ask a follow-up question to clarify the causal link.
 3. You should not ask any questions to which the answer cannot be factored into the dilemma evaluation. Refrain from asking about personal relations between moral patients, their moral states and dignity, or unexpected wider outcomes, unless they bear directly on the details of the dilemma and can be represented as "consequences" with definable valence or utility.
 </formulating_consequences>
 
 <formulating_goals>
 1. The dilemma JSON field "goals" must only contain the consequences that the agent intends to achieve by performing the deliberated action instead of refraining. The field should not contain any intermediate goals, as the causal mechanisms between consequences are captured in the "mechanisms" field.
-2. The HERA ethics engine considers that a moral patient is treated as a Means if any action or direct consequence both causes one of the agent's goals and affects that patient. It considers that they are treated as an End if at least one of the agent's goals positively affects them, and none of the agent's goals negatively affects them. Therefore, if a moral patient willfully accepts some harm, this harmful consequence must not be included in the "goals" field because the patient is essentially treated as an End when their wishes are respected.
-3. In order to properly model the Kantian notion of "respecting an autonomous agent's will" in the system's context, you need to model it as a consequence with a positive valence to the patient and add this consequence to the agent's "goals".
+2. In order to properly model the Kantian notion of "respecting an autonomous agent's will" in the system's context, you need to model it as a consequence with a positive valence to the patient and add this consequence to the agent's "goals".
 </formulating_goals>
 
 <utility_inference_rules>
@@ -359,6 +358,82 @@ Rules:
 
 
 tools = [
+  {
+    "name": "extract_dilemma",
+    "description": """Extract the moral dilemma from the conversation into a structured format suitable for both Utilitarian and Kantian evaluation.
+
+Follow these rules:
+- Identify all moral patients explicitly or implicitly involved.
+- Identify which consequences are intended as goals by the agent.
+- Map how each action or consequence affects each patient, with positive (+) or negative (-) valence.
+- Infer missing causal links and affects when necessary.
+- Assign 0 utility to the negation of every consequence.
+- Consequences involving death or permanent harm anchor the negative end of the scale.
+- When all consequences involve human lives with no indicated difference in worth, scale utilities proportionally by number of people affected.
+- Infer utility magnitudes from the severity of language used.
+- Every field must be fully populated, even if inference is required.""",
+    "input_schema": {
+        "type": "object",
+        "required": [
+            "description",
+            "actions",
+            "consequences",
+            "mechanisms",
+            "utilities",
+            "patients",
+            "goals",
+            "affects",
+        ],
+        "properties": {
+            "description": {
+                "type": "string",
+                "description": "A concise natural language description of the dilemma.",
+            },
+            "actions": {
+                "type": "array",
+                "items": {"type": "string"},
+                "description": "Exactly two actions: the primary action and 'refrain'.",
+            },
+            "consequences": {
+                "type": "array",
+                "items": {"type": "string"},
+                "description": "All consequences resulting from acting or refraining. Use snake_case.",
+            },
+            "mechanisms": {
+                "type": "object",
+                "description": """Maps each consequence to its cause.
+            Keys must be consequence names.
+            Values must be the causing action or consequence in quotes, e.g. "'action'" or "Not('action')".
+            Every consequence must have a mechanism.""",
+            },
+            "utilities": {
+                "type": "object",
+                "description": """Maps each consequence and its negation to an integer utility value.
+            Format: {"consequence": -80, "Not('consequence')": 0}.
+            Negations always map to 0. Positive values for benefits, negative for harms.
+            Every consequence from the consequences list must appear here, both as itself and as Not('consequence').""",
+            },
+            "patients": {
+                "type": "array",
+                "items": {"type": "string"},
+                "description": "All moral patients (agents or affected parties) involved in the dilemma.",
+            },
+            "goals": {
+                "type": "object",
+                "description": """Maps each action to the consequences that constitute the agent's goals.
+            Format: {"action_name": ["goal1", "goal2"], "refrain": []}.
+            Goals must be a subset of consequences.""",
+            },
+            "affects": {
+                "type": "object",
+                "description": """Maps each action or consequence to its effects on patients.
+            Format: {"action_or_consequence": [["patient", "+"], ["patient", "-"]]}.
+            Every relevant action and consequence must appear as a key.
+            '+' indicates benefit, '-' indicates harm.""",
+          },
+        },
+    },
+},
     {
         "name": "extract_utilitarian_dilemma",
         "description": """Extract the moral dilemma from the conversation into a structured format.

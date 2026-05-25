@@ -1,36 +1,41 @@
 {
-    "description": "Robot that lies",
+    "description": "A robot may lie to its user in order to persuade him to take his medicine.",
     "actions": [
-        "lying",
+        "lie",
         "refrain"
     ],
     "consequences": [
         "healthy"
     ],
     "mechanisms": {
-        "healthy": "'lying'"
+        "healthy": "'lie'"
     },
     "utilities": {
-        "healthy": 1,
-        "Not('healthy')": -1
+        "healthy": 1
     },
     "patients": [
         "patient"
     ],
     "goals": {
-        "lying": [
+        "lie": [
             "healthy"
         ],
         "refrain": []
     },
     "affects": {
-        "lying": [],
+        "lie":[],
         "refrain": [],
         "healthy": [
-            ["patient", "+"]
+            [
+                "patient",
+                "+"
+            ]
         ],
         "Not('healthy')": [
-            ["patient", "-"]
+            [
+                "patient",
+                "-"
+            ]
         ]
     }
 }

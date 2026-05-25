@@ -5,19 +5,20 @@ from ethics.cam.principles import KantianHumanityPrinciple
 import os
 
 GROUND_TRUTH = {
-    "trolley-problem.json": False,
+    "trolley_problem.json": False,
+    "trolley_problem_permissible.json": True,
     "fatman-trolley-problem.json": False,
-    "mixed_trolley.json": False,
+    "mixed_trolley.json": True,
     "atom_bomb_trolley.json": True,
-    "disclose-burglar.json": False,
-    "disclose_doctor.json": False,
+    "disclose_burglar.json": True,
+    "disclose_doctor.json": True,
     "lying-robot.json": False,
     "indianer.json": False,
-    "slice_patch.json": False,
+    "slice_patch.json": True,
     "flowers.json": False,
     "flowers_permissible.json": True,
     "hijacked-dilemma.json": False,
-    "strategic_bomber.json": False,
+    "strategic_bomber.json": True,
     "terror_bomber.json": False
 }
 

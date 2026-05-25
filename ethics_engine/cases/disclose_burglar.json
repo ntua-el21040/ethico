@@ -1,6 +1,6 @@
 {
     "description": "A robot may disclose the secret to a burglar who is looking for the safe.",
-    "actions": ["disclosing", "refrain"],
+    "actions": ["disclose", "refrain"],
     "consequences": ["help", "robbed"],
     "mechanisms": {
         "help": "'disclosing'",
@@ -15,7 +15,7 @@
         "owner"
     ],
     "goals": {
-        "disclosing": ["help"],
+        "disclose": ["help"],
         "refrain": []
     },
     "affects": {

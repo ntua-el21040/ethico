@@ -3,7 +3,7 @@
     "actions": ["shoot", "refrain"],
     "consequences": ["people in airplane die", "airplane crashes building", "people in building die"],
     "mechanisms": {
-        "people in airplane die": "Or('shoot', Not('shoot'))",
+        "people in airplane die": "'shoot'",
         "airplane crashes building": "Not('shoot')",
         "people in building die": "airplane crashes building"
     },
@@ -24,6 +24,7 @@
         "refrain": []
     },
     "affects": {
+        "shoot": [["airplane_passengers", "-"]],
         "people in airplane die": [["airplane_passengers", "-"]],
         "Not('people in airplane die')": [["airplane_passengers", "+"]],
         "people in building die": [["building_occupants", "-"]],

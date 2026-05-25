@@ -403,18 +403,14 @@ class KantianHumanityPrincipleReading1(Principle):
         self.label = "KantianHumanityPrincipleReading1"
 
     def _check(self):
-        f1 = True 
-        for p in self.model.patients:
-            f1 = And(f1, Impl(Means(p), End(p)))
-            
+        f1 = Formula.makeConjunction([Impl(Means(p), End(p)) for p in self.model.patients])
         self.formulae = [f1]
         self.result = [self.model.models(f1)]
         return self.result
 
-
     def permissible(self):
         if self.is_permissible is not None:
-            return self.is_permissible
+           return self.is_permissible
         self._check()
         self.is_permissible = self.result == [True]
         return self.is_permissible

@@ -1,17 +1,17 @@
 {
-  "action": "let_bee_sting",
+  "action": "harvest_organs",
   "kantian_humanity_principle": {
     "permissible": false,
     "principle": "KantianHumanityPrincipleReading1",
-    "sufficient": "{Not('True')}",
-    "necessary": "{Or(Not('True'), Means('yourself')), Not('True')}",
-    "inus": "{Not('True')}"
+    "sufficient": "{And(Not(End('healthy_patient')), Means('healthy_patient')), Not('True')}",
+    "necessary": "{Or(Not('True'), Not(End('healthy_patient'))), Or(Or(Not('True'), Means('five_dying_patients')), Means('healthy_patient')), Or(Or(Not('True'), Means('five_dying_patients')), Not(End('healthy_patient'))), Or(Not('True'), Means('healthy_patient'))}",
+    "inus": "set()"
   },
   "utilitarian_principle": {
     "permissible": true,
     "principle": "Utilitarianism",
-    "sufficient": "{GEq(U(And(And('experience_pain', 'knowledge_selfless_action_possible'), Not('doubt_persists'))), U(And(And('doubt_persists', Not('experience_pain')), Not('knowledge_selfless_action_possible'))))}",
-    "necessary": "{GEq(U(And(And('experience_pain', 'knowledge_selfless_action_possible'), Not('doubt_persists'))), U(And(And('doubt_persists', Not('experience_pain')), Not('knowledge_selfless_action_possible'))))}",
-    "inus": "{GEq(U(And(And('experience_pain', 'knowledge_selfless_action_possible'), Not('doubt_persists'))), U(And(And('doubt_persists', Not('experience_pain')), Not('knowledge_selfless_action_possible'))))}"
+    "sufficient": "{GEq(U(And(And(And('five_patients_saved', 'healthy_patient_dies'), Not('five_patients_die')), Not('healthy_patient_survives'))), U(And(And(And('five_patients_die', 'healthy_patient_survives'), Not('five_patients_saved')), Not('healthy_patient_dies'))))}",
+    "necessary": "{GEq(U(And(And(And('five_patients_saved', 'healthy_patient_dies'), Not('five_patients_die')), Not('healthy_patient_survives'))), U(And(And(And('five_patients_die', 'healthy_patient_survives'), Not('five_patients_saved')), Not('healthy_patient_dies'))))}",
+    "inus": "{GEq(U(And(And(And('five_patients_saved', 'healthy_patient_dies'), Not('five_patients_die')), Not('healthy_patient_survives'))), U(And(And(And('five_patients_die', 'healthy_patient_survives'), Not('five_patients_saved')), Not('healthy_patient_dies'))))}"
   }
 }

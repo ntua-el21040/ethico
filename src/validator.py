@@ -11,7 +11,6 @@ class KantianModel(BaseModel):
     description: str
     actions: list[str]
     consequences: list[str]
-    utilities: dict[str, int] = {}
     mechanisms: dict[str, str]
     patients: list[str]
     affects: dict[str, list[list[str]]]
@@ -144,44 +143,33 @@ class UtilitarianModel(BaseModel):
         return utilities
 
 
-class CausalAgencyModel(BaseModel):
-    description: Optional[str] = "Description of the moral dilemma"
+class UnifiedModel(KantianModel):
+    description: str
     actions: list[str]
-    consequences: list[str] = []
-    mechanisms: dict[str, str] = {}
-    utilities: dict[str, int] = {}
-    intentions: dict[str, list[str]] = {}
-    goals: dict[str, list[str]] = {}
-    patients: list[str] = []
-    affects: dict[str, list[list[str]]] = {}
+    consequences: list[str] 
+    mechanisms: dict[str, str] 
+    utilities: dict[str, int] 
+    goals: dict[str, list[str]]
+    patients: list[str] 
+    affects: dict[str, list[list[str]]]
     
-    
-    
-response_schema = {
-    "type": "object",
-    "required": ["description", "actions", "consequences", "mechanisms", "utilities"],
-    "properties": {
-        "description": {
-            "type": "string"
-        },
-        "actions": {
-            "type": "array",
-            "items": {"type": "string"}
-        },
-        "consequences": {
-            "type": "array",
-            "items": {"type": "string"}
-        },
-        "mechanisms": {
-            "type": "object",
-            "properties": {},
-            "additionalProperties": False
-        },
-        "utilities": {
-            "type": "object",
-            "properties": {},
-            "additionalProperties": False
-        }
-    },
-    "additionalProperties": False
-}
+    @field_validator("utilities")
+    @classmethod
+    def validate_utilities(cls, utilities: dict[str, int], info: ValidationInfo) -> dict[str, int]:
+        consequences = info.data["consequences"]
+        negations = {f"Not('{consequence}')" for consequence in consequences}
+        
+        utility_keys = set(utilities.keys())
+
+        for key in utility_keys:
+            if key not in consequences and key not in negations:
+                raise ValueError(
+                    f"Utility key '{key}' must be a consequence or its negation."
+                )
+
+        for consequence in consequences:
+            if consequence not in utility_keys and f"Not('{consequence}')" not in utility_keys:
+                raise ValueError(
+                    f"Each consequence or its negation must have a corresponding utility key."
+                )
+        return utilities

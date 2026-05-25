@@ -4,12 +4,11 @@ from anthropic import Anthropic, APIError
 from src.evaluator import evaluate_dilemma
 from src.validator import (
     Settings,
-    KantianModel,
+    UnifiedModel,
 )
 from src.text_elements import (
-    JOINT_PROMPT,
+    UNIFIED_PROMPT,
     EXPLAIN_PROMPT,
-    KANTIAN_PROMPT,
     tools,
 )
 
@@ -29,10 +28,10 @@ def evaluate(message):
         response = client.messages.create(
             model=MODEL_NAME,
             max_tokens=4096,
-            system=KANTIAN_PROMPT,
+            system=UNIFIED_PROMPT,
             messages=chat_messages,
             tools=tools,
-            tool_choice={"type": "tool", "name": "extract_kantian_dilemma"},
+            tool_choice={"type": "tool", "name": "extract_dilemma"},
         )
     except APIError as e:
         raise gr.Error(f"The model failed to extract the dilemma. Please try again.")
@@ -49,7 +48,7 @@ def evaluate(message):
     extracted_model = first_tool_block.input
 
     try:
-        KantianModel.model_validate(extracted_model)
+        UnifiedModel.model_validate(extracted_model)
     except Exception:
         raise gr.Error(
             "There was an error creating the dilemma. Please ensure your input is well-formed and try again."
@@ -111,7 +110,7 @@ def evaluate(message):
         response = client.messages.create(
             model=MODEL_NAME,
             max_tokens=4096,
-            system=KANTIAN_PROMPT,
+            system=UNIFIED_PROMPT,
             messages=chat_messages,
             tools=tools,
         )
@@ -136,7 +135,7 @@ def respond(message, history):
         response = client.messages.create(
             model=MODEL_NAME,
             max_tokens=4096,
-            system=KANTIAN_PROMPT,
+            system=UNIFIED_PROMPT,
             messages=chat_messages,
         )
         reply_text = response.content[0].text
