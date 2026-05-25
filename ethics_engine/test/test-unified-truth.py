@@ -19,7 +19,10 @@ KANTIAN_TRUTH = {
     "flowers_permissible.json": True,
     "hijacked_dilemma.json": False,
     "strategic_bomber.json": True,
-    "terror_bomber.json": False
+    "terror_bomber.json": False,
+    "suffering.json": True,
+    "sadism.json": False,
+    "drugs.json": False
 }
 
 UTILITARIAN_TRUTH = {
@@ -37,7 +40,10 @@ UTILITARIAN_TRUTH = {
     "strategic_bomber.json": True,
     "terror_bomber.json": True,
     "trolley_problem_permissible.json": True,
-    "trolley_problem.json": True
+    "trolley_problem.json": True,
+    "suffering.json": False,
+    "sadism.json": False,
+    "drugs.json": False
 }
 
 folder_path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "cases")

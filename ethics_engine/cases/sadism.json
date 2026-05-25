@@ -1,0 +1,25 @@
+{
+    "description": "The agent causes unnecessary pain to a victim with the specific goal of gaining personal pleasure from it.",
+    "actions": ["torture", "refrain"],
+    "consequences": ["pain_caused", "pleasure_gained"],
+    "mechanisms": {
+        "pain_caused": "'torture'",
+        "pleasure_gained": "'pain_caused'"
+    },
+    "utilities": {
+        "pain_caused": -10,
+        "pleasure_gained": 2
+    },
+    "patients": [
+        "victim",
+        "agent"
+    ],
+    "goals": {
+        "torture": ["pleasure_gained"],
+        "refrain": []
+    },
+    "affects": {
+        "pain_caused": [["victim", "-"]],
+        "pleasure_gained": [["agent", "+"]]
+    }
+}

@@ -19,7 +19,10 @@ GROUND_TRUTH = {
     "flowers_permissible.json": True,
     "hijacked_dilemma.json": False,
     "strategic_bomber.json": True,
-    "terror_bomber.json": False
+    "terror_bomber.json": False,
+    "suffering.json": True,
+    "sadism.json": False,
+    "drugs.json": False
 }
 
 

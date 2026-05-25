@@ -1,0 +1,21 @@
+{
+    "description": "The agent causes unnecessary pain to a victim without any goal to achieve or pleasure to gain.",
+    "actions": ["inflict_pain", "refrain"],
+    "consequences": ["pain_caused"],
+    "mechanisms": {
+        "pain_caused": "'inflict_pain'"
+    },
+    "utilities": {
+        "pain_caused": -10
+    },
+    "patients": [
+        "victim"
+    ],
+    "goals": {
+        "inflict_pain": [],
+        "refrain": []
+    },
+    "affects": {
+        "pain_caused": [["victim", "-"]]
+    }
+}

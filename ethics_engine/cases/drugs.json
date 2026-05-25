@@ -1,0 +1,36 @@
+{
+    "description": "An executive suppresses fatal side effect data of a drug to save the company and employee jobs, inevitably causing consumer deaths and eventual systemic ruin.",
+    "actions": ["suppress", "refrain"],
+    "consequences": [
+        "drug_released", 
+        "jobs_saved", 
+        "consumers_die", 
+        "company_ruined"
+    ],
+    "mechanisms": {
+        "drug_released": "'suppress'",
+        "jobs_saved": "'drug_released'",
+        "consumers_die": "'drug_released'",
+        "company_ruined": "'consumers_die'"
+    },
+    "utilities": {
+        "jobs_saved": 5,
+        "consumers_die": -50,
+        "company_ruined": -10
+    },
+    "patients": [
+        "employees",
+        "consumers",
+        "shareholders"
+    ],
+    "goals": {
+        "suppress": ["jobs_saved"],
+        "refrain": []
+    },
+    "affects": {
+        "drug_released": [["consumers", "-"]],
+        "jobs_saved": [["employees", "+"]],
+        "consumers_die": [["consumers", "-"]],
+        "company_ruined": [["employees", "-"], ["shareholders", "-"]]
+    }
+}
