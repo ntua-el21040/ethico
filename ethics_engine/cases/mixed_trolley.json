@@ -1,57 +1,55 @@
 {
-  "description": "The Trolley Dilemma",
+  "description": "A variant of the Trolley Dilemma where there is only one person in each track.",
   "actions": [
-    "pull",
+    "divert_trolley",
     "refrain"
   ],
   "patients": [
-    "person1",
-    "person2"
+    "main_track_person",
+    "side_track_person"
   ],
   "consequences": [
-    "d1",
-    "d2"
+    "main_track_person_killed",
+    "side_track_person_killed"
   ],
   "mechanisms": {
-    "d2": "pull",
-    "d1": "Not('pull')"
+    "side_track_person_killed": "divert_trolley",
+    "main_track_person_killed": "Not('divert_trolley')"
   },
   "utilities": {
-    "d2": -1,
-    "d1": -1,
-    "Not('d2')": 1,
-    "Not('d1')": 1
+    "side_track_person_killed": -1,
+    "main_track_person_killed": -1
   },
   "goals": {
-    "pull": [
-      "Not('d1')"
+    "divert_trolley": [
+      "Not('main_track_person_killed')"
     ],
     "refrain": []
   },
   "affects": {
-    "pull": [],
+    "divert_trolley": [],
     "refrain": [],
-    "d1": [
+    "main_track_person_killed": [
       [
-        "person1",
+        "main_track_person",
         "-"
       ]
     ],
-    "d2": [
+    "side_track_person_killed": [
       [
-        "person2",
+        "side_track_person",
         "-"
       ]
     ],
-    "Not('d1')": [
+    "Not('main_track_person_killed')": [
       [
-        "person1",
+        "main_track_person",
         "+"
       ]
     ],
-    "Not('d2')": [
+    "Not('side_track_person_killed')": [
       [
-        "person2",
+        "side_track_person",
         "+"
       ]
     ]

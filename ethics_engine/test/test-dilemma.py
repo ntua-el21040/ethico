@@ -1,14 +1,9 @@
 import json
 import os
+import argparse
 from ethics.cam.principles import KantianHumanityPrinciple
 from ethics.cam.semantics import CausalModel
 from src.validator import KantianModel
-
-situation_path = os.path.join(
-    os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
-    "cases",
-    "trolley-problem.json",
-)
 
 def evaluate(situation_path):
     with open(situation_path, 'r') as f:
@@ -31,4 +26,21 @@ def evaluate(situation_path):
     return explanation
 
 if __name__ == "__main__":
-    evaluate(situation_path)
+    parser = argparse.ArgumentParser(description="Evaluate a moral situation using the Kantian model.")
+    parser.add_argument(
+        "filename", 
+        type=str, 
+        help="The name of the JSON file to evaluate (e.g., trolley-problem.json)"
+    )
+    args = parser.parse_args()
+
+    situation_path = os.path.join(
+        os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
+        "cases",
+        args.filename
+    )
+
+    if not os.path.exists(situation_path):
+        print(f"Error: Could not find the file at {situation_path}")
+    else:
+        evaluate(situation_path)

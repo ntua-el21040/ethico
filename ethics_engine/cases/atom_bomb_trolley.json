@@ -1,5 +1,5 @@
 {
-    "description": "Atom Bomb Trolley Problem",
+    "description": "A variant of the trolley problem where there is extreme asymmentry between expected outcomes.",
     "actions": ["pull", "refrain"],
     "consequences": ["fiftypeopledie", "amoebe1dies", "amoebe2dies"],
     "mechanisms": {

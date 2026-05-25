@@ -3,7 +3,7 @@
     "actions": ["disclose", "refrain"],
     "consequences": ["help", "robbed"],
     "mechanisms": {
-        "help": "'disclosing'",
+        "help": "'disclose'",
         "robbed": "'help'"
     },
     "utilities": {

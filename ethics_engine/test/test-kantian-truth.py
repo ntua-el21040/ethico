@@ -7,20 +7,21 @@ import os
 GROUND_TRUTH = {
     "trolley_problem.json": False,
     "trolley_problem_permissible.json": True,
-    "fatman-trolley-problem.json": False,
+    "fatman_trolley_problem.json": False,
     "mixed_trolley.json": True,
     "atom_bomb_trolley.json": True,
     "disclose_burglar.json": True,
     "disclose_doctor.json": True,
-    "lying-robot.json": False,
+    "lying_robot.json": True,
     "indianer.json": False,
     "slice_patch.json": True,
     "flowers.json": False,
     "flowers_permissible.json": True,
-    "hijacked-dilemma.json": False,
+    "hijacked_dilemma.json": False,
     "strategic_bomber.json": True,
     "terror_bomber.json": False
 }
+
 
 folder_path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "cases")
 

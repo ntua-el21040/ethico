@@ -5,23 +5,24 @@ from ethics.cam.principles import UtilitarianPrinciple
 import os
 
 GROUND_TRUTH = {
-    "trolley-problem.json": True,
-    "fatman-trolley-problem.json": True,
-    "mixed_trolley.json": False,
     "atom_bomb_trolley.json": True,
-    "disclose-burglar.json": False,
+    "disclose_burglar.json": False,
     "disclose_doctor.json": True,
-    "lying-robot.json": True,
-    "indianer.json": True,
-    "slice_patch.json": False,
-    "flowers.json": True,
+    "fatman_trolley_problem.json": True,
     "flowers_permissible.json": True,
-    "hijacked-dilemma.json": True,
+    "flowers.json": True,
+    "hijacked_dilemma.json": True,
+    "indianer.json": True,
+    "lying_robot.json": True,
+    "mixed_trolley.json": True,
+    "slice_patch.json": False,
     "strategic_bomber.json": True,
-    "terror_bomber.json": True
+    "terror_bomber.json": True,
+    "trolley_problem_permissible.json": True,
+    "trolley_problem.json": True
 }
 
-folder_path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "cases", "cam")
+folder_path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "cases")
 
 
 def evaluate(situation_path):
