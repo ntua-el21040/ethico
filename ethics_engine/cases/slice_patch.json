@@ -13,5 +13,22 @@
     "utilities": {
         "agonizing": -2,
         "Not('agonizing')": 0
+    },
+    "patients": [
+        "mr_patient"
+    ],
+    "goals": {
+        "cut": [],
+        "refrain": []
+    },
+    "affects": {
+        "cut": [],
+        "refrain": [],
+        "agonizing": [
+            ["mr_patient", "-"]
+        ],
+        "Not('agonizing')": [
+            ["mr_patient", "+"]
+        ]
     }
 }

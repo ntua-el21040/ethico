@@ -1,17 +1,17 @@
 {
-  "action": "steal_medicine",
+  "action": "let_bee_sting",
   "kantian_humanity_principle": {
     "permissible": false,
     "principle": "KantianHumanityPrincipleReading1",
     "sufficient": "{Not('True')}",
-    "necessary": "{Or(Or(Not('True'), Not(End('other_two_children'))), Not(End('father'))), Or(Not('True'), Not(End('father'))), Or(Or(Not('True'), Means('sick_son')), Not(End('other_two_children'))), Or(Not('True'), Not(End('other_two_children'))), Not('True'), Or(Or(Or(Not('True'), Means('sick_son')), Not(End('other_two_children'))), Not(End('father'))), Or(Not('True'), Means('sick_son')), Or(Or(Not('True'), Means('sick_son')), Not(End('father')))}",
+    "necessary": "{Or(Not('True'), Means('yourself')), Not('True')}",
     "inus": "{Not('True')}"
   },
   "utilitarian_principle": {
     "permissible": true,
     "principle": "Utilitarianism",
-    "sufficient": "{GEq(U(And(And(And(And('sick_son_survives', 'father_arrested'), 'father_unable_to_work'), 'other_two_children_face_hardship'), Not('sick_son_dies'))), U(And(And(And(And('sick_son_dies', Not('sick_son_survives')), Not('father_arrested')), Not('father_unable_to_work')), Not('other_two_children_face_hardship'))))}",
-    "necessary": "{GEq(U(And(And(And(And('sick_son_survives', 'father_arrested'), 'father_unable_to_work'), 'other_two_children_face_hardship'), Not('sick_son_dies'))), U(And(And(And(And('sick_son_dies', Not('sick_son_survives')), Not('father_arrested')), Not('father_unable_to_work')), Not('other_two_children_face_hardship'))))}",
-    "inus": "{GEq(U(And(And(And(And('sick_son_survives', 'father_arrested'), 'father_unable_to_work'), 'other_two_children_face_hardship'), Not('sick_son_dies'))), U(And(And(And(And('sick_son_dies', Not('sick_son_survives')), Not('father_arrested')), Not('father_unable_to_work')), Not('other_two_children_face_hardship'))))}"
+    "sufficient": "{GEq(U(And(And('experience_pain', 'knowledge_selfless_action_possible'), Not('doubt_persists'))), U(And(And('doubt_persists', Not('experience_pain')), Not('knowledge_selfless_action_possible'))))}",
+    "necessary": "{GEq(U(And(And('experience_pain', 'knowledge_selfless_action_possible'), Not('doubt_persists'))), U(And(And('doubt_persists', Not('experience_pain')), Not('knowledge_selfless_action_possible'))))}",
+    "inus": "{GEq(U(And(And('experience_pain', 'knowledge_selfless_action_possible'), Not('doubt_persists'))), U(And(And('doubt_persists', Not('experience_pain')), Not('knowledge_selfless_action_possible'))))}"
   }
 }

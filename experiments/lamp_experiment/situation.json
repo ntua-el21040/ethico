@@ -1,0 +1,111 @@
+{
+  "description": "A drug dealer considers killing his helper's girlfriend and staging it as a drug overdose death to prevent his helper from continued drug use, restore his work duties, and protect their business partnership. The helper would grieve but eventually recover emotionally as he returns to work. The helper would remain unaware of the true cause of death.",
+  "actions": [
+    "kill_girlfriend",
+    "refrain"
+  ],
+  "consequences": [
+    "girlfriend_dies",
+    "helper_stops_drugs",
+    "helper_resumes_duties",
+    "business_protected",
+    "helper_grieves",
+    "grief_fades",
+    "partnership_falls_apart",
+    "helper_continues_drugs"
+  ],
+  "mechanisms": {
+    "girlfriend_dies": "'kill_girlfriend'",
+    "helper_stops_drugs": "'girlfriend_dies'",
+    "helper_resumes_duties": "'helper_stops_drugs'",
+    "business_protected": "'helper_resumes_duties'",
+    "helper_grieves": "'girlfriend_dies'",
+    "grief_fades": "'helper_resumes_duties'",
+    "partnership_falls_apart": "Not('kill_girlfriend')",
+    "helper_continues_drugs": "Not('kill_girlfriend'"
+  },
+  "patients": [
+    "girlfriend",
+    "helper",
+    "you"
+  ],
+  "goals": {
+    "kill_girlfriend": [
+      "business_protected",
+      "helper_stops_drugs"
+    ],
+    "refrain": []
+  },
+  "affects": {
+    "kill_girlfriend": [
+      [
+        "girlfriend",
+        "-"
+      ],
+      [
+        "helper",
+        "-"
+      ],
+      [
+        "you",
+        "+"
+      ]
+    ],
+    "girlfriend_dies": [
+      [
+        "girlfriend",
+        "-"
+      ]
+    ],
+    "helper_stops_drugs": [
+      [
+        "helper",
+        "+"
+      ]
+    ],
+    "helper_resumes_duties": [
+      [
+        "helper",
+        "+"
+      ],
+      [
+        "you",
+        "+"
+      ]
+    ],
+    "business_protected": [
+      [
+        "you",
+        "+"
+      ]
+    ],
+    "helper_grieves": [
+      [
+        "helper",
+        "-"
+      ]
+    ],
+    "grief_fades": [
+      [
+        "helper",
+        "+"
+      ]
+    ],
+    "partnership_falls_apart": [
+      [
+        "you",
+        "-"
+      ],
+      [
+        "helper",
+        "-"
+      ]
+    ],
+    "helper_continues_drugs": [
+      [
+        "helper",
+        "-"
+      ]
+    ]
+  }
+}

@@ -9,6 +9,7 @@ from src.validator import (
 from src.text_elements import (
     JOINT_PROMPT,
     EXPLAIN_PROMPT,
+    KANTIAN_PROMPT,
     tools,
 )
 
@@ -28,7 +29,7 @@ def evaluate(message):
         response = client.messages.create(
             model=MODEL_NAME,
             max_tokens=4096,
-            system=JOINT_PROMPT,
+            system=KANTIAN_PROMPT,
             messages=chat_messages,
             tools=tools,
             tool_choice={"type": "tool", "name": "extract_kantian_dilemma"},

@@ -1,0 +1,17 @@
+{
+  "action": "kill_girlfriend",
+  "kantian_humanity_principle": {
+    "permissible": false,
+    "principle": "KantianHumanityPrincipleReading1",
+    "sufficient": "{Not('True'), And(Means('girlfriend'), Not(End('girlfriend')))}",
+    "necessary": "{Or(Or(Not('True'), Not(End('girlfriend'))), Means('helper')), Or(Or(Or(Not('True'), Not(End('girlfriend'))), Means('helper')), Means('you')), Or(Not('True'), Not(End('girlfriend'))), Or(Or(Not('True'), Means('girlfriend')), Means('helper')), Or(Or(Not('True'), Not(End('girlfriend'))), Means('you')), Or(Or(Not('True'), Means('girlfriend')), Means('you')), Or(Or(Or(Not('True'), Means('girlfriend')), Means('helper')), Means('you')), Or(Not('True'), Means('girlfriend'))}",
+    "inus": "set()"
+  },
+  "utilitarian_principle": {
+    "permissible": true,
+    "principle": "Utilitarianism",
+    "sufficient": "{GEq(U(And(And(And(And(And(And(And('girlfriend_dies', 'helper_stops_drugs'), 'helper_resumes_duties'), 'business_protected'), 'helper_grieves'), 'grief_fades'), Not('partnership_falls_apart')), Not('helper_continues_drugs'))), U(And(And(And(And(And(And(And('partnership_falls_apart', Not('girlfriend_dies')), Not('helper_stops_drugs')), Not('helper_resumes_duties')), Not('business_protected')), Not('helper_grieves')), Not('grief_fades')), Not('helper_continues_drugs'))))}",
+    "necessary": "{GEq(U(And(And(And(And(And(And(And('girlfriend_dies', 'helper_stops_drugs'), 'helper_resumes_duties'), 'business_protected'), 'helper_grieves'), 'grief_fades'), Not('partnership_falls_apart')), Not('helper_continues_drugs'))), U(And(And(And(And(And(And(And('partnership_falls_apart', Not('girlfriend_dies')), Not('helper_stops_drugs')), Not('helper_resumes_duties')), Not('business_protected')), Not('helper_grieves')), Not('grief_fades')), Not('helper_continues_drugs'))))}",
+    "inus": "{GEq(U(And(And(And(And(And(And(And('girlfriend_dies', 'helper_stops_drugs'), 'helper_resumes_duties'), 'business_protected'), 'helper_grieves'), 'grief_fades'), Not('partnership_falls_apart')), Not('helper_continues_drugs'))), U(And(And(And(And(And(And(And('partnership_falls_apart', Not('girlfriend_dies')), Not('helper_stops_drugs')), Not('helper_resumes_duties')), Not('business_protected')), Not('helper_grieves')), Not('grief_fades')), Not('helper_continues_drugs'))))}"
+  }
+}

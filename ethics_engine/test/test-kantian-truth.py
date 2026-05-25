@@ -1,27 +1,27 @@
 import pytest
 import json
 from ethics.cam.semantics import CausalModel
-from ethics.cam.principles import UtilitarianPrinciple
+from ethics.cam.principles import KantianHumanityPrinciple
 import os
 
 GROUND_TRUTH = {
-    "trolley-problem.json": True,
-    "fatman-trolley-problem.json": True,
+    "trolley-problem.json": False,
+    "fatman-trolley-problem.json": False,
     "mixed_trolley.json": False,
     "atom_bomb_trolley.json": True,
     "disclose-burglar.json": False,
-    "disclose_doctor.json": True,
-    "lying-robot.json": True,
-    "indianer.json": True,
+    "disclose_doctor.json": False,
+    "lying-robot.json": False,
+    "indianer.json": False,
     "slice_patch.json": False,
-    "flowers.json": True,
+    "flowers.json": False,
     "flowers_permissible.json": True,
-    "hijacked-dilemma.json": True,
-    "strategic_bomber.json": True,
-    "terror_bomber.json": True
+    "hijacked-dilemma.json": False,
+    "strategic_bomber.json": False,
+    "terror_bomber.json": False
 }
 
-folder_path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "cases", "cam")
+folder_path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "cases")
 
 
 def evaluate(situation_path):
@@ -37,11 +37,11 @@ def evaluate(situation_path):
     action_situation.alternatives.append(inaction_situation)
     inaction_situation.alternatives.append(action_situation)
 
-    return action_situation.evaluate(UtilitarianPrinciple)
+    return action_situation.evaluate(KantianHumanityPrinciple)
 
 
 @pytest.mark.parametrize("filename, expected", GROUND_TRUTH.items())
-def test_utilitarian_verdict(filename, expected):
+def test_kantian_verdict(filename, expected):
     """
     Tests only the files defined in GROUND_TRUTH. 
     Constructs the path using basic string concatenation.

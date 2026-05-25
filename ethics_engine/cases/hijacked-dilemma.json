@@ -15,12 +15,18 @@
         "Not('airplane crashes building')": 1, 
         "Not('people in building die')": 500
     },
-    "intentions": {
-        "shoot": ["shoot", "Not('airplane crashes building')", "Not('people in building die')"],
+    "patients": [
+        "airplane_passengers",
+        "building_occupants"
+    ],
+    "goals": {
+        "shoot": ["Not('airplane crashes building')", "Not('people in building die')"],
         "refrain": []
     },
-    "goals": {
-        "shoot": ["shoot", "Not('airplane crashes building')", "Not('people in building die')"],
-        "refrain": []
+    "affects": {
+        "people in airplane die": [["airplane_passengers", "-"]],
+        "Not('people in airplane die')": [["airplane_passengers", "+"]],
+        "people in building die": [["building_occupants", "-"]],
+        "Not('people in building die')": [["building_occupants", "+"]]
     }
 }

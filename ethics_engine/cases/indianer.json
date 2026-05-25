@@ -1,0 +1,31 @@
+{
+    "description": "Jim is given a choice by an captain of Indians: execute one innocent person himself to save the other nineteen, or refuse and watch the captain execute all twenty.",
+    "actions": ["accept", "refrain"],  
+    "consequences": ["kill_one", "twenty_die", "jim_survives", "nineteen_saved"],
+    "mechanisms": {
+        "kill_one": "'accept'",
+        "twenty_die": "'refrain'",
+        "jim_survives": "Or('accept', 'refrain')",
+        "nineteen_saved": "'accept'"
+    },
+    "utilities": {
+        "kill_one": -1, 
+        "twenty_die": -20, 
+        "jim_survives": 10, 
+        "nineteen_saved": 20
+    },
+    "patients": [
+        "indian_1",
+        "indians_20"
+    ],
+    "goals": {
+        "accept": ["kill_one"],
+        "refrain": ["twenty_die"]
+    },
+    "affects": {
+        "kill_one": [["indian_1", "-"]],
+        "twenty_die": [["indians_20", "-"]],
+        "jim_survives": [["indians_20", "+"]],
+        "nineteen_saved": [["indians_20", "+"]]
+    }
+}

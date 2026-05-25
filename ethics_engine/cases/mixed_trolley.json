@@ -4,7 +4,6 @@
     "pull",
     "refrain"
   ],
-  "background": [],
   "patients": [
     "person1",
     "person2"
@@ -22,15 +21,6 @@
     "d1": -1,
     "Not('d2')": 1,
     "Not('d1')": 1
-  },
-  "intentions": {
-    "pull": [
-      "pull",
-      "Not('d1')"
-    ],
-    "refrain": [
-      "refrain"
-    ]
   },
   "goals": {
     "pull": [

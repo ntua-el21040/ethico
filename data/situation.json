@@ -1,68 +1,45 @@
 {
-  "description": "A father must choose whether to steal medicine to save his sick son's life. The pharmacy refuses to help on principle. If he steals and is caught, he will face legal consequences that damage his ability to work and support all three of his children, causing serious hardship for his other two children. If he does not steal, his sick son will die, but his other two children can continue to be supported. The father's primary goal is to save his sick son's life.",
+  "description": "You are considering intentionally letting a bee sting you to prove to yourself that selfless action is possible\u2014an action that benefits no one (including yourself) and causes you significant pain. Your goal is to resolve your doubt that we always benefit from our actions by demonstrating that such action exists.",
   "actions": [
-    "steal_medicine",
+    "let_bee_sting",
     "refrain"
   ],
+  "patients": [
+    "yourself"
+  ],
   "consequences": [
-    "sick_son_survives",
-    "sick_son_dies",
-    "father_arrested",
-    "father_unable_to_work",
-    "other_two_children_face_hardship"
+    "experience_pain",
+    "knowledge_selfless_action_possible",
+    "doubt_persists"
   ],
   "mechanisms": {
-    "sick_son_survives": "'steal_medicine'",
-    "sick_son_dies": "Not('steal_medicine')",
-    "father_arrested": "'steal_medicine'",
-    "father_unable_to_work": "'father_arrested'",
-    "other_two_children_face_hardship": "'father_unable_to_work'"
+    "experience_pain": "'let_bee_sting'",
+    "knowledge_selfless_action_possible": "'let_bee_sting'",
+    "doubt_persists": "Not('let_bee_sting')"
   },
-  "patients": [
-    "sick_son",
-    "other_two_children",
-    "father"
-  ],
   "goals": {
-    "steal_medicine": [
-      "sick_son_survives"
+    "let_bee_sting": [
+      "knowledge_selfless_action_possible"
     ],
     "refrain": []
   },
   "affects": {
-    "steal_medicine": [],
-    "refrain": [],
-    "sick_son_survives": [
+    "let_bee_sting": [],
+    "experience_pain": [
       [
-        "sick_son",
+        "yourself",
+        "-"
+      ]
+    ],
+    "knowledge_selfless_action_possible": [
+      [
+        "yourself",
         "+"
       ]
     ],
-    "sick_son_dies": [
+    "doubt_persists": [
       [
-        "sick_son",
-        "-"
-      ]
-    ],
-    "father_arrested": [
-      [
-        "father",
-        "-"
-      ]
-    ],
-    "father_unable_to_work": [
-      [
-        "father",
-        "-"
-      ],
-      [
-        "other_two_children",
-        "-"
-      ]
-    ],
-    "other_two_children_face_hardship": [
-      [
-        "other_two_children",
+        "yourself",
         "-"
       ]
     ]
