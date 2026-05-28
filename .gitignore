@@ -10,6 +10,9 @@ __pycache__/
 # C extensions
 *.so
 
+.deepeval
+.gradio
+
 # Distribution / packaging
 .Python
 build/
