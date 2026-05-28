@@ -10,7 +10,7 @@
   },
   "utilities": {
     "random_person_dies": -5,
-    "money_received": 0,
+    "money_received": 1,
     "people_in_need_helped": 10
   },
   "goals": {

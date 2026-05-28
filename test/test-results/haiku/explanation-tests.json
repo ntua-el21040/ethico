@@ -1,0 +1,122 @@
+[
+  {
+    "name": "glyk_experiment",
+    "passed": false,
+    "metrics": [
+      {
+        "metric": "Explanation Structure",
+        "score": 0.9,
+        "threshold": 0.7,
+        "passed": true,
+        "reason": "The response demonstrates strong alignment with all evaluation steps. It uses clear section headings (## Verdict, ## Why, ## What Would Change the Verdict, ## Overview) to separate distinct components of the ethical evaluation. The Kantian and Utilitarian principles are presented as clearly distinct and comparable sections with dedicated paragraphs for each framework, rather than blending them together. The logical flow progresses smoothly from the final verdict statement through reasoning and conditions for change, with effective transitions between sections. The formatting is highly scannable and readable, using bold text for emphasis, separate paragraphs for each ethical framework, and bulleted lists for conditions that would change verdicts. The response avoids presenting raw JSON data or dense unformatted text entirely. The only minor limitation is that the input contains complex logical formulas in the JSON that could have been briefly acknowledged or explained, though this is not strictly required by the evaluation steps."
+      },
+      {
+        "metric": "Explanatory Value",
+        "score": 0.3,
+        "threshold": 0.7,
+        "passed": false,
+        "reason": "The response fails to translate the JSON's logical conditions into plain language. It never explains what the sufficient/necessary conditions actually mean or how they were evaluated. For example, the Kantian sufficient condition involves 'Means(shop_worker)' and 'Not(End(shop_worker))'\u2014the response should translate this as 'the worker is being used as a means but not treated as an end in themselves,' but instead it paraphrases the principle generically without grounding in the JSON logic. The utilitarian section mentions utility comparisons but doesn't explain what the GEq (greater-than-or-equal) conditions in the JSON actually evaluate to. The response does connect to the user's scenario (asking for coffee, worker compensation, patient care) and explains the ethical principles clearly for a layperson, earning credit for accessibility and scenario-grounding. However, it completely omits the technical 'why' behind the permissibility verdicts\u2014it never shows how the JSON conditions led to 'permissible: false' for Kantian and 'permissible: true' for utilitarian. A stronger response would explicitly state: 'The Kantian logic found that treating the worker as a means without treating them as an end violates the principle, making it impermissible,' and 'The utilitarian logic found that the utility gain from your productivity and patient care outweighs the harm, making it permissible.' The response reads more like a generic ethics explanation than an evaluation of the specific JSON logic provided."
+      }
+    ]
+  },
+  {
+    "name": "lamp_experiment",
+    "passed": false,
+    "metrics": [
+      {
+        "metric": "Explanation Structure",
+        "score": 0.9,
+        "threshold": 0.7,
+        "passed": true,
+        "reason": "The response excellently meets all four evaluation criteria. It uses clear section headings (## Verdict, ## Why, ## What Would Change the Verdict, ## Overview) to separate distinct components of the ethical evaluation. The Kantian and Utilitarian principles are presented as clearly distinct and comparable sections with bold labels, making their opposing conclusions immediately apparent. The logical flow progresses smoothly from the final verdict through detailed reasoning to conditions for change, with effective transitions between sections. The formatting is highly scannable and readable, using bold text, bullet points, and paragraph breaks to avoid dense walls of text. The response avoids presenting raw JSON data entirely and instead translates the complex logical formulas into accessible, human-readable explanations. The only minor limitation is that the response could have been slightly more explicit in connecting specific elements from the input's logical notation to the plain-language explanations, though this is a very minor shortcoming given the overall clarity and accessibility achieved."
+      },
+      {
+        "metric": "Explanatory Value",
+        "score": 0.2,
+        "threshold": 0.7,
+        "passed": false,
+        "reason": "The response fails on nearly all evaluation criteria. While it avoids repeating raw JSON syntax, it provides only generic descriptions of Kantian and utilitarian principles without grounding them in the specific scenario's logic. The explanation lacks concrete connection to the JSON's actual conditions: it never explains why the sufficient/necessary conditions in the JSON evaluate as they do, or what those logical formulas mean in plain language. The response treats the dilemma as a standard ethics thought experiment rather than explaining how the JSON's specific utility comparisons (girlfriend_dies + helper_stops_drugs + business_protected vs. partnership_falls_apart + helper_continues_drugs) drive the utilitarian permissibility verdict. For Kantian ethics, it asserts the girlfriend is treated as a 'means' without connecting this to the JSON's logical structure showing she is not an 'End' in the sufficient condition. The explanation is accessible to a layperson but sacrifices the required technical grounding\u2014it reads as a generic ethics lecture rather than a translation of the JSON logic into plain language. A strong response would explain: 'The JSON shows the utilitarian calculation compares total utility when she dies (with these specific outcomes) versus when she lives (with these specific outcomes), and the first scenario has higher utility,' and 'The Kantian logic shows she fails to be treated as an end because the sufficient condition requires she not be an end, which is satisfied.' The response provides neither."
+      }
+    ]
+  },
+  {
+    "name": "myr_experiment",
+    "passed": true,
+    "metrics": [
+      {
+        "metric": "Explanation Structure",
+        "score": 0.9,
+        "threshold": 0.7,
+        "passed": true,
+        "reason": "The response demonstrates strong alignment with all evaluation steps. It uses clear section headings (## Verdict, ## Why, ## What Would Change the Verdict, ## Overview) that effectively separate distinct components of the ethical evaluation. The Kantian and Utilitarian principles are presented as clearly distinct and comparable sections with dedicated paragraphs for each framework, avoiding blended or wall-of-text presentation. The logical flow progresses smoothly from the final verdict statement through detailed reasoning to conditions for change, with effective transitions between sections. The formatting is highly scannable, using paragraph breaks, bold text for emphasis, and bullet-like structure rather than presenting raw JSON data. The explanation directly addresses the test case parameters (stealing medicine, sick son, other two children, father's arrest) and grounds the ethical analysis in concrete consequences. The only minor limitation is that the response could have been slightly more explicit in connecting the logical formulas from the input to the narrative explanation, though this doesn't significantly detract from clarity or readability."
+      },
+      {
+        "metric": "Explanatory Value",
+        "score": 0.7,
+        "threshold": 0.7,
+        "passed": true,
+        "reason": "The response demonstrates strong alignment with evaluation steps 2, 3, and 4 by translating the JSON logic into plain language and grounding explanations in the specific scenario (the father, sick son, other two children, arrest, hardship). The Kantian explanation effectively connects the logic to the ethical principle by explaining how the other children are treated as 'mere tools,' and the utilitarian explanation compares outcomes concretely (one death vs. economic hardship). However, the response falls short on step 1 in one critical way: it does not explicitly translate the complex logical conditions from the JSON (e.g., the 'sufficient' and 'necessary' conditions involving boolean operators like 'Or,' 'And,' 'Not,' 'GEq,' and 'Means') into accessible plain language. Instead, it paraphrases the principles without showing how the specific logical structure (e.g., 'Means(sick_son)' or the comparison of utility states) maps to the reasoning provided. A stronger response would explicitly walk through what 'sufficient' and 'necessary' mean in this context and how the JSON's logical conditions support the verdicts. The explanation is otherwise clear and accessible to a layperson, successfully avoiding jargon while maintaining ethical rigor."
+      }
+    ]
+  },
+  {
+    "name": "nalex_experiment",
+    "passed": false,
+    "metrics": [
+      {
+        "metric": "Explanation Structure",
+        "score": 0.9,
+        "threshold": 0.7,
+        "passed": true,
+        "reason": "The response demonstrates strong alignment with all evaluation steps. It uses clear section headings (## Verdict, ## Why, ## What Would Change the Verdict, ## Overview) to separate distinct components of the ethical evaluation. The Kantian and Utilitarian principles are presented as clearly distinct sections with separate paragraphs explaining each framework's reasoning, rather than blending them together. The logical flow progresses from the final verdict statement through reasoning and conditions for change, with smooth transitions between sections. The formatting is highly scannable and readable, using bold text, paragraph breaks, and bullet-like structure to avoid dense walls of text. The explanation avoids presenting raw JSON data and instead translates the complex logical conditions into accessible language. The only minor limitation is that the response could have been slightly more explicit in connecting specific elements from the input JSON (e.g., the 'sufficient' and 'necessary' conditions) to the narrative explanation, though this doesn't significantly detract from the overall quality and clarity of the evaluation."
+      },
+      {
+        "metric": "Explanatory Value",
+        "score": 0.6,
+        "threshold": 0.7,
+        "passed": false,
+        "reason": "The response demonstrates strong accessibility and grounds the explanation in the specific scenario (pressing a button that kills a random person to help people in need). It effectively translates the abstract ethical principles into plain language and explains the *why* behind each verdict by connecting to core principles (dignity/consent for Kantian, outcome-focus for utilitarian). However, the response falls short on fully leveraging the JSON's logical structure. It doesn't explicitly explain the sufficient/necessary conditions from the JSON (e.g., why the Kantian principle's 'Not(True)' condition makes it impermissible, or how the utilitarian comparison of utility states works). The response treats the JSON as a black box that produces verdicts rather than unpacking the logical reasoning embedded in the conditions. A stronger response would translate the utility comparison logic and the necessity/sufficiency constraints into concrete terms (e.g., 'The utilitarian framework checks whether the total well-being from helping people in need outweighs the harm of the random death'). The explanation is clear and relatable but misses an opportunity to deepen understanding by making the underlying logical mechanics transparent to a layperson."
+      }
+    ]
+  },
+  {
+    "name": "ros_experiment",
+    "passed": true,
+    "metrics": [
+      {
+        "metric": "Explanation Structure",
+        "score": 0.9,
+        "threshold": 0.7,
+        "passed": true,
+        "reason": "The response demonstrates strong alignment with all evaluation steps. It uses clear section headings (## Verdict, ## Why, ## What Would Change the Verdict, ## Overview) to separate distinct components of the ethical evaluation. The Kantian and Utilitarian principles are presented as clearly distinct and comparable sections with dedicated paragraphs for each framework, avoiding blended text. The logical flow progresses from the final verdict statement through detailed reasoning to conditions for change, with smooth transitions between sections. The formatting is highly scannable, using bold text, bullet points, and paragraph breaks to enhance readability rather than presenting raw JSON or dense text. The explanation directly addresses the test case parameters (financial_improvement vs. clear_conscience_lost, the symbolic principle concern) and translates the complex logical formulas into accessible language. A minor limitation is that the response could have more explicitly referenced the specific logical notation from the input (e.g., the sufficient/necessary/inus conditions), though this omission actually enhances readability for general users."
+      },
+      {
+        "metric": "Explanatory Value",
+        "score": 0.8,
+        "threshold": 0.7,
+        "passed": true,
+        "reason": "The response demonstrates strong alignment with the evaluation steps. It successfully translates the complex logical conditions into plain language\u2014explaining that the Kantian principle involves 'using yourself as a tool' rather than repeating '{Not('True')}' syntax, and describing the utilitarian calculation as a weighing of financial improvement against conscience loss rather than quoting the GEq comparison. The chatbot explicitly connects the logic to ethical principles, explaining *why* Kantian ethics forbids the action ('treating yourself merely as a means') and *why* utilitarianism permits it ('maximizes wellbeing'). The explanation is grounded in the specific scenario of taking a job that compromises values for financial gain, making the abstract logic concrete and relatable. The response is highly accessible to a layperson, walking them through the reasoning step-by-step and even providing hypothetical scenarios that would change each verdict. Minor weakness: the response could have been slightly more explicit in connecting the specific JSON logical operators (the 'Not' and 'GEq' structures) to their real-world meaning, though the translation is clear enough that this omission does not significantly impact comprehension."
+      }
+    ]
+  },
+  {
+    "name": "tso_experiment",
+    "passed": true,
+    "metrics": [
+      {
+        "metric": "Explanation Structure",
+        "score": 0.9,
+        "threshold": 0.7,
+        "passed": true,
+        "reason": "The Actual Output demonstrates strong alignment with all evaluation steps. It uses clear section headings (## Verdict, ## Why, ## What Would Change the Verdict, ## Overview) that effectively separate distinct components of the ethical evaluation. The Kantian and Utilitarian principles are presented as clearly distinct and comparable sections with dedicated paragraphs for each, avoiding blended or wall-of-text formatting. The logical flow progresses smoothly from the final verdict statement through detailed reasoning to conditions for change, with natural transitions between sections. The output avoids presenting raw JSON data and instead uses well-formatted paragraphs, bold text for emphasis, and visual breaks to enhance scannability and readability. The explanation directly addresses the test case parameters (stealing and distributing, Kantian humanity principle permissibility as false, Utilitarian principle permissibility as true) and translates the complex logical conditions into accessible language. The only minor limitation is that the output could have been slightly more explicit in connecting the formal logical conditions from the input to the plain-language explanations, though this does not significantly detract from the overall quality and clarity."
+      },
+      {
+        "metric": "Explanatory Value",
+        "score": 0.7,
+        "threshold": 0.7,
+        "passed": true,
+        "reason": "The response demonstrates strong alignment with evaluation steps 2, 3, and 4 by translating the JSON logic into plain language (e.g., 'the math, so to speak, favors stealing'), grounding the explanation in the specific scenario (rich vs. poor, property rights, consent), and explaining the *why* behind each verdict by connecting to ethical principles (Kantian autonomy/dignity, utilitarian consequences). The explanation is accessible and avoids raw syntax. However, it falls slightly short on step 1 by not fully unpacking the complex logical conditions in the JSON\u2014particularly the utilitarian 'sufficient' and 'necessary' fields, which involve nested utility comparisons (U(And(...))) that could have been more explicitly translated into concrete terms like 'the total well-being gained by the poor must exceed the total harm to the rich.' The response also doesn't explicitly reference what the JSON's 'inus' conditions represent or why they matter to the overall permissibility judgment. These omissions prevent a perfect score, though the core ethical reasoning and scenario-grounding are well-executed."
+      }
+    ]
+  }
+]

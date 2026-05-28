@@ -24,6 +24,16 @@
     "partnership_falls_apart": "Not('kill_girlfriend')",
     "helper_continues_drugs": "Not('kill_girlfriend'"
   },
+  "utilities": {
+    "girlfriend_dies": -50,
+    "helper_grieves": -10,
+    "partnership_falls_apart": -5,
+    "helper_continues_drugs": -5,
+    "helper_stops_drugs": 3,
+    "helper_resumes_duties": 4,
+    "business_protected": 4,
+    "grief_fades": 2
+  },
   "patients": [
     "girlfriend",
     "helper",

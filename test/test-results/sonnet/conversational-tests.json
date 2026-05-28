@@ -1,0 +1,122 @@
+[
+  {
+    "name": "/mnt/d/source/ethico/experiments/glyk_experiment/extraction.txt",
+    "passed": false,
+    "metrics": [
+      {
+        "metric": "TurnRelevancyMetric",
+        "score": 1.0,
+        "threshold": 0.9,
+        "passed": true,
+        "reason": "The score is 1.0 because there are no irrelevancies found in the assistant messages, indicating that all responses were fully relevant to the user messages in the conversation."
+      },
+      {
+        "metric": "KnowledgeRetentionMetric",
+        "score": 0.8,
+        "threshold": 0.9,
+        "passed": false,
+        "reason": "The score is 0.80 because while the LLM retains most of the established knowledge, there are notable lapses. Specifically, the LLM asks 'What would you ask of them?' despite prior knowledge already establishing that 'Someone else is making it,' implying the user wants the other person to make the coffee. The LLM also asks about the stakes of not getting coffee, even though it was already clearly stated that the alternative is 'No coffee for all and no work done for the rest of the day.' Additionally, the LLM poses redundant clarifying questions about whether the person works in a shop (already known) and the outcome assumption (already stated as 'Cannot assume anything about the outcome'), suggesting partial forgetfulness of previously established context."
+      }
+    ]
+  },
+  {
+    "name": "/mnt/d/source/ethico/experiments/lamp_experiment/extraction.txt",
+    "passed": false,
+    "metrics": [
+      {
+        "metric": "TurnRelevancyMetric",
+        "score": 1.0,
+        "threshold": 0.9,
+        "passed": true,
+        "reason": "The score is 1.0 because there are no irrelevancies found in the assistant messages, indicating that all responses were fully relevant to the user messages in the conversation."
+      },
+      {
+        "metric": "KnowledgeRetentionMetric",
+        "score": 0.5,
+        "threshold": 0.9,
+        "passed": false,
+        "reason": "The score is 0.50 because the LLM repeatedly forgot key details already established in the conversation. Specifically, it asked about information already known, including: (1) that the helper stopped using drugs after cooperating with the user but restarted due to his girlfriend, (2) that the helper is neglecting his duties, (3) that the goal is to protect the helper from drug addiction and restore cooperation, (4) that the helper would be emotionally sad, (5) that the helper was assessed as a good partner, (6) that the user already tried talking to the helper but he does not listen because he has fallen in love, and (7) that the user does not trust anyone else. The LLM asked about all these points as if they were unknown, demonstrating significant forgetfulness of previously established knowledge, though the score of 0.50 suggests partial retention in other areas of the conversation."
+      }
+    ]
+  },
+  {
+    "name": "/mnt/d/source/ethico/experiments/myr_experiment/extraction.txt",
+    "passed": false,
+    "metrics": [
+      {
+        "metric": "TurnRelevancyMetric",
+        "score": 1.0,
+        "threshold": 0.9,
+        "passed": true,
+        "reason": "The score is 1.0 because there are no irrelevancies found in the assistant messages, indicating that all responses were fully relevant to the user messages in the conversation."
+      },
+      {
+        "metric": "KnowledgeRetentionMetric",
+        "score": 0.75,
+        "threshold": 0.9,
+        "passed": false,
+        "reason": "The score is 0.75 because while the LLM retains much of the established knowledge, there are notable inaccuracies. Specifically, the LLM generalizes the legal consequences as affecting 'all three of his children,' whereas the previous knowledge specifies the impact would be on 'his son' (the sick one). More critically, the LLM asserts as fact that 'if the father doesn't steal, his sick son will die,' but the previous knowledge explicitly states that the 'Outcome if Father Does Not Steal Medicine: Not specified' \u2014 meaning the LLM fabricated a definitive outcome for an unspecified scenario, representing a clear knowledge retention failure."
+      }
+    ]
+  },
+  {
+    "name": "/mnt/d/source/ethico/experiments/nalex_experiment/extraction.txt",
+    "passed": true,
+    "metrics": [
+      {
+        "metric": "TurnRelevancyMetric",
+        "score": 1.0,
+        "threshold": 0.9,
+        "passed": true,
+        "reason": "The score is 1.0 because there are no irrelevancies found in the assistant messages, indicating that all responses were fully relevant to the user messages in the conversation."
+      },
+      {
+        "metric": "KnowledgeRetentionMetric",
+        "score": 1.0,
+        "threshold": 0.9,
+        "passed": true,
+        "reason": "The score is 1.00 because there were no attritions recorded, indicating that the LLM demonstrated perfect knowledge retention throughout the conversation with no instances of forgetfulness or failure to recall previously established information."
+      }
+    ]
+  },
+  {
+    "name": "/mnt/d/source/ethico/experiments/ros_experiment/extraction.txt",
+    "passed": false,
+    "metrics": [
+      {
+        "metric": "TurnRelevancyMetric",
+        "score": 1.0,
+        "threshold": 0.9,
+        "passed": true,
+        "reason": "The score is 1.0 because there are no irrelevancies found in the assistant messages, indicating that all responses were fully relevant to the user messages in the conversation."
+      },
+      {
+        "metric": "KnowledgeRetentionMetric",
+        "score": 0.4,
+        "threshold": 0.9,
+        "passed": false,
+        "reason": "The score is 0.40 because the LLM demonstrates significant forgetfulness across multiple interactions. It repeatedly asks clarifying questions about already-established information, such as the financial benefit being 'a few hundred dollars,' the user's primary motivation being simply preferring 'to take the job and the money than not,' and the instrumental (not intrinsic) nature of moral integrity. The LLM's summaries consistently omit key known facts: (1) the financial benefit is only a few hundred dollars, not a broad 'financial improvement'; (2) taking the job offers an additional benefit of improved professional reputation and a path to financial independence that could reduce future morally compromised jobs; (3) taking the job would actually make future integrity compromises less likely; (4) the complicity involved is indirect and comparable to that of a cleaning lady; and (5) the drawback includes not just feeling like 'a sellout' but also guilt from contributing to the corrupt party's influence and power. These repeated omissions and redundant clarifying questions indicate poor retention of previously established knowledge."
+      }
+    ]
+  },
+  {
+    "name": "/mnt/d/source/ethico/experiments/tso_experiment/extraction.txt",
+    "passed": false,
+    "metrics": [
+      {
+        "metric": "TurnRelevancyMetric",
+        "score": 1.0,
+        "threshold": 0.9,
+        "passed": true,
+        "reason": "The score is 1.0 because there are no irrelevancies found in the assistant messages, indicating that all responses were fully relevant to the user messages in the conversation."
+      },
+      {
+        "metric": "KnowledgeRetentionMetric",
+        "score": 0.6,
+        "threshold": 0.9,
+        "passed": false,
+        "reason": "The score is 0.60 because the LLM demonstrated partial but imperfect retention of previously established knowledge. Specifically, the LLM forgot that it was already established that the poor people would know the items are stolen, instead treating it as an open, unresolved question. Additionally, the LLM subtly misrepresented the goal by stating 'Reduce the poor people's suffering' instead of the established 'To make the poor people feel better,' and incorrectly dismissed the poor people's awareness and consent as 'not part of your primary goal,' when in fact their knowledge and decision to accept stolen goods is a defined parameter of the dilemma. Furthermore, the LLM omitted the morally relevant established fact that the rich people earned their money fairly, which is a key component of the dilemma's context."
+      }
+    ]
+  }
+]

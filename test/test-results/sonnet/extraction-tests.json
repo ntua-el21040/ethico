@@ -1,0 +1,122 @@
+[
+  {
+    "name": "glyk_experiment",
+    "passed": true,
+    "metrics": [
+      {
+        "metric": "Extraction Faithfulness",
+        "score": 0.7,
+        "threshold": 0.7,
+        "passed": true,
+        "reason": "The JSON output is largely faithful to the conversation. Key facts are accurately captured: the doctor needing coffee for productivity during a hospital shift, the shop worker's uncertain compensation status, the doctor respecting the worker's autonomy, and the downstream effect on patient care. The actions (ask_for_coffee, refrain), consequences, and affected parties all trace back to explicitly stated details. However, there are some minor inventions: the utility scores (e.g., -3 for worker_possibly_unpaid, +5 for patients_receive_good_care) are numerical assignments not grounded in the conversation \u2014 these are analytical constructs added by the system. The 'affects' field assigns 'ask_for_coffee' a positive effect on the shop_worker ('+'), which is not clearly supported \u2014 the user never said asking would benefit the worker. The 'goals' field lists 'worker_makes_coffee' as the goal of 'ask_for_coffee', which is a reasonable inference. Overall, the core structure is faithful, but the numerical utilities and the positive affect of asking on the worker are minor hallucinations or unsupported inferences."
+      },
+      {
+        "metric": "Semantic Capture",
+        "score": 0.9,
+        "threshold": 0.7,
+        "passed": true,
+        "reason": "The Actual Output JSON faithfully captures the core dilemma from the Input: a doctor needing coffee during a hospital shift asking a shop worker whose compensation status is uncertain. All key elements are preserved \u2014 the two main actions (ask_for_coffee vs. refrain), the causal chain of consequences (worker makes coffee \u2192 doctor productive \u2192 patients receive good care), the moral tension around potential unpaid labor (worker_possibly_unpaid with negative utility), and the three affected parties (shop_worker, doctor, patients). The utility values reflect the stakes appropriately, with patient care outcomes weighted most heavily. The autonomy aspect (doctor respecting worker's choice) is partially captured through the 'affects' field showing ask_for_coffee positively affects the shop_worker (implying agency). A reasonable person reading only this JSON would clearly recognize the original dilemma without additional context. Minor shortcoming: the autonomy/respect dimension is not explicitly labeled, but the structural representation is otherwise comprehensive and accurate."
+      }
+    ]
+  },
+  {
+    "name": "lamp_experiment",
+    "passed": true,
+    "metrics": [
+      {
+        "metric": "Extraction Faithfulness",
+        "score": 0.9,
+        "threshold": 0.7,
+        "passed": true,
+        "reason": "The actual output closely mirrors the details provided in the conversation. The description accurately captures the drug dealer scenario, the staged overdose, the helper's grief and eventual recovery, and the helper's unawareness of the true cause. The two actions (kill_girlfriend, refrain) match the binary choice discussed. All consequences listed (girlfriend_dies, helper_stops_drugs, helper_resumes_duties, business_protected, helper_grieves, grief_fades, partnership_falls_apart, helper_continues_drugs) are directly traceable to user statements. The goals correctly prioritize business_protected and include helper_stops_drugs, consistent with the user's clarification that business protection was primary. The patients (girlfriend, helper, you) are all mentioned in the conversation. The affect signs are reasonable inferences: girlfriend dying is negative for her, helper resuming duties is positive for both helper and the dealer, grief is negative for helper, etc. The mechanisms correctly chain causality as described by the user. One minor point: 'helper_resumes_duties' causing 'grief_fades' is a slight inference (the user said sadness fades 'with work'), but this is a minimal and faithful interpretation. No significant hallucinations or invented details are present."
+      },
+      {
+        "metric": "Semantic Capture",
+        "score": 0.9,
+        "threshold": 0.7,
+        "passed": true,
+        "reason": "The Actual Output JSON faithfully captures the core dilemma from the Input: a drug dealer considering killing his helper's girlfriend and staging it as a drug overdose to protect his business and restore the partnership. The two actions (kill_girlfriend, refrain) correctly represent the binary choice. All key consequences are present: girlfriend's death, helper stopping drugs, resuming duties, business protection, grief and its fading, and the alternative outcomes of partnership collapse and continued drug use. The causal mechanisms accurately reflect the chain of events described in the conversation. The goals correctly prioritize business protection and stopping drug use. The affects section properly captures the moral valence for each stakeholder. The deception element (staging as overdose) is noted in the description. A reasonable person reading only this JSON would clearly recognize the original dilemma without additional context."
+      }
+    ]
+  },
+  {
+    "name": "myr_experiment",
+    "passed": true,
+    "metrics": [
+      {
+        "metric": "Extraction Faithfulness",
+        "score": 0.9,
+        "threshold": 0.7,
+        "passed": true,
+        "reason": "The actual output closely mirrors the facts established in the conversation. The description accurately captures the father's dilemma, the pharmacy's absolute refusal, the legal consequences affecting his ability to work, the serious hardship for his other two children, and his primary goal of saving his sick son. The actions (steal_medicine, refrain), consequences, patients (sick_son, other_two_children, father), and causal mechanisms all trace directly back to user-stated details. The utility values are numerical assignments that represent a modeling choice rather than user-stated facts, but they are reasonable inferences for a decision-analysis framework and do not misrepresent the relative importance of outcomes as described by the user. The father's intent to repay the pharmacy later is not reflected in the JSON, which is a minor omission but not a hallucination. No significant new information or distorting assumptions are introduced."
+      },
+      {
+        "metric": "Semantic Capture",
+        "score": 1.0,
+        "threshold": 0.7,
+        "passed": true,
+        "reason": "The Actual Output JSON faithfully captures the core dilemma from the Input: a father choosing between stealing medicine (saving his sick son but risking arrest and hardship for his other two children) or refraining (son dies, other children supported). All key elements are preserved: the pharmacy's absolute refusal, the father's primary goal of saving his sick son, the causal chain from arrest to inability to work to hardship for the other two children, and the two main actions. The consequences, mechanisms, affected parties, and utility values are clearly structured and accurately reflect the trade-offs discussed throughout the conversation. A reasonable person reading only the JSON would immediately recognize the original dilemma without needing additional context."
+      }
+    ]
+  },
+  {
+    "name": "nalex_experiment",
+    "passed": true,
+    "metrics": [
+      {
+        "metric": "Extraction Faithfulness",
+        "score": 0.7,
+        "threshold": 0.7,
+        "passed": true,
+        "reason": "The actual output is largely faithful to the conversation. The description, actions, patients, consequences, mechanisms, goals, and affects all trace directly back to what the user stated: pressing the button causes a random person to die, yields one million euros, and the money would be donated to help people in need. The 'refrain' action correctly results in no money and no help. However, the 'utilities' field introduces numerical values (-5, 1, 10) that were never discussed or implied by the user \u2014 these are invented by the system without any basis in the conversation. Additionally, 'money_received' appears as a consequence with no direct negative or positive affect on any patient, which is a reasonable structural choice. The main hallucination is the assignment of specific utility scores, which are fabricated values not grounded in anything the user said. This is a moderate addition that doesn't distort the core scenario but does introduce unverified quantitative assumptions."
+      },
+      {
+        "metric": "Semantic Capture",
+        "score": 1.0,
+        "threshold": 0.7,
+        "passed": true,
+        "reason": "The Actual Output JSON faithfully captures the core dilemma from the Input: pressing a button that kills a random person in exchange for 1 million euros to be donated to charity, versus refraining and helping no one. The central conflict, key actions (press_button vs. refrain), affected parties (random_person, people_in_need), and consequences (random_person_dies, money_received, people_in_need_helped) are all accurately represented. The causal chain (pressing button \u2192 money received \u2192 people helped) is correctly modeled in the mechanisms field. The utilities reflect the ethical tension \u2014 a significant negative for death (-5) and a larger positive for helping people in need (10), which preserves the utilitarian tension of the dilemma. A reasonable person reading only the JSON would clearly recognize the original thought experiment without needing additional context. No critical elements are missing or distorted."
+      }
+    ]
+  },
+  {
+    "name": "ros_experiment",
+    "passed": true,
+    "metrics": [
+      {
+        "metric": "Extraction Faithfulness",
+        "score": 0.9,
+        "threshold": 0.7,
+        "passed": true,
+        "reason": "The JSON output is highly faithful to the conversation. All key elements are directly traceable to user statements: the corrupt political party job offer, financial improvement as the primary goal, loss of clear conscience/betraying values as the cost, the certainty that someone else will take the job (making practical harm identical), and the small symbolic weight of refusal. The moral patient being only 'self' aligns with the user explicitly excluding family. The utility values (financial_improvement: 3, clear_conscience_lost: -3, clear_conscience_retained: 3, symbolic_principle_upheld: 1) are reasonable quantifications of the user's stated priorities \u2014 financial improvement as primary goal, clear conscience as significant cost, and symbolic principle as minor weight. The mechanisms and affects correctly map consequences to actions. No significant hallucinations or invented details are present. The only minor inference is the specific numeric utility values, which are interpretive assignments rather than user-stated facts, but these are necessary for the JSON structure and align well with the user's expressed priorities."
+      },
+      {
+        "metric": "Semantic Capture",
+        "score": 0.9,
+        "threshold": 0.7,
+        "passed": true,
+        "reason": "The Actual Output JSON faithfully captures the core dilemma from the Input. The central conflict \u2014 taking a job with a corrupt political party for financial improvement versus preserving moral integrity and clear conscience \u2014 is accurately represented. The two actions (take_job, refrain) correspond directly to the user's choices. The key consequences are all present: financial_improvement, clear_conscience_lost, clear_conscience_retained, and symbolic_principle_upheld. The utilities reflect the relative weights discussed (financial gain and conscience each valued at \u00b13, symbolic principle at 1). The mechanisms correctly map each consequence to its triggering action. The patient is correctly limited to 'self' as the user explicitly excluded family. The goals structure correctly shows financial_improvement as the goal of take_job and nothing for refrain. The affects section captures the mixed positive/negative impacts of each action on self. A reasonable person reading this JSON would clearly recognize the original dilemma without additional context. Minor structural redundancy in the affects section (listing self twice for each action) is a cosmetic issue that doesn't distort the semantic content."
+      }
+    ]
+  },
+  {
+    "name": "tso_experiment",
+    "passed": true,
+    "metrics": [
+      {
+        "metric": "Extraction Faithfulness",
+        "score": 0.9,
+        "threshold": 0.7,
+        "passed": true,
+        "reason": "The actual output closely mirrors the details established in the conversation. The description accurately captures that the rich earned their wealth fairly, the poor know the goods are stolen but need them, and the alternative is continued suffering. The two actions (steal_and_distribute, refrain), the patients (poor_people, rich_people), and the consequences (poor_suffering_reduced, rich_people_feel_violated, rich_property_rights_violated, poor_continue_suffering) all trace directly to user-confirmed facts. The goal of 'poor_suffering_reduced' for steal_and_distribute aligns with the user's stated goal of reducing poor people's suffering. The utility values (e.g., 8, -3, -8) are numerical assignments not explicitly stated by the user, but these are reasonable modeling inferences rather than factual hallucinations \u2014 the user confirmed the poor's suffering is significant and the rich's harm is both emotional and rights-based but not economic, which loosely supports the relative weighting. The 'affects' field for 'steal_and_distribute' being empty is a minor structural oddity but not a hallucination. Overall, the output is highly faithful to the input with only minor inferential elements."
+      },
+      {
+        "metric": "Semantic Capture",
+        "score": 1.0,
+        "threshold": 0.7,
+        "passed": true,
+        "reason": "The Actual Output JSON faithfully captures the core dilemma from the conversation. The central conflict \u2014 whether to steal from fairly-wealthy individuals to relieve the suffering of the poor \u2014 is accurately described. Both actions ('steal_and_distribute' and 'refrain') are present. All key consequences are represented: poor suffering reduced, rich feeling violated, property rights violated, and poor continuing to suffer if no action is taken. The utilities reflect the asymmetry discussed (high negative for continued poor suffering, moderate negative for harm to rich). The goals field correctly identifies that 'steal_and_distribute' aims at 'poor_suffering_reduced', while 'refrain' has no positive goal. The affects mapping correctly links outcomes to the relevant parties with appropriate valence. A reasonable person reading only this JSON would clearly recognize the Robin Hood-style ethical dilemma from the conversation, including the nuance that the rich earned their wealth fairly and suffer both emotionally and in terms of rights. No critical elements are missing or distorted."
+      }
+    ]
+  }
+]

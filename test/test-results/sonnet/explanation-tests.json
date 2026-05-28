@@ -1,0 +1,122 @@
+[
+  {
+    "name": "glyk_experiment",
+    "passed": true,
+    "metrics": [
+      {
+        "metric": "Explanation Structure",
+        "score": 0.7,
+        "threshold": 0.7,
+        "passed": true,
+        "reason": "The response includes all four required sections (Verdict, Why, What Would Change the Verdict, Overview) with clear headings and logical flow. The Verdict correctly references both Kantian and Utilitarian principles from the input, stating the action is impermissible under Kantian ethics and permissible under Utilitarianism. The Why section connects specific consequences from the input JSON (worker_makes_coffee, doctor_productive, patients_receive_good_care, worker_possibly_unpaid) to the verdict in plain language. However, the 'What Would Change the Verdict' section falls short of the INUS-style condition requirement \u2014 it hypothesizes changes to the action itself (e.g., 'if the worker is compensated') rather than referencing INUS-style conditions from the dilemma evaluation in the input JSON. The Kantian INUS field is 'set()' (empty), which should have been noted, and the utilitarian INUS condition (the GEq utility comparison) is not explicitly referenced. The Overview summarizes both principles clearly and uses good formatting throughout, but the INUS condition handling is a notable gap."
+      },
+      {
+        "metric": "Explanatory Value",
+        "score": 0.8,
+        "threshold": 0.7,
+        "passed": true,
+        "reason": "The response does an excellent job translating complex logical/mathematical syntax into plain language. It avoids echoing raw syntax like 'GEq', 'And()', or boolean flags, instead converting utility comparisons into intuitive statements about wellbeing outcomes (e.g., 'you become productive, your patients receive better care'). The explanation is well-anchored to the specific scenario \u2014 asking for coffee, the shop worker, the doctor's productivity, and patient care are all referenced concretely. The Kantian reasoning clearly explains the 'means vs. ends' logic in accessible terms, and the utilitarian reasoning walks through the outcome comparison in a way a layperson would understand. The 'What Would Change the Verdict' section adds useful depth. Minor shortcomings: the Kantian explanation slightly oversimplifies by focusing heavily on unpaid labor, which isn't explicitly the core of the JSON's sufficient condition (which centers on 'Means(shop_worker)' and 'Not(End(shop_worker))' without emphasizing compensation specifically). The necessary conditions from the JSON are complex and not meaningfully translated \u2014 the response doesn't attempt to explain the layered logical conditions. Overall, the translation is largely seamless and conversational, with only minor gaps in fidelity to the JSON's logical structure."
+      }
+    ]
+  },
+  {
+    "name": "lamp_experiment",
+    "passed": true,
+    "metrics": [
+      {
+        "metric": "Explanation Structure",
+        "score": 0.7,
+        "threshold": 0.7,
+        "passed": true,
+        "reason": "The response includes all four required sections: '## Verdict', '## Why', '## What would change the verdict', and '## Overview'. The Verdict clearly states permissibility under both Kantian and Utilitarian principles, directly referencing the input JSON's findings. The Why section explains the reasoning in plain language, connecting consequences like 'business_protected', 'helper_stops_drugs', 'helper_resumes_duties', and 'partnership_falls_apart' to the utilitarian verdict, and the girlfriend being used as a means to the Kantian verdict. However, the 'What Would Change the Verdict' section falls short of Step 3's requirement to reference INUS-style conditions from the input JSON. The INUS condition for utilitarianism is explicitly present in the input (the GEq utility comparison), but the response instead hypothesizes changes to the action itself (e.g., 'if refraining actually produced better overall outcomes') rather than referencing the specific INUS conditions. The Kantian INUS is 'set()' (empty), which the response doesn't acknowledge. The Overview section summarizes both principles clearly with good formatting throughout. The main shortcoming is the insufficient engagement with INUS-style conditions in the third section."
+      },
+      {
+        "metric": "Explanatory Value",
+        "score": 0.8,
+        "threshold": 0.7,
+        "passed": true,
+        "reason": "The response does well on most evaluation criteria. It explains the underlying ethical logic in plain language: the Kantian verdict is grounded in the concept of treating the girlfriend as a 'means' rather than an 'end,' and the utilitarian verdict is explained through a concrete comparison of outcomes (business survival, helper's sobriety, grief fading vs. partnership collapse and continued drug use). These explanations are anchored to the specific scenario details from the JSON (girlfriend_dies, helper_stops_drugs, business_protected, partnership_falls_apart, etc.) rather than being abstract. The response successfully converts the boolean flags and utility comparisons into readable concepts without echoing raw syntax. However, the response does not fully explain why the Kantian 'sufficient' and 'necessary' conditions fail \u2014 it doesn't clarify what would make the action permissible under Kantian logic beyond a brief mention of consent, and the 'inus' field (empty set) is not addressed. The utilitarian INUS condition is also not explicitly translated, though the overall utility comparison is well-rendered. These minor gaps in translating the logical structure prevent a perfect score."
+      }
+    ]
+  },
+  {
+    "name": "myr_experiment",
+    "passed": false,
+    "metrics": [
+      {
+        "metric": "Explanation Structure",
+        "score": 0.8,
+        "threshold": 0.7,
+        "passed": true,
+        "reason": "The response includes all four required sections: '## Verdict', '## Why', '## What Would Change the Verdict', and '## Overview', with clear formatting and logical flow throughout. The Verdict explicitly references both Kantian and Utilitarian principles and their permissibility outcomes from the Input JSON. The Why section connects the specific consequences (sick_son_survives, father_arrested, father_unable_to_work, other_two_children_face_hardship) to the moral reasoning in plain language without abrupt transitions. The 'What Would Change the Verdict' section references INUS-style conditions tied to the dilemma's specific factors (arrest, inability to work, hardship to other children) rather than simply hypothesizing changes to the action itself, though it could more explicitly reference the INUS logical structure from the Input JSON. The Overview summarizes permissibility across both principles clearly. Minor shortcoming: the INUS conditions from the Input JSON (e.g., the formal logical expressions) are not directly referenced in the 'What Would Change the Verdict' section, which slightly weakens alignment with step 3."
+      },
+      {
+        "metric": "Explanatory Value",
+        "score": 0.5,
+        "threshold": 0.7,
+        "passed": false,
+        "reason": "The response does well in several areas but has notable shortcomings. On the positive side, it anchors the explanation to the specific scenario (sick son, father's arrest, other two children's hardship) and avoids echoing raw JSON syntax, successfully converting utility comparisons and logical conditions into plain language. The utilitarian explanation correctly identifies the two outcome states being compared. However, the Kantian explanation contains a significant error: it claims the father treats his 'other two children as mere tools,' but the JSON's Kantian analysis actually concerns whether the sick son, the father, and the other two children are treated as means vs. ends. The 'sufficient' condition being Not('True') means the action is never permissible under this reading regardless of circumstances, yet the response invents a nuanced explanation about side effects and consent that doesn't reflect the actual logical structure. The response also misrepresents what would change the Kantian verdict \u2014 since the condition is hardcoded as Not('True'), nothing would make it permissible under this reading, but the response suggests workarounds. The utilitarian explanation is reasonably accurate in translating the GEq utility comparison but oversimplifies by asserting 'one death is typically worse than economic hardship' without grounding this in the specific conditions listed. Overall, the response is readable and scenario-specific but introduces inaccuracies in the Kantian logic and fails to convey that the Kantian impermissibility is absolute under this reading."
+      }
+    ]
+  },
+  {
+    "name": "nalex_experiment",
+    "passed": true,
+    "metrics": [
+      {
+        "metric": "Explanation Structure",
+        "score": 0.7,
+        "threshold": 0.7,
+        "passed": true,
+        "reason": "The response includes all four required sections (Verdict, Why, What Would Change the Verdict, Overview) with clear headings and logical flow. The Verdict section explicitly references both Kantian and Utilitarian principles from the Input JSON and states permissibility for each. The Why section connects the specific consequences (random_person_dies, money_received, people_in_need_helped) to the moral reasoning in plain language without abrupt transitions. However, the 'What Would Change the Verdict' section falls short of Step 3's requirement to reference INUS-style conditions from the Input JSON's dilemma evaluation \u2014 it instead hypothesizes changes to the action itself (e.g., consent, weighting of harm) rather than referencing the formal INUS conditions like GEq(U(...)) or Not('True') from the input. The Overview section summarizes permissibility across both principles and formatting is clear throughout. The main weakness is the lack of INUS-condition grounding in the third section."
+      },
+      {
+        "metric": "Explanatory Value",
+        "score": 0.8,
+        "threshold": 0.7,
+        "passed": true,
+        "reason": "The response does well on most evaluation criteria. It explains the underlying ethical logic in plain language \u2014 the Kantian reasoning about dignity and consent is clearly tied to the specific scenario (a random person dying when the button is pressed, money received, people in need helped), and the utilitarian reasoning about net outcomes is similarly grounded. The response avoids echoing raw JSON syntax entirely, successfully converting logical conditions like 'GEq(U(...))' into intuitive language about weighing outcomes. The scenario details (button press, random death, charity donation) are consistently referenced throughout. However, the Kantian explanation slightly mischaracterizes the issue \u2014 the JSON indicates the action is impermissible because the sufficient condition 'Not(True)' is never satisfiable, meaning it's categorically forbidden regardless of consent or means/ends analysis, not merely because of a consent issue. The response introduces a consent-based framing that isn't fully supported by the logical structure, and the 'What Would Change the Verdict' section suggests consent could flip the Kantian verdict, which oversteps what the JSON's absolute 'Not(True)' condition implies. This is a meaningful inaccuracy in translating the logical conditions, though the overall explanation remains accessible and scenario-specific."
+      }
+    ]
+  },
+  {
+    "name": "ros_experiment",
+    "passed": true,
+    "metrics": [
+      {
+        "metric": "Explanation Structure",
+        "score": 0.8,
+        "threshold": 0.7,
+        "passed": true,
+        "reason": "The response contains all four required sections (Verdict, Why, What would change the verdict, Overview) with clear headings and logical flow. The Verdict section explicitly states permissibility under both Kantian and Utilitarian principles from the Input JSON. The Why section connects the specific consequences from the JSON (financial_improvement, clear_conscience_lost, clear_conscience_retained, symbolic_principle_upheld) to the moral reasoning in plain language without abrupt transitions. The 'What would change the verdict' section attempts INUS-style reasoning by referencing the conditions from the dilemma evaluation, though it leans slightly toward hypothesizing changes to the action rather than purely referencing INUS conditions from the JSON structure. The Overview section summarizes permissibility across both principles with clear formatting. The response is well-structured, avoids walls of text, and uses formatting effectively throughout. Minor shortcoming: the 'What would change the verdict' section doesn't explicitly reference the INUS conditions from the JSON (e.g., the GEq utility comparison) but does address the underlying factors meaningfully."
+      },
+      {
+        "metric": "Explanatory Value",
+        "score": 0.8,
+        "threshold": 0.7,
+        "passed": true,
+        "reason": "The response does well on most evaluation criteria. It explains the underlying ethical logic in plain language \u2014 the Kantian reasoning about treating oneself as a means to an end is clearly articulated, and the utilitarian weighing of financial improvement against conscience loss is grounded in the specific scenario. The response avoids echoing raw JSON syntax and successfully converts the boolean flags and utility comparisons into intuitive concepts like 'financial improvement,' 'clear conscience,' and 'symbolic principle.' The scenario details (taking a job, financial gain, loss of clear conscience, symbolic principle) are consistently referenced throughout, making the explanation concrete rather than abstract. However, the utilitarian explanation introduces reasoning not directly supported by the JSON (e.g., 'someone else will take the job regardless' and the idea that refusal could inspire others), which goes beyond what the logical conditions specify and could mislead a layperson about the actual basis for the verdict. The Kantian explanation also slightly oversimplifies by framing it as self-instrumentalization without fully grounding it in the 'Not True' sufficient/necessary conditions, though this is a minor issue given the plain-language goal. Overall, the translation is largely seamless and conversational, with only minor deviations from the input's logical structure."
+      }
+    ]
+  },
+  {
+    "name": "tso_experiment",
+    "passed": true,
+    "metrics": [
+      {
+        "metric": "Explanation Structure",
+        "score": 0.7,
+        "threshold": 0.7,
+        "passed": true,
+        "reason": "The response includes all four required sections (Verdict, Why, What Would Change the Verdict, Overview) with clear headings and logical flow. The Verdict section explicitly references both Kantian and Utilitarian principles and correctly states permissibility for each. The Why section connects the Input JSON's specific elements \u2014 poor_suffering_reduced, rich_people_feel_violated, rich_property_rights_violated, and the means/ends distinction \u2014 to the verdicts in plain language without abrupt transitions. However, the 'What Would Change the Verdict' section falls short of the INUS-style condition requirement: it hypothesizes changes to the action itself (e.g., getting consent, or the harm outweighing benefits) rather than referencing the specific INUS conditions from the Input JSON's dilemma evaluation fields. The Overview section summarizes permissibility across both principles clearly and uses good formatting throughout. The main weakness is the failure to ground the 'What Would Change the Verdict' section in the formal INUS conditions provided in the JSON."
+      },
+      {
+        "metric": "Explanatory Value",
+        "score": 0.9,
+        "threshold": 0.7,
+        "passed": true,
+        "reason": "The response excels at translating complex JSON logic into plain, accessible language. It explains the Kantian verdict by grounding it in the specific scenario (stealing from rich to give to poor), clarifying why treating the rich as mere instruments violates their autonomy \u2014 not just stating the result. The utilitarian explanation converts the GEq utility comparison into an intuitive 'the math favors stealing' framing, explaining that the poor's gains outweigh the rich's losses in concrete terms. No raw syntax or technical jargon from the JSON appears in the output. The 'What Would Change the Verdict' section further demonstrates understanding of the logical conditions (consent for Kantian, harm magnitude for utilitarian) without echoing boolean flags or formal notation. The scenario details (poor suffering, rich property rights, redistribution) are consistently referenced throughout, making the ethical reasoning feel directly tied to the user's situation rather than abstract. Minor limitation: the response slightly understates the Kantian 'necessary' conditions complexity, but this doesn't detract meaningfully from comprehension for a layperson."
+      }
+    ]
+  }
+]

@@ -1,0 +1,122 @@
+[
+  {
+    "name": "/mnt/d/source/ethico/experiments/glyk_experiment/extraction.txt",
+    "passed": true,
+    "metrics": [
+      {
+        "metric": "TurnRelevancyMetric",
+        "score": 1.0,
+        "threshold": 0.9,
+        "passed": true,
+        "reason": "The score is 1.0 because there are no irrelevancies identified. The assistant messages are entirely relevant to the user messages in the conversation."
+      },
+      {
+        "metric": "KnowledgeRetentionMetric",
+        "score": 1.0,
+        "threshold": 0.9,
+        "passed": true,
+        "reason": "The score is 1.00 because there are no attritions recorded. The LLM demonstrated perfect knowledge retention with no instances of forgetfulness or failure to recall previously established information in the conversation."
+      }
+    ]
+  },
+  {
+    "name": "/mnt/d/source/ethico/experiments/lamp_experiment/extraction.txt",
+    "passed": true,
+    "metrics": [
+      {
+        "metric": "TurnRelevancyMetric",
+        "score": 1.0,
+        "threshold": 0.9,
+        "passed": true,
+        "reason": "The score is 1.0 because there are no irrelevancies identified in the conversation. The assistant messages are entirely relevant to the user messages, with no instances of off-topic responses, factual errors, or misaligned information detected."
+      },
+      {
+        "metric": "KnowledgeRetentionMetric",
+        "score": 1.0,
+        "threshold": 0.9,
+        "passed": true,
+        "reason": "The score is 1.00 because there are no attritions recorded. The LLM demonstrated perfect knowledge retention with no instances of forgetfulness or failure to recall previously established information in the conversation."
+      }
+    ]
+  },
+  {
+    "name": "/mnt/d/source/ethico/experiments/myr_experiment/extraction.txt",
+    "passed": false,
+    "metrics": [
+      {
+        "metric": "TurnRelevancyMetric",
+        "score": 1.0,
+        "threshold": 0.9,
+        "passed": true,
+        "reason": "The score is 1.0 because there are no irrelevancies identified in the assistant messages. The assistant's responses were entirely relevant and appropriate to the user's inquiries throughout the conversation."
+      },
+      {
+        "metric": "KnowledgeRetentionMetric",
+        "score": 0.75,
+        "threshold": 0.9,
+        "passed": false,
+        "reason": "The score is 0.75 because while the LLM retained the established fact that there are '2 more children' as other dependents and understood that legal consequences would affect the father's ability to work and support his son, it failed to recognize that the severity of impact on these other children was never specified in the Previous Knowledge. The LLM asked about impact severity without acknowledging this information gap, demonstrating partial knowledge retention with a notable lapse in tracking what was and wasn't established in the conversation."
+      }
+    ]
+  },
+  {
+    "name": "/mnt/d/source/ethico/experiments/nalex_experiment/extraction.txt",
+    "passed": false,
+    "metrics": [
+      {
+        "metric": "TurnRelevancyMetric",
+        "score": 1.0,
+        "threshold": 0.9,
+        "passed": true,
+        "reason": "The score is 1.0 because there are no irrelevancies identified in the assistant messages. The assistant's responses were entirely relevant and appropriate to the user's inquiries throughout the conversation."
+      },
+      {
+        "metric": "KnowledgeRetentionMetric",
+        "score": 0.667,
+        "threshold": 0.9,
+        "passed": false,
+        "reason": "The score is 0.67 because the LLM demonstrated significant knowledge retention failures in two critical areas: (1) It contradicted established facts by emphasizing 'money's use for charity' as a central dilemma element when the Previous Knowledge explicitly stated 'Use of Money' is 'Not of concern,' and (2) It fabricated consequences by including 'A random person dies if you press the button' when the Previous Knowledge clearly stated 'Other Effects from Pressing Button: No.' These direct contradictions of previously established facts indicate substantial forgetfulness, though the LLM retained some contextual understanding of the overall scenario, preventing a lower score."
+      }
+    ]
+  },
+  {
+    "name": "/mnt/d/source/ethico/experiments/ros_experiment/extraction.txt",
+    "passed": true,
+    "metrics": [
+      {
+        "metric": "TurnRelevancyMetric",
+        "score": 1.0,
+        "threshold": 0.9,
+        "passed": true,
+        "reason": "The score is 1.0 because there are no irrelevancies identified in the conversation. The assistant messages are entirely relevant to the user messages, with no instances of off-topic responses, factual errors, or misaligned information detected."
+      },
+      {
+        "metric": "KnowledgeRetentionMetric",
+        "score": 1.0,
+        "threshold": 0.9,
+        "passed": true,
+        "reason": "The score is 1.00 because there are no attritions recorded. The LLM demonstrated perfect knowledge retention with no instances of forgetfulness or failure to recall previously established information in the conversation."
+      }
+    ]
+  },
+  {
+    "name": "/mnt/d/source/ethico/experiments/tso_experiment/extraction.txt",
+    "passed": false,
+    "metrics": [
+      {
+        "metric": "TurnRelevancyMetric",
+        "score": 1.0,
+        "threshold": 0.9,
+        "passed": true,
+        "reason": "The score is 1.0 because there are no irrelevancies identified in the conversation. The assistant messages are entirely relevant to the user messages, with no instances of off-topic responses, factual errors, or misaligned information detected."
+      },
+      {
+        "metric": "KnowledgeRetentionMetric",
+        "score": 0.8,
+        "threshold": 0.9,
+        "passed": false,
+        "reason": "The score is 0.80 because while the LLM retained some contextual understanding of the scenario, it demonstrated significant factual contradictions with established knowledge: (1) It mischaracterized the goal as 'reduce the poor people's suffering' instead of the established 'Make the poor people feel better'; (2) It incorrectly stated the outcome as 'Poor people's suffering is reduced' when Previous Knowledge explicitly specified 'Will suffer'; (3) It misattributed consequences to rich people by claiming they 'feel violated and wronged' as a result of theft's impact, when Previous Knowledge indicated their 'Economic Status' 'Won't be affected' and the wrongness stems from emotional harm and rights violations themselves. These multiple contradictions indicate moderate knowledge retention with notable lapses in recalling and applying previously established facts."
+      }
+    ]
+  }
+]
