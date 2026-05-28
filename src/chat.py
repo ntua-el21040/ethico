@@ -126,6 +126,9 @@ def evaluate(message):
 
 
 def respond(message, history):
+    if not message or not message.strip():
+        return gr.skip(), gr.skip()
+    
     chat_messages.append({"role": "user", "content": message})
 
     if message.strip().upper() == "EVALUATE":
