@@ -25,7 +25,8 @@ GROUND_TRUTH = {
     "drugs.json": False
 }
 
-folder_path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "cases")
+folder_path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
+                           "cases")
 
 
 def evaluate(situation_path):

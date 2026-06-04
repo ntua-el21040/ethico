@@ -46,7 +46,8 @@ UTILITARIAN_TRUTH = {
     "drugs.json": False
 }
 
-folder_path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "cases")
+folder_path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
+                           "cases")
 test_cases = [
     (filename, KANTIAN_TRUTH[filename], UTILITARIAN_TRUTH[filename])
     for filename in KANTIAN_TRUTH.keys()

@@ -3,7 +3,8 @@ import os
 import pytest
 from src.validator import UtilitarianModel
 
-folder_path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "cases", "cam")
+folder_path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 
+                           "cases", "cam")
 
 def get_dilemma_files():
     """
