@@ -1,5 +1,5 @@
 # THUFIR - A VIrtual Ethics Advisor
-Thufir is a hybrid machine ethics system that helps users navigate moral dilemmas.
+**THUFIR** is a hybrid machine ethics system that helps users navigate moral dilemmas.
 
 It integrates an LLM to converse with users and a mdodified version of the HERA Python library for moral reasoning.
 

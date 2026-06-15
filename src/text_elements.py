@@ -551,28 +551,40 @@ Follow these rules:
 
 
 SYSTEM_INFORMATION = """
-### In a nutshell
+**In a nutshell**
 
-THUFIR is designed as a interactive and transparent ethics advisor. It consists of an LLM-powered chatbot that elicits information about a dilemma from the user paired with an ethics engine that evaluates the dilemmas in a formal and transparent manner. The goal of the system is to facilitate users to understand and evaluate moral dilemmas and the ethical theories that can be applied in moral consideration.
+**THUFIR** is a virtual ethics advisor that helps you navigate moral dilemmas. You can discuss your dilemma with **THUFIR** through the chatbot interface. The system will inform you when it has gathered enough context about your dilemma, and you may then request its evaluation. **THUFIR** will explain how the dilemma would be evaluated by the ethical principles of act-utilitarianism and the Kantian Humanity Formula. You may then ask any question about the results of the evaluation, or describe a new dilemma that you would like **THUFIR** to help you explore.
 
-### In more detail
+**In more detail**
 
-THUFIR is composed by two essential parts: a costumised LLM chatbot and the HERA python library for ethics reasoning.
+**THUFIR** is a hybrid machine ethics system. It combines a Large Language Model (LLM) as its data-driven, bottom-up component and the HERA Python library for ethical reasoning as its verifiable, top-down component.
 
-The LLM chatbot is THUFIR’s component that the user interacts with by cinversing in natural language and describing their moral dilemma . The chatbot’s main task is to collect any relevant information about the dilemma, clarify possible ambiguities, and codify the information provided by users throughout the conversation into a pre-defined JSON format. This process aims to capture the essence of the dilemma in a format that can be understood by a computer, and in this case the HERA library in specific.
+**THUFIR**’s LLM component powers the chatbot interface you use to converse with the system. Its main task is to collect all relevant moral context about your dilemma, clarify ambiguities, and construct a structured dilemma model. The aim of this extraction stage is to translate your description into a format that can be processed and evaluated by the HERA library.
 
-After the dilemma has been codified in this way, it is then parsed by the system’s “ethics engine” that uses the HERA library. This is where the dilemma actually gets evaluated, using ethical principles based on traditional theories of ethics such as Utilitarianism, Kantian Ethics or the Doctrine of Double Effect. The moral permissibility of the action described in the dilemma gets evaluated based on a number of different criteria that each theory considers relevant. For example, Utilitarianism will evaluate the action based on the action’s consequences, while other theories may also consider the agent’s intentions or goals. 
+In the **evaluation stage**, the dilemma model is processed by **THUFIR**’s ethics engine using two core ethical principles: act-utilitarianism and the Kantian Humanity Formula. Act-utilitarianism evaluates the action based on which option produces the best overall consequences. Kant’s Humanity Formula examines whether the action treats people merely as means rather than as ends in themselves.
 
-After evaluating the dilemma according to a set of pre-defined ethical theories, the ethics engine provides its evaluation and reasoning in a separate JSON file. Then, the LLM chatbot reads the ethics engine’s output and presents it to the user in natural language. It details the reasons for each evaluation, compares the results of each theory and provides a high-level overview of the main principles for each theory. Then the user is free to ask a couple of follow-up questions, in order to better understand THUFIR’s evaluations and conclusions.
+In the **explanation stage**, **THUFIR** presents the results in clear natural language. The system details the reasoning behind each evaluation, compares the conclusions of the two principles, and provides a high-level overview of their theoretical foundations. You may then ask follow-up questions to better understand **THUFIR**’s evaluations and conclusions. You can also request the evaluation of a modified version of your dilemma or an entirely different one.
 
-The main goal of THUFIR is that users can access the power of an ethics engine while not having to learn the intricacies of its inner workings. 
+**THUFIR**’s goal is to provide clarity and guidance. You may find the perspectives offered by the implemented ethical principles provide illuminating, but the final choice in any moral dilemma remains yours, as does the responsibility for it.
 """
 
-DISCLAIMERS = """
-All usual bias and dangers that pertain to LLMs still apply, as THUFIR uses an LLM to extract information about the dilemma from users.
-
-After the dilemma evaluation has been presented, users are encouraged to discuss it with THUFIR in order to enhance their understanding of the dilemma, the evaluations of various theories, or the theories themselves. However, keep in mind that HERA will not be used again by THUFIR. This means that long-winded discussions are likely to drift away from the ethics engine’s reliable outputs and more towards the usual LLM bullshittery.
+DILEMMA_INTRO= """
+Your dilemma model will appear below after its evaluation. You may inspect it to make sure that it captures the essence of your dilemma:
 """
+
+DILEMMA_FOLLOWUP="""
+### Field descriptions:
+
+- **description:** a short description of your dilemma
+- **actions**: the action the moral agent is considering, and the option to refrain from doing it
+- **consequences**: the consequences that the agent's choice may produce, either directly or through other consequences
+- **mechanisms**: the actions or consequences that cause each possible consequence
+- **utilities**: the utility of each consequence that describes how 'good' or 'desirable' it is
+- **patients**: the moral patients involved in the dilemma
+- **affects**: how a given consequence affects a moral patient (positively or negatively)
+- **goals**: which consequences constitute the moral agent's goals when acting or refraining
+"""
+
 
 INTRO_MESSAGE = """
 <span style="font-size: 20px; text-align: center;">
@@ -581,41 +593,6 @@ Hello! THUFIR is a virtual ethics advisor that helps you navigate moral dilemmas
 To begin, describe your moral dilemma to THUFIR and discuss it with him.
 </span>
 """
-
-EXAMPLE_DILEMMA = """
-Suppose the user describes the following dilemma: 
-
-"A robot sees a burglar and has to decide whether to tell them where the safe is. If it discloses, the safe gets robbed. If it refrains, the robot gets damaged by the burglar."
-
-After some back-and-forth with the user, the chatbot provides this JSON to the ethics engine:
-
-```python
-{
-  "description": "A robot must decide whether to disclose the location of a safe to a burglar, risking the safe being robbed, or to refrain from disclosing, risking damage to itself.",
-  "actions": ["disclose", "refrain"],
-  "consequences": ["safe_robbed", "robot_damaged"],
-  "mechanisms": {
-    "safe_robbed": "'disclose'",
-    "robot_damaged": "Not('disclose')"
-  },
-  "utilities": {
-    "safe_robbed": -80,
-    "Not('safe_robbed')": 0,
-    "robot_damaged": -10,
-    "Not('robot_damaged')": 0
-  }
-}
-```
-
-This is how this dilemma can be interpreted:
-
-- **description:** a short description of the dilemma in natural language
-- **actions**: the robot must choose between actions `disclose` (i.e. disclose the location of the safe to the burglar) and `refrain` (say nothing).
-- **consequences**: the possible consequences of these options are `safe_robbed` (the safe gets robbed) and `robot_damaged` (the robot gets damaged).
-- **mechanisms**: action `'disclose'` causes the safe to be robbed, but  `Not('disclose')` (not disclosing the location of the safe) causes the robot to be damaged.
-- **utilities**: both the safe getting robbed and the robot being damaged have negative utility, which means that they are undesirable or harmful consequences. Notice that `safe_robbed`  has significantly lower utility than `robot_damaged` , which implies that the user has described that the safe being robbed would be much more disastrous than the robot getting damaged. Finally, not robbing the safe and not damaging the robot carry neutral utility, as they descibe the status quo before the dilemma.
-"""
-
 
 EXAMPLES = [
     "A doctor can save 5 patients by harvesting organs from one healthy patient. If he does, the 5 patients are saved and the healthy one dies. Else, the 5 patients die.",
