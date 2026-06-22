@@ -1,17 +1,17 @@
 {
   "action": "harvest_organs",
   "kantian_humanity_principle": {
-    "permissible": true,
+    "permissible": false,
     "principle": "KantianHumanityPrincipleReading1",
-    "sufficient": "{And(End('healthy_patient'), End('five_patients'))}",
-    "necessary": "{End('healthy_patient'), End('five_patients')}",
-    "inus": "{End('healthy_patient'), End('five_patients')}"
+    "sufficient": "{And(Not(End('healthy_patient')), Means('healthy_patient'))}",
+    "necessary": "{Not(End('healthy_patient')), Or(Means('five_dying_patients'), Not(End('healthy_patient'))), Or(Means('five_dying_patients'), Means('healthy_patient')), Means('healthy_patient')}",
+    "inus": "{Not(End('healthy_patient')), Means('healthy_patient')}"
   },
   "utilitarian_principle": {
     "permissible": true,
     "principle": "Utilitarianism",
-    "sufficient": "{GEq(U(And(And(And(And('five_patients_saved', 'healthy_patient_dies'), 'healthy_patient_autonomy_respected'), Not('five_patients_die')), Not('healthy_patient_autonomy_thwarted'))), U(And(And(And(And('five_patients_die', 'healthy_patient_autonomy_thwarted'), Not('five_patients_saved')), Not('healthy_patient_dies')), Not('healthy_patient_autonomy_respected'))))}",
-    "necessary": "{GEq(U(And(And(And(And('five_patients_saved', 'healthy_patient_dies'), 'healthy_patient_autonomy_respected'), Not('five_patients_die')), Not('healthy_patient_autonomy_thwarted'))), U(And(And(And(And('five_patients_die', 'healthy_patient_autonomy_thwarted'), Not('five_patients_saved')), Not('healthy_patient_dies')), Not('healthy_patient_autonomy_respected'))))}",
-    "inus": "{GEq(U(And(And(And(And('five_patients_saved', 'healthy_patient_dies'), 'healthy_patient_autonomy_respected'), Not('five_patients_die')), Not('healthy_patient_autonomy_thwarted'))), U(And(And(And(And('five_patients_die', 'healthy_patient_autonomy_thwarted'), Not('five_patients_saved')), Not('healthy_patient_dies')), Not('healthy_patient_autonomy_respected'))))}"
+    "sufficient": "{GEq(U(And(And(And('five_patients_saved', 'healthy_patient_dies'), Not('five_patients_die')), Not('healthy_patient_lives'))), U(And(And(And('five_patients_die', 'healthy_patient_lives'), Not('five_patients_saved')), Not('healthy_patient_dies'))))}",
+    "necessary": "{GEq(U(And(And(And('five_patients_saved', 'healthy_patient_dies'), Not('five_patients_die')), Not('healthy_patient_lives'))), U(And(And(And('five_patients_die', 'healthy_patient_lives'), Not('five_patients_saved')), Not('healthy_patient_dies'))))}",
+    "inus": "{GEq(U(And(And(And('five_patients_saved', 'healthy_patient_dies'), Not('five_patients_die')), Not('healthy_patient_lives'))), U(And(And(And('five_patients_die', 'healthy_patient_lives'), Not('five_patients_saved')), Not('healthy_patient_dies'))))}"
   }
 }

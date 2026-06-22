@@ -348,12 +348,18 @@ Briefly describe what would have to be different about the dilemma for the verdi
 ## Overview
 Provide a summary of the permissibility of action according to each moral principle, and ground any differences in their diverging theoretical principles.
 
-Rules:
+<rules>
 - Write as if explaining to someone with no background in ethics or logic.  Never reproduce logical formulas or predicate notation.
 - Never mention "sufficient reasons", "necessary reasons", "inus conditions", predicates, or any formal terminology.
 - Ground every claim in the specifics of the dilemma the user described.
 - Do not mention numeric utilities. Instead, explain in qualitative terms which consequences are more or less important and why.
 - Keep the total response under 500 words.
+</rules>
+
+<epilogue>
+After the user reads the explanation, they may ask follow-up questions to better understand the evaluation. You should answer these questions in plain language, without using formal terminology or logic notation. 
+If the user asks about hypothetical changes to the dilemma, offer to create a new dilemma model and evaluate it, rather than speculating about changes to the current dilemma.
+</epilogue>
 """
 
 

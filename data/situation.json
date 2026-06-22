@@ -1,26 +1,24 @@
 {
-  "description": "A doctor can harvest organs from one healthy patient who has voluntarily agreed to donate them to save five other patients who would otherwise die. The doctor's goals are to save the five patients and to respect the healthy patient's autonomous choice to donate. If the doctor harvests the organs, the five patients are saved and the healthy patient dies (by their consent). If the doctor refrains, the five patients die and the healthy patient's voluntary choice is thwarted.",
+  "description": "A doctor can harvest organs from one healthy, non-consenting patient to save five dying patients. If organs are harvested, the five patients are saved but the healthy patient dies. If the doctor refrains, the five patients die and the healthy patient lives.",
   "actions": [
     "harvest_organs",
     "refrain"
   ],
   "patients": [
-    "five_patients",
+    "five_dying_patients",
     "healthy_patient"
   ],
   "consequences": [
     "five_patients_saved",
     "healthy_patient_dies",
     "five_patients_die",
-    "healthy_patient_autonomy_respected",
-    "healthy_patient_autonomy_thwarted"
+    "healthy_patient_lives"
   ],
   "mechanisms": {
     "five_patients_saved": "'harvest_organs'",
     "healthy_patient_dies": "'harvest_organs'",
     "five_patients_die": "Not('harvest_organs')",
-    "healthy_patient_autonomy_respected": "'harvest_organs'",
-    "healthy_patient_autonomy_thwarted": "Not('harvest_organs')"
+    "healthy_patient_lives": "Not('harvest_organs')"
   },
   "utilities": {
     "five_patients_saved": 5,
@@ -29,36 +27,29 @@
     "Not('healthy_patient_dies')": 0,
     "five_patients_die": -5,
     "Not('five_patients_die')": 0,
-    "healthy_patient_autonomy_respected": 2,
-    "Not('healthy_patient_autonomy_respected')": 0,
-    "healthy_patient_autonomy_thwarted": -2,
-    "Not('healthy_patient_autonomy_thwarted')": 0
+    "healthy_patient_lives": 1,
+    "Not('healthy_patient_lives')": 0
   },
   "goals": {
     "harvest_organs": [
-      "five_patients_saved",
-      "healthy_patient_autonomy_respected"
+      "five_patients_saved"
     ],
     "refrain": []
   },
   "affects": {
     "harvest_organs": [
       [
-        "five_patients",
+        "five_dying_patients",
         "+"
       ],
       [
         "healthy_patient",
         "-"
-      ],
-      [
-        "healthy_patient",
-        "+"
       ]
     ],
     "refrain": [
       [
-        "five_patients",
+        "five_dying_patients",
         "-"
       ],
       [
@@ -68,7 +59,7 @@
     ],
     "five_patients_saved": [
       [
-        "five_patients",
+        "five_dying_patients",
         "+"
       ]
     ],
@@ -80,20 +71,14 @@
     ],
     "five_patients_die": [
       [
-        "five_patients",
+        "five_dying_patients",
         "-"
       ]
     ],
-    "healthy_patient_autonomy_respected": [
+    "healthy_patient_lives": [
       [
         "healthy_patient",
         "+"
-      ]
-    ],
-    "healthy_patient_autonomy_thwarted": [
-      [
-        "healthy_patient",
-        "-"
       ]
     ]
   }
