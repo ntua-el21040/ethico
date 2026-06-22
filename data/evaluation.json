@@ -4,14 +4,14 @@
     "permissible": false,
     "principle": "KantianHumanityPrincipleReading1",
     "sufficient": "{And(Not(End('healthy_patient')), Means('healthy_patient'))}",
-    "necessary": "{Not(End('healthy_patient')), Or(Means('five_dying_patients'), Not(End('healthy_patient'))), Or(Means('five_dying_patients'), Means('healthy_patient')), Means('healthy_patient')}",
+    "necessary": "{Or(Means('five_dying_patients'), Not(End('healthy_patient'))), Not(End('healthy_patient')), Or(Means('five_dying_patients'), Means('healthy_patient')), Means('healthy_patient')}",
     "inus": "{Not(End('healthy_patient')), Means('healthy_patient')}"
   },
   "utilitarian_principle": {
     "permissible": true,
     "principle": "Utilitarianism",
-    "sufficient": "{GEq(U(And(And(And('five_patients_saved', 'healthy_patient_dies'), Not('five_patients_die')), Not('healthy_patient_lives'))), U(And(And(And('five_patients_die', 'healthy_patient_lives'), Not('five_patients_saved')), Not('healthy_patient_dies'))))}",
-    "necessary": "{GEq(U(And(And(And('five_patients_saved', 'healthy_patient_dies'), Not('five_patients_die')), Not('healthy_patient_lives'))), U(And(And(And('five_patients_die', 'healthy_patient_lives'), Not('five_patients_saved')), Not('healthy_patient_dies'))))}",
-    "inus": "{GEq(U(And(And(And('five_patients_saved', 'healthy_patient_dies'), Not('five_patients_die')), Not('healthy_patient_lives'))), U(And(And(And('five_patients_die', 'healthy_patient_lives'), Not('five_patients_saved')), Not('healthy_patient_dies'))))}"
+    "sufficient": "{GEq(U(And('five_patients_saved', 'healthy_patient_dies_by_choice')), U(And(Not('five_patients_saved'), Not('healthy_patient_dies_by_choice'))))}",
+    "necessary": "{GEq(U(And('five_patients_saved', 'healthy_patient_dies_by_choice')), U(And(Not('five_patients_saved'), Not('healthy_patient_dies_by_choice'))))}",
+    "inus": "{GEq(U(And('five_patients_saved', 'healthy_patient_dies_by_choice')), U(And(Not('five_patients_saved'), Not('healthy_patient_dies_by_choice'))))}"
   }
 }
