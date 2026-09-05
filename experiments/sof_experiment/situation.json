@@ -1,0 +1,156 @@
+{
+  "description": "A psychology intern working at an addiction-focused organization must decide whether to continue working at a betting company. Staying provides financial stability to complete studies and transition to part-time psychotherapy, but risks compromising professional values around addiction, damaging reputation in psychology circles, and gradually losing motivation for psychology entirely. Leaving avoids the ethical conflict but removes the financial stability needed to sustain the difficult path to becoming a psychotherapist.",
+  "actions": [
+    "stay_at_betting_company",
+    "refrain"
+  ],
+  "patients": [
+    "psychologist_self",
+    "psychology_profession",
+    "addiction_field"
+  ],
+  "consequences": [
+    "financial_stability_maintained",
+    "studies_completed",
+    "psychology_reputation_damaged",
+    "values_compromised",
+    "motivation_for_psychology_lost",
+    "psychology_career_abandoned",
+    "ethical_conflict_resolved",
+    "financial_instability_incurred"
+  ],
+  "mechanisms": {
+    "financial_stability_maintained": "'stay_at_betting_company'",
+    "studies_completed": "'financial_stability_maintained'",
+    "psychology_reputation_damaged": "'stay_at_betting_company'",
+    "values_compromised": "'stay_at_betting_company'",
+    "motivation_for_psychology_lost": "'financial_stability_maintained'",
+    "psychology_career_abandoned": "'motivation_for_psychology_lost'",
+    "ethical_conflict_resolved": "Not('stay_at_betting_company')",
+    "financial_instability_incurred": "Not('stay_at_betting_company')"
+  },
+  "goals": {
+    "stay_at_betting_company": [
+      "studies_completed"
+    ],
+    "refrain": [
+      "ethical_conflict_resolved"
+    ]
+  },
+  "affects": {
+    "stay_at_betting_company": [
+      [
+        "psychologist_self",
+        "-"
+      ],
+      [
+        "psychology_profession",
+        "-"
+      ],
+      [
+        "addiction_field",
+        "-"
+      ]
+    ],
+    "refrain": [
+      [
+        "psychologist_self",
+        "+"
+      ],
+      [
+        "psychology_profession",
+        "+"
+      ],
+      [
+        "addiction_field",
+        "+"
+      ]
+    ],
+    "financial_stability_maintained": [
+      [
+        "psychologist_self",
+        "+"
+      ]
+    ],
+    "studies_completed": [
+      [
+        "psychologist_self",
+        "+"
+      ]
+    ],
+    "psychology_reputation_damaged": [
+      [
+        "psychologist_self",
+        "-"
+      ],
+      [
+        "psychology_profession",
+        "-"
+      ]
+    ],
+    "values_compromised": [
+      [
+        "psychologist_self",
+        "-"
+      ],
+      [
+        "addiction_field",
+        "-"
+      ]
+    ],
+    "motivation_for_psychology_lost": [
+      [
+        "psychologist_self",
+        "-"
+      ],
+      [
+        "psychology_profession",
+        "-"
+      ]
+    ],
+    "psychology_career_abandoned": [
+      [
+        "psychologist_self",
+        "-"
+      ],
+      [
+        "psychology_profession",
+        "-"
+      ]
+    ],
+    "ethical_conflict_resolved": [
+      [
+        "psychologist_self",
+        "+"
+      ],
+      [
+        "addiction_field",
+        "+"
+      ]
+    ],
+    "financial_instability_incurred": [
+      [
+        "psychologist_self",
+        "-"
+      ]
+    ]
+  },
+  "utilities": {
+    "financial_stability_maintained": 25,
+    "Not('financial_stability_maintained')": 0,
+    "studies_completed": 40,
+    "Not('studies_completed')": 0,
+    "psychology_reputation_damaged": -30,
+    "Not('psychology_reputation_damaged')": 0,
+    "values_compromised": -35,
+    "Not('values_compromised')": 0,
+    "motivation_for_psychology_lost": -50,
+    "Not('motivation_for_psychology_lost')": 0,
+    "psychology_career_abandoned": -60,
+    "Not('psychology_career_abandoned')": 0,
+    "ethical_conflict_resolved": 30,
+    "Not('ethical_conflict_resolved')": 0,
+    "financial_instability_incurred": -20,
+    "Not('financial_instability_incurred')": 0
+  }
+}

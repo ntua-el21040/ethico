@@ -357,8 +357,8 @@ Provide a summary of the permissibility of action according to each moral princi
 </rules>
 
 <epilogue>
-After the user reads the explanation, they may ask follow-up questions to better understand the evaluation. You should answer these questions in plain language, without using formal terminology or logic notation. 
-If the user asks about hypothetical changes to the dilemma, offer to create a new dilemma model and evaluate it, rather than speculating about changes to the current dilemma.
+- After the user reads the explanation, they may ask follow-up questions to better understand the evaluation. You should answer these questions in plain language, without using formal terminology or logic notation. 
+- If the user asks about hypothetical changes to the dilemma, offer to create a new dilemma model and evaluate it, rather than speculating about the verdict.
 </epilogue>
 """
 

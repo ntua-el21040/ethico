@@ -1,17 +1,17 @@
 {
-  "action": "harvest_organs",
+  "action": "pay_full_month_rent",
   "kantian_humanity_principle": {
     "permissible": false,
     "principle": "KantianHumanityPrincipleReading1",
-    "sufficient": "{And(Not(End('healthy_patient')), Means('healthy_patient'))}",
-    "necessary": "{Or(Means('five_dying_patients'), Not(End('healthy_patient'))), Not(End('healthy_patient')), Or(Means('five_dying_patients'), Means('healthy_patient')), Means('healthy_patient')}",
-    "inus": "{Not(End('healthy_patient')), Means('healthy_patient')}"
+    "sufficient": "{And(Means('classmates'), Not(End('classmates'))), And(Not(End('roommates')), Means('roommates')), And(Not(End('parents')), Means('parents'))}",
+    "necessary": "{Or(Or(Or(Means('user'), Not(End('roommates'))), Means('classmates')), Means('parents')), Or(Or(Means('roommates'), Means('classmates')), Means('parents')), Or(Or(Not(End('roommates')), Not(End('classmates'))), Means('parents')), Or(Or(Or(Means('user'), Means('roommates')), Not(End('classmates'))), Not(End('parents'))), Or(Or(Or(Means('user'), Not(End('roommates'))), Not(End('classmates'))), Not(End('parents'))), Or(Or(Or(Means('user'), Means('roommates')), Means('classmates')), Means('parents')), Or(Or(Not(End('roommates')), Means('classmates')), Not(End('parents'))), Or(Or(Means('roommates'), Not(End('classmates'))), Means('parents')), Or(Or(Or(Means('user'), Not(End('roommates'))), Means('classmates')), Not(End('parents'))), Or(Or(Means('roommates'), Means('classmates')), Not(End('parents'))), Or(Or(Not(End('roommates')), Not(End('classmates'))), Not(End('parents'))), Or(Or(Or(Means('user'), Means('roommates')), Not(End('classmates'))), Means('parents')), Or(Or(Not(End('roommates')), Means('classmates')), Means('parents')), Or(Or(Or(Means('user'), Not(End('roommates'))), Not(End('classmates'))), Means('parents')), Or(Or(Means('roommates'), Not(End('classmates'))), Not(End('parents'))), Or(Or(Or(Means('user'), Means('roommates')), Means('classmates')), Not(End('parents')))}",
+    "inus": "set()"
   },
   "utilitarian_principle": {
     "permissible": true,
     "principle": "Utilitarianism",
-    "sufficient": "{GEq(U(And('five_patients_saved', 'healthy_patient_dies_by_choice')), U(And(Not('five_patients_saved'), Not('healthy_patient_dies_by_choice'))))}",
-    "necessary": "{GEq(U(And('five_patients_saved', 'healthy_patient_dies_by_choice')), U(And(Not('five_patients_saved'), Not('healthy_patient_dies_by_choice'))))}",
-    "inus": "{GEq(U(And('five_patients_saved', 'healthy_patient_dies_by_choice')), U(And(Not('five_patients_saved'), Not('healthy_patient_dies_by_choice'))))}"
+    "sufficient": "{GEq(U(And(And(And(And(And(And('financial_burden_on_parents', 'user_avoids_conflict'), 'user_preserves_social_standing'), Not('roommates_lose_income')), Not('reputation_damage_among_classmates')), Not('roommates_become_hostile')), Not('user_maintains_dignity_by_refusing_unfair_demand'))), U(And(And(And(And(And(And('roommates_lose_income', 'reputation_damage_among_classmates'), 'roommates_become_hostile'), 'user_maintains_dignity_by_refusing_unfair_demand'), Not('financial_burden_on_parents')), Not('user_avoids_conflict')), Not('user_preserves_social_standing'))))}",
+    "necessary": "{GEq(U(And(And(And(And(And(And('financial_burden_on_parents', 'user_avoids_conflict'), 'user_preserves_social_standing'), Not('roommates_lose_income')), Not('reputation_damage_among_classmates')), Not('roommates_become_hostile')), Not('user_maintains_dignity_by_refusing_unfair_demand'))), U(And(And(And(And(And(And('roommates_lose_income', 'reputation_damage_among_classmates'), 'roommates_become_hostile'), 'user_maintains_dignity_by_refusing_unfair_demand'), Not('financial_burden_on_parents')), Not('user_avoids_conflict')), Not('user_preserves_social_standing'))))}",
+    "inus": "{GEq(U(And(And(And(And(And(And('financial_burden_on_parents', 'user_avoids_conflict'), 'user_preserves_social_standing'), Not('roommates_lose_income')), Not('reputation_damage_among_classmates')), Not('roommates_become_hostile')), Not('user_maintains_dignity_by_refusing_unfair_demand'))), U(And(And(And(And(And(And('roommates_lose_income', 'reputation_damage_among_classmates'), 'roommates_become_hostile'), 'user_maintains_dignity_by_refusing_unfair_demand'), Not('financial_burden_on_parents')), Not('user_avoids_conflict')), Not('user_preserves_social_standing'))))}"
   }
 }

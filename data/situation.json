@@ -1,67 +1,147 @@
 {
-  "description": "A doctor can save five dying patients by harvesting organs from one healthy patient who has willingly consented to the procedure, understanding it will result in their death. If the doctor harvests, the five patients are saved and the healthy patient dies as they intended. If the doctor refrains, the five patients die and the healthy patient survives.",
+  "description": "A person moving to Italy must decide whether to pay roommates a full month's rent for only one week of stay to avoid social conflict and reputation damage among classmates, or to avoid payment by staying with a friend for free and risk the roommates becoming hostile and spreading negative things about them.",
   "actions": [
-    "harvest_organs",
+    "pay_full_month_rent",
     "refrain"
   ],
   "patients": [
-    "five_dying_patients",
-    "healthy_patient"
+    "user",
+    "roommates",
+    "classmates",
+    "parents"
   ],
   "consequences": [
-    "five_patients_saved",
-    "healthy_patient_dies_by_choice"
+    "financial_burden_on_parents",
+    "user_avoids_conflict",
+    "roommates_lose_income",
+    "reputation_damage_among_classmates",
+    "user_preserves_social_standing",
+    "roommates_become_hostile",
+    "user_maintains_dignity_by_refusing_unfair_demand"
   ],
   "mechanisms": {
-    "five_patients_saved": "'harvest_organs'",
-    "healthy_patient_dies_by_choice": "'harvest_organs'",
-    "Not('five_patients_saved')": "Not('harvest_organs')",
-    "Not('healthy_patient_dies_by_choice')": "Not('harvest_organs')"
-  },
-  "utilities": {
-    "five_patients_saved": 5,
-    "Not('five_patients_saved')": 0,
-    "healthy_patient_dies_by_choice": -1,
-    "Not('healthy_patient_dies_by_choice')": 0
+    "financial_burden_on_parents": "'pay_full_month_rent'",
+    "user_avoids_conflict": "'pay_full_month_rent'",
+    "roommates_lose_income": "Not('pay_full_month_rent')",
+    "reputation_damage_among_classmates": "Not('pay_full_month_rent')",
+    "user_preserves_social_standing": "'pay_full_month_rent'",
+    "roommates_become_hostile": "Not('pay_full_month_rent')",
+    "user_maintains_dignity_by_refusing_unfair_demand": "Not('pay_full_month_rent')"
   },
   "goals": {
-    "harvest_organs": [
-      "five_patients_saved",
-      "healthy_patient_dies_by_choice"
+    "pay_full_month_rent": [
+      "user_avoids_conflict",
+      "user_preserves_social_standing"
     ],
-    "refrain": []
+    "refrain": [
+      "user_maintains_dignity_by_refusing_unfair_demand"
+    ]
+  },
+  "utilities": {
+    "financial_burden_on_parents": -70,
+    "Not('financial_burden_on_parents')": 0,
+    "user_avoids_conflict": 25,
+    "Not('user_avoids_conflict')": 0,
+    "roommates_lose_income": -15,
+    "Not('roommates_lose_income')": 0,
+    "reputation_damage_among_classmates": -50,
+    "Not('reputation_damage_among_classmates')": 0,
+    "user_preserves_social_standing": 40,
+    "Not('user_preserves_social_standing')": 0,
+    "roommates_become_hostile": -35,
+    "Not('roommates_become_hostile')": 0,
+    "user_maintains_dignity_by_refusing_unfair_demand": 45,
+    "Not('user_maintains_dignity_by_refusing_unfair_demand')": 0
   },
   "affects": {
-    "harvest_organs": [
+    "pay_full_month_rent": [
       [
-        "five_dying_patients",
+        "user",
+        "-"
+      ],
+      [
+        "parents",
+        "-"
+      ],
+      [
+        "roommates",
         "+"
       ],
       [
-        "healthy_patient",
-        "-"
+        "classmates",
+        "+"
       ]
     ],
     "refrain": [
       [
-        "five_dying_patients",
+        "user",
+        "+"
+      ],
+      [
+        "parents",
+        "+"
+      ],
+      [
+        "roommates",
         "-"
       ],
       [
-        "healthy_patient",
-        "+"
-      ]
-    ],
-    "five_patients_saved": [
-      [
-        "five_dying_patients",
-        "+"
-      ]
-    ],
-    "healthy_patient_dies_by_choice": [
-      [
-        "healthy_patient",
+        "classmates",
         "-"
+      ]
+    ],
+    "financial_burden_on_parents": [
+      [
+        "parents",
+        "-"
+      ],
+      [
+        "user",
+        "-"
+      ]
+    ],
+    "user_avoids_conflict": [
+      [
+        "user",
+        "+"
+      ]
+    ],
+    "roommates_lose_income": [
+      [
+        "roommates",
+        "-"
+      ]
+    ],
+    "reputation_damage_among_classmates": [
+      [
+        "user",
+        "-"
+      ],
+      [
+        "classmates",
+        "+"
+      ]
+    ],
+    "user_preserves_social_standing": [
+      [
+        "user",
+        "+"
+      ]
+    ],
+    "roommates_become_hostile": [
+      [
+        "user",
+        "-"
+      ],
+      [
+        "roommates",
+        "+"
+      ]
+    ],
+    "user_maintains_dignity_by_refusing_unfair_demand": [
+      [
+        "user",
+        "+"
       ]
     ]
   }

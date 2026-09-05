@@ -1,0 +1,17 @@
+{
+  "action": "stay_at_betting_company",
+  "kantian_humanity_principle": {
+    "permissible": false,
+    "principle": "KantianHumanityPrincipleReading1",
+    "sufficient": "{And(Not(End('addiction_field')), Means('addiction_field')), And(Not(End('psychology_profession')), Means('psychology_profession'))}",
+    "necessary": "{Or(Or(Means('psychologist_self'), Not(End('psychology_profession'))), Means('addiction_field')), Or(Not(End('psychology_profession')), Means('addiction_field')), Or(Means('psychology_profession'), Not(End('addiction_field'))), Or(Or(Means('psychologist_self'), Not(End('psychology_profession'))), Not(End('addiction_field'))), Or(Or(Means('psychologist_self'), Means('psychology_profession')), Means('addiction_field')), Or(Not(End('psychology_profession')), Not(End('addiction_field'))), Or(Means('psychology_profession'), Means('addiction_field')), Or(Or(Means('psychologist_self'), Means('psychology_profession')), Not(End('addiction_field')))}",
+    "inus": "set()"
+  },
+  "utilitarian_principle": {
+    "permissible": false,
+    "principle": "Utilitarianism",
+    "sufficient": "{Not(GEq(U(And(And(And(And(And(And(And('financial_stability_maintained', 'studies_completed'), 'psychology_reputation_damaged'), 'values_compromised'), 'motivation_for_psychology_lost'), 'psychology_career_abandoned'), Not('ethical_conflict_resolved')), Not('financial_instability_incurred'))), U(And(And(And(And(And(And(And('ethical_conflict_resolved', 'financial_instability_incurred'), Not('financial_stability_maintained')), Not('studies_completed')), Not('psychology_reputation_damaged')), Not('values_compromised')), Not('motivation_for_psychology_lost')), Not('psychology_career_abandoned')))))}",
+    "necessary": "{Not(GEq(U(And(And(And(And(And(And(And('financial_stability_maintained', 'studies_completed'), 'psychology_reputation_damaged'), 'values_compromised'), 'motivation_for_psychology_lost'), 'psychology_career_abandoned'), Not('ethical_conflict_resolved')), Not('financial_instability_incurred'))), U(And(And(And(And(And(And(And('ethical_conflict_resolved', 'financial_instability_incurred'), Not('financial_stability_maintained')), Not('studies_completed')), Not('psychology_reputation_damaged')), Not('values_compromised')), Not('motivation_for_psychology_lost')), Not('psychology_career_abandoned')))))}",
+    "inus": "{Not(GEq(U(And(And(And(And(And(And(And('financial_stability_maintained', 'studies_completed'), 'psychology_reputation_damaged'), 'values_compromised'), 'motivation_for_psychology_lost'), 'psychology_career_abandoned'), Not('ethical_conflict_resolved')), Not('financial_instability_incurred'))), U(And(And(And(And(And(And(And('ethical_conflict_resolved', 'financial_instability_incurred'), Not('financial_stability_maintained')), Not('studies_completed')), Not('psychology_reputation_damaged')), Not('values_compromised')), Not('motivation_for_psychology_lost')), Not('psychology_career_abandoned')))))}"
+  }
+}
