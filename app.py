@@ -24,7 +24,6 @@ custom_css = """
 }
 """
 
-
 with gr.Blocks(title="THUFIR") as demo:
     
     with gr.Sidebar(open=True, width=380):
@@ -45,6 +44,7 @@ with gr.Blocks(title="THUFIR") as demo:
         chatbot=gr.Chatbot(placeholder=INTRO_MESSAGE,
                            height="70vh",
                            buttons=['copy', 'copy_all']),
+        textbox=gr.Textbox(placeholder="Describe your dilemma...", submit_btn=True, max_lines=6),
         title="THUFIR - A Virtual Ethics Advisor",
         examples=EXAMPLES,
         additional_outputs=[dilemma_json],

@@ -49,21 +49,18 @@ def evaluate(messages):
         raise gr.Error("There was an error creating the dilemma. Please ensure your input is well-formed and try again.")
 
     tmp_dir = tempfile.mkdtemp(prefix="thufir_")
+    situation_path = os.path.join(tmp_dir, "situation.json")
+    evaluation_path = os.path.join(tmp_dir, "evaluation.json")
+
+    with open(situation_path, "w", encoding="utf-8") as f:
+        json.dump(extracted_model, f, indent=2)
+
     try:
-        situation_path = os.path.join(tmp_dir, "situation.json")
-        evaluation_path = os.path.join(tmp_dir, "evaluation.json")
-
-        with open(situation_path, "w", encoding="utf-8") as f:
-            json.dump(extracted_model, f, indent=2)
-
-        try:
-            evaluate_dilemma(situation_path, evaluation_path)
-            with open(evaluation_path, "r", encoding="utf-8") as f:
-                evaluation = json.load(f)
-        except Exception:
-            raise gr.Error("The ethics engine could not evaluate this dilemma. Please ensure your input is well-formed and try again.")
-    finally:
-        shutil.rmtree(tmp_dir, ignore_errors=True)
+        evaluate_dilemma(situation_path, evaluation_path)
+        with open(evaluation_path, "r", encoding="utf-8") as f:
+            evaluation = json.load(f)
+    except Exception:
+        raise gr.Error("The ethics engine could not evaluate this dilemma. Please ensure your input is well-formed and try again.")
 
     formatted_explain_prompt = EXPLAIN_PROMPT.format(
         evaluation=json.dumps(evaluation, indent=2)
@@ -97,10 +94,8 @@ def evaluate(messages):
 
 
 def respond(message, history):
-    # FIX
     if not message or not message.strip():
-        print("Empty message received. Skipping response.")
-        return gr.skip(), gr.skip()
+        return "Please provide a non-empty message.", gr.skip()
     
     messages = [{"role": t["role"], "content": t["content"]} for t in history]
     messages.append({"role": "user", "content": message})
