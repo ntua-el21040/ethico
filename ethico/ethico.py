@@ -23,15 +23,18 @@ def action_bar() -> rx.Component:
     return rx.hstack(
         rx.input(
             value=State.question,
+            disabled=State.processing,
             placeholder="Ask a question",
             on_change=State.set_question,
             style=style.input_style,
         ),
+        # on_click event triggers the API to send the prompt to OpenAI.
         rx.button(
-            "Ask", 
-            on_click=State.answer, 
-            style=style.button_style)
-        ,
+            "Ask",
+            on_click=State.answer,
+            loading=State.processing,
+            style=style.button_style,
+        ),
         width="100%",
     )
 
@@ -41,10 +44,11 @@ def index() -> rx.Component:
         rx.vstack(
             chat(),
             action_bar(),
-            align="stretch",
+            rx.cond(State.error != "", rx.text(State.error, color="red", role="alert")),
             width="100%",
             max_width="48em",
             padding="1em",
+            align="stretch",
         )
     )
 
