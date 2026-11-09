@@ -1,11 +1,15 @@
 import os
 import asyncio
-
 import reflex as rx
 from openai import APIError, AsyncOpenAI
+from dotenv import load_dotenv
+from ethico.constants import SYSTEM_PROMPT
+
+
+from rxconfig import config
 
 MODEL = "gpt-4o-mini"
-
+load_dotenv()
 
 class State(rx.State):
     question: str = ""
@@ -24,12 +28,15 @@ class State(rx.State):
             if not question or self.processing:
                 return
 
-            api_key = os.environ.get("OPENAI_API_KEY")
+            api_key = os.getenv("OPENAI_API_KEY")
             if not api_key:
                 self.error = "Set OPENAI_API_KEY and restart the app."
                 return
 
-            messages = []
+            messages = [
+                {"role": "system", "content": SYSTEM_PROMPT}
+            ]
+            
             for previous_question, previous_answer in self.chat_history:
                 messages.append({"role": "user", "content": previous_question})
                 messages.append({"role": "assistant", "content": previous_answer})
