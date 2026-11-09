@@ -10,7 +10,7 @@ from dotenv import load_dotenv
 from ethico.constants import SYSTEM_PROMPT
 from src.validator import Settings, UnifiedModel
 from src.evaluator import evaluate_dilemma
-from ethico.constants import EXPLAIN_PROMPT, tools
+from ethico.constants import EXPLAIN_PROMPT, OPENAI_TOOLS
 from rxconfig import config
 
 
@@ -100,28 +100,20 @@ class State(rx.State):
         for previous_question, previous_answer in self.chat_history:
             messages.append({"role": "user", "content": previous_question})
             messages.append({"role": "assistant", "content": previous_answer})
-        messages.append({"role": "user", "content": self.question.strip()})
-        return messages
+        # Remove empty assistant message
+        return messages[:-1]
     
     
     async def _extract_dilemma(self, client: AsyncOpenAI, messages: list[dict]) -> str:
-        tool = next(t for t in tools if t["name"] == "extract_dilemma")
+        tool = next(t for t in OPENAI_TOOLS if t["name"] == "extract_dilemma")
 
         response = await client.chat.completions.create(
             model=MODEL,
             messages=messages,
-            tools=[{
-                "type": "function",
-                "function": {
-                    "name": tool["name"],
-                    "description": tool["description"],
-                    "parameters": tool["input_schema"],
-                    "strict": False,
-                },
-            }],
+            tools=tool,
             tool_choice={
                 "type": "function",
-                "function": {"name": "extract_dilemma"},
+                "name": "extract_dilemma",
             },
         )
 

@@ -363,8 +363,90 @@ Provide a summary of the permissibility of action according to each moral princi
 """
 
 
-tools = [
-  {
+OPENAI_TOOLS = [{
+    "type": "function",
+    "function": {
+        "name": "extract_dilemma",
+        "description":  """Extract the moral dilemma from the conversation into a structured format suitable for both Utilitarian and Kantian evaluation.
+                        Follow these rules:
+                        - Identify all moral patients explicitly or implicitly involved.
+                        - Identify which consequences are intended as goals by the agent.
+                        - Map how each action or consequence affects each patient, with positive (+) or negative (-) valence.
+                        - Infer missing causal links and affects when necessary.
+                        - Assign 0 utility to the negation of every consequence.
+                        - Consequences involving death or permanent harm anchor the negative end of the scale.
+                        - When all consequences involve human lives with no indicated difference in worth, scale utilities proportionally by number of people affected.
+                        - Infer utility magnitudes from the severity of language used.
+                        - Every field must be fully populated, even if inference is required.""",
+        "parameters": {
+            "type": "object",
+            "required": [
+                "description",
+                "actions",
+                "consequences",
+                "mechanisms",
+                "utilities",
+                "patients",
+                "goals",
+                "affects",
+            ],
+            "properties": {
+                "description": {
+                    "type": "string",
+                    "description": "A concise natural language description of the dilemma.",
+                },
+                "actions": {
+                    "type": "array",
+                    "items": {"type": "string"},
+                    "description": "Exactly two actions: the primary action and 'refrain'.",
+                },
+                "consequences": {
+                    "type": "array",
+                    "items": {"type": "string"},
+                    "description": "All consequences resulting from acting or refraining. Use snake_case.",
+                },
+                "mechanisms": {
+                    "type": "object",
+                    "description": """Maps each consequence to its cause.
+                Keys must be consequence names.
+                Values must be the causing action or consequence in quotes, e.g. "'action'" or "Not('action')".
+                Every consequence must have a mechanism.""",
+                },
+                "utilities": {
+                    "type": "object",
+                    "description": """Maps each consequence and its negation to an integer utility value.
+                Format: {"consequence": -80, "Not('consequence')": 0}.
+                Negations always map to 0. Positive values for benefits, negative for harms.
+                Every consequence from the consequences list must appear here, both as itself and as Not('consequence').""",
+                },
+                "patients": {
+                    "type": "array",
+                    "items": {"type": "string"},
+                    "description": "All moral patients (agents or affected parties) involved in the dilemma.",
+                },
+                "goals": {
+                    "type": "object",
+                    "description": """Maps each action to the consequences that constitute the agent's goals.
+                Format: {"action_name": ["goal1", "goal2"], "refrain": []}.
+                Goals must be a subset of consequences.""",
+                },
+                "affects": {
+                    "type": "object",
+                    "description": """Maps each action or consequence to its effects on patients.
+                Format: {"action_or_consequence": [["patient", "+"], ["patient", "-"]]}.
+                Every relevant action and consequence must appear as a key.
+                '+' indicates benefit, '-' indicates harm.""",
+                },
+                "strict": False,
+                },
+            }
+        }
+    }
+]
+
+
+CLAUDE_TOOLS = [
+    {
     "name": "extract_dilemma",
     "description": """Extract the moral dilemma from the conversation into a structured format suitable for both Utilitarian and Kantian evaluation.
 
