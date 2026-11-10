@@ -1,7 +1,9 @@
-import reflex as rx
+import reflex as rx 
+
 from ethico import style
 from ethico.state import State
-from ethico.constants import INTRO_MESSAGE, SYSTEM_INFORMATION
+from ethico.constants import INTRO_MESSAGE
+from ethico.auth_state import AuthState
 
 def sidebar_item(text: str, icon: str, href: str) -> rx.Component:
     return rx.link(
@@ -38,6 +40,7 @@ def sidebar_items() -> rx.Component:
     )
 
 
+
 def sidebar() -> rx.Component:
     return rx.vstack(
         rx.hstack(
@@ -48,47 +51,79 @@ def sidebar() -> rx.Component:
                 height="auto",
                 border_radius="25%",
             ),
-            rx.heading("THUFIR", as_="h2", size="7", weight="bold"),
+            rx.heading(
+                "THUFIR",
+                as_="h2",
+                size="7",
+                weight="bold",
+            ),
             align="center",
             justify="start",
             padding_x="0.5rem",
             width="100%",
         ),
+
         sidebar_items(),
         rx.spacer(),
+
         rx.vstack(
-            rx.vstack(
-                sidebar_item("Settings", "settings", "/#"),
-                sidebar_item("Log out", "log-out", "/#"),
-                spacing="1",
-                width="100%",
-            ),
-            rx.divider(),
-            rx.hstack(
-                rx.icon_button(
-                    rx.icon("user"), size="3", radius="full"
+            # Show logout when authenticated,
+            # otherwise show login.
+            rx.cond(
+                AuthState.is_authenticated,
+                rx.button(
+                    rx.icon("log-out"),
+                    rx.text("Log out", size="4"),
+                    on_click=AuthState.sign_out,
+                    variant="ghost",
+                    width="100%",
+                    justify="start",
                 ),
-                rx.vstack(
-                    rx.box(
-                        rx.text("My account", size="3", weight="bold"),
+                sidebar_item(
+                    "Log in",
+                    "log-in",
+                    "/login",
+                ),
+            ),
+
+            rx.divider(),
+
+            # Account information is only visible
+            # when the user is authenticated.
+            rx.cond(
+                AuthState.is_authenticated,
+                rx.hstack(
+                    rx.icon(
+                        "user",
+                        size=24,
+                    ),
+                    rx.vstack(
                         rx.text(
-                            "user@reflex.dev", size="2", weight="medium"
+                            "My account",
+                            size="3",
+                            weight="bold",
                         ),
+                        rx.text(
+                            AuthState.user_email,
+                            size="2",
+                            weight="medium",
+                            overflow_wrap="anywhere",
+                        ),
+                        spacing="0",
+                        align="start",
                         width="100%",
                     ),
-                    spacing="0",
-                    align="start",
+                    padding_x="0.5rem",
+                    align="center",
                     justify="start",
                     width="100%",
                 ),
-                padding_x="0.5rem",
-                align="center",
-                justify="start",
-                width="100%",
             ),
+
             width="100%",
-            spacing="5",
+            spacing="4",
         ),
+
         spacing="5",
         padding_x="1em",
         padding_y="1.5em",
@@ -102,7 +137,7 @@ def sidebar() -> rx.Component:
         overflow_y="auto",
         z_index="10",
     )
-    
+
 def qa(question: str, answer: str) -> rx.Component:
     return rx.vstack(
         rx.box(
@@ -137,7 +172,7 @@ def chat() -> rx.Component:
     return rx.box(
         rx.auto_scroll(
             rx.cond(
-                State.chat_history.length() == 0,
+                State.chat_history.length() == 0, # type: ignore
                 rx.box(
                     rx.markdown(INTRO_MESSAGE),
                     padding="1em",
@@ -184,28 +219,4 @@ def action_bar() -> rx.Component:
             style=style.button_style,
         ),
         width="100%",
-    )
-
-
-def about_content() -> rx.Component:
-    return rx.box(
-        rx.vstack(
-            rx.heading(
-                "About THUFIR",
-                size="8",
-                weight="bold",
-            ),
-            rx.separator(),
-            rx.markdown(SYSTEM_INFORMATION),
-            spacing="5",
-            align="stretch",
-            width="100%",
-        ),
-        width="100%",
-        max_width="52em",
-        padding="2em",
-        bg=rx.color("slate", 1),
-        border="1px solid",
-        border_color=rx.color("slate", 6),
-        border_radius="16px",
     )
