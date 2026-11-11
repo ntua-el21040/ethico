@@ -49,6 +49,7 @@ def login():
 
                 **style.login_stack,
             ),
+            **style.login_card,
         ),
         **style.login_page,
     )

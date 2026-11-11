@@ -31,11 +31,7 @@ def sidebar_items() -> rx.Component:
 def sidebar() -> rx.Component:
     return rx.vstack(
         rx.hstack(
-            rx.image(
-                src="https://web.reflex-assets.dev/other/logo.jpg",
-                alt="THUFIR Logo",
-                **style.sidebar_logo,
-            ),
+            rx.icon("heart", **style.sidebar_logo),
             rx.heading(
                 "THUFIR",
                 **style.sidebar_heading,
@@ -47,8 +43,6 @@ def sidebar() -> rx.Component:
         rx.spacer(),
 
         rx.vstack(
-            # Show logout when authenticated,
-            # otherwise show login.
             rx.cond(
                 AuthState.is_authenticated,
                 rx.button(
@@ -66,8 +60,6 @@ def sidebar() -> rx.Component:
 
             rx.divider(),
 
-            # Account information is only visible
-            # when the user is authenticated.
             rx.cond(
                 AuthState.is_authenticated,
                 rx.hstack(
@@ -141,17 +133,14 @@ def action_bar() -> rx.Component:
                 style=style.input_style,
             ),
             rx.button(
-                "Ask",
+                rx.icon("arrow-up", size=19),
+                aria_label="Send message",
                 on_click=State.answer,
                 disabled=~enabled,
                 loading=State.processing,
                 style=style.button_style,
             ),
             **style.action_bar_row,
-        ),
-        rx.cond(
-            State.error != "",
-            rx.text(State.error, **style.error_text),
         ),
         **style.action_bar_container,
     )
