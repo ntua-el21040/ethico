@@ -1,37 +1,7 @@
 import reflex as rx
-from ethico.components import sidebar, action_bar, chat
-from ethico.state import State
+from ethico.components import chat_page
 
 
-# Change to actual dilemmas later
+# Replace with a dedicated dilemmas page when implemented.
 def dilemmas() -> rx.Component:
-    return rx.hstack(
-        sidebar(),
-        rx.center(
-            rx.vstack(
-                chat(),
-                action_bar(),
-                rx.cond(
-                    State.error != "",
-                    rx.text(State.error, color="red", role="alert"),
-                ),
-                width="100%",
-                max_width="48em",
-                height="100%",
-                min_height="0",
-                padding="1em",
-                spacing="3",
-                align="stretch",
-            ),
-            flex="1",
-            min_width="0",
-            margin_left="16em",
-            height="100dvh",
-            overflow="hidden",
-        ),
-        width="100%",
-        height="100dvh",
-        spacing="0",
-        align="stretch",
-        overflow="hidden",
-    )
+    return chat_page()

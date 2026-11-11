@@ -1,28 +1,20 @@
 import reflex as rx
 from ethico.constants import SYSTEM_INFORMATION
 from ethico.components import sidebar
+from ethico import style
 
 def about_content() -> rx.Component:
     return rx.box(
         rx.vstack(
             rx.heading(
                 "About THUFIR",
-                size="8",
-                weight="bold",
+                **style.about_heading,
             ),
             rx.separator(),
             rx.markdown(SYSTEM_INFORMATION),
-            spacing="5",
-            align="stretch",
-            width="100%",
+            **style.about_stack,
         ),
-        width="100%",
-        max_width="52em",
-        padding="2em",
-        bg=rx.color("slate", 1),
-        border="1px solid",
-        border_color=rx.color("slate", 6),
-        border_radius="16px",
+        **style.about_card,
     )
     
 def about() -> rx.Component:
@@ -31,15 +23,9 @@ def about() -> rx.Component:
         rx.box(
             rx.center(
                 about_content(),
-                width="100%",
-                padding="2em",
+                **style.about_page_center,
             ),
-            margin_left="16em",
-            width="100%",
-            min_height="100dvh",
-            overflow_y="auto",
+            **style.about_page_content,
         ),
-        width="100%",
-        align="start",
-        spacing="0",
+        **style.about_page_shell,
     )

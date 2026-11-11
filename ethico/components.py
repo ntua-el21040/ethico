@@ -9,23 +9,11 @@ def sidebar_item(text: str, icon: str, href: str) -> rx.Component:
     return rx.link(
         rx.hstack(
             rx.icon(icon),
-            rx.text(text, size="4"),
-            width="100%",
-            padding_x="0.5rem",
-            padding_y="0.75rem",
-            align="center",
-            style={
-                "_hover": {
-                    "bg": rx.color("accent", 4),
-                    "color": rx.color("accent", 11),
-                },
-                "border-radius": "0.5em",
-            },
+            rx.text(text, **style.sidebar_link_text),
+            **style.sidebar_link_row,
         ),
         href=href,
-        underline="none",
-        weight="medium",
-        width="100%",
+        **style.sidebar_link_style,
     )
 
 
@@ -35,8 +23,7 @@ def sidebar_items() -> rx.Component:
         sidebar_item("Chat", "message_circle", "/"),
         sidebar_item("Dilemmas", "scale", "/#"),
         sidebar_item("About", "info", "/about"),
-        spacing="1",
-        width="100%",
+        **style.sidebar_navigation,
     )
 
 
@@ -47,20 +34,13 @@ def sidebar() -> rx.Component:
             rx.image(
                 src="https://web.reflex-assets.dev/other/logo.jpg",
                 alt="THUFIR Logo",
-                width="2.25em",
-                height="auto",
-                border_radius="25%",
+                **style.sidebar_logo,
             ),
             rx.heading(
                 "THUFIR",
-                as_="h2",
-                size="7",
-                weight="bold",
+                **style.sidebar_heading,
             ),
-            align="center",
-            justify="start",
-            padding_x="0.5rem",
-            width="100%",
+            **style.sidebar_brand_row,
         ),
 
         sidebar_items(),
@@ -75,9 +55,7 @@ def sidebar() -> rx.Component:
                     rx.icon("log-out"),
                     rx.text("Log out", size="4"),
                     on_click=AuthState.sign_out,
-                    variant="ghost",
-                    width="100%",
-                    justify="start",
+                    **style.sidebar_logout,
                 ),
                 sidebar_item(
                     "Log in",
@@ -100,72 +78,35 @@ def sidebar() -> rx.Component:
                     rx.vstack(
                         rx.text(
                             "My account",
-                            size="3",
-                            weight="bold",
+                            **style.sidebar_account_title,
                         ),
                         rx.text(
                             AuthState.user_email,
-                            size="2",
-                            weight="medium",
-                            overflow_wrap="anywhere",
+                            **style.sidebar_account_email,
                         ),
-                        spacing="0",
-                        align="start",
-                        width="100%",
+                        **style.sidebar_account_info,
                     ),
-                    padding_x="0.5rem",
-                    align="center",
-                    justify="start",
-                    width="100%",
+                    **style.sidebar_account_row,
                 ),
             ),
 
-            width="100%",
-            spacing="4",
+            **style.sidebar_footer,
         ),
 
-        spacing="5",
-        padding_x="1em",
-        padding_y="1.5em",
-        bg=rx.color("accent", 3),
-        align="start",
-        position="fixed",
-        top="0",
-        left="0",
-        height="100dvh",
-        width="16em",
-        overflow_y="auto",
-        z_index="10",
+        **style.sidebar_container,
     )
 
 def qa(question: str, answer: str) -> rx.Component:
     return rx.vstack(
         rx.box(
             rx.markdown(question),
-            bg=rx.color("accent", 3),
-            border="1px solid",
-            border_color=rx.color("accent", 5),
-            padding="1em",
-            border_radius="12px",
-            align_self="end",
-            max_width="85%",
-            overflow_wrap="anywhere",
+            **style.question_style,
         ),
         rx.box(
             rx.markdown(answer),
-            bg=rx.color("slate", 4),
-            border="1px solid",
-            border_color=rx.color("slate", 6),
-            padding="1em",
-            border_radius="12px",
-            align_self="start",
-            max_width="85%",
-            overflow_wrap="anywhere",
+            **style.answer_style,
         ),
-        width="100%",
-        spacing="3",
-        align="stretch",
-        margin_y="0.5em",
+        **style.message_stack,
     )
 
 def chat() -> rx.Component:
@@ -175,31 +116,16 @@ def chat() -> rx.Component:
                 State.chat_history.length() == 0, # type: ignore
                 rx.box(
                     rx.markdown(INTRO_MESSAGE),
-                    padding="1em",
-                    bg=rx.color("slate", 4),
-                    border_radius="12px",
-                    align_self="start",
-                    max_width="85%",
+                    **style.intro_message,
                 ),
             ),
             rx.foreach(
                 State.chat_history,
                 lambda messages: qa(messages[0], messages[1]),
             ),
-            width="100%",
-            height="100%",
-            min_height="0",
-            padding="1em",
+            **style.chat_scroll,
         ),
-        width="100%",
-        flex="1",
-        min_height="0",
-        bg=rx.color("slate", 1),
-        border="1px solid",
-        border_color=rx.color("slate", 6),
-        border_radius="16px",
-        box_shadow="0 2px 12px rgba(0, 0, 0, 0.05)",
-        overflow="hidden",
+        **style.chat_panel,
     )
     
 
@@ -221,12 +147,31 @@ def action_bar() -> rx.Component:
                 loading=State.processing,
                 style=style.button_style,
             ),
-            width="100%",
+            **style.action_bar_row,
         ),
         rx.cond(
             State.error != "",
-            rx.text(State.error, color=rx.color("red", 11), size="2"),
+            rx.text(State.error, **style.error_text),
         ),
-        width="100%",
-        spacing="2",
+        **style.action_bar_container,
+    )
+
+
+def chat_page() -> rx.Component:
+    """Shared layout for the main chat and dilemmas pages."""
+    return rx.hstack(
+        sidebar(),
+        rx.center(
+            rx.vstack(
+                chat(),
+                action_bar(),
+                rx.cond(
+                    State.error != "",
+                    rx.text(State.error, role="alert", **style.error_text),
+                ),
+                **style.chat_column,
+            ),
+            **style.page_content,
+        ),
+        **style.page_shell,
     )
