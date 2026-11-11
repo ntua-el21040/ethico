@@ -204,19 +204,29 @@ def chat() -> rx.Component:
     
 
 def action_bar() -> rx.Component:
-    return rx.hstack(
-        rx.input(
-            value=State.question,
-            disabled=State.processing,
-            placeholder="Ask a question",
-            on_change=State.set_question,
-            style=style.input_style,
+    enabled = AuthState.auth_checked & AuthState.is_authenticated
+    return rx.vstack(
+        rx.hstack(
+            rx.input(
+                value=State.question,
+                disabled=State.processing | ~enabled,
+                placeholder="Ask a question",
+                on_change=State.set_question,
+                style=style.input_style,
+            ),
+            rx.button(
+                "Ask",
+                on_click=State.answer,
+                disabled=~enabled,
+                loading=State.processing,
+                style=style.button_style,
+            ),
+            width="100%",
         ),
-        rx.button(
-            "Ask",
-            on_click=State.answer,
-            loading=State.processing,
-            style=style.button_style,
+        rx.cond(
+            State.error != "",
+            rx.text(State.error, color=rx.color("red", 11), size="2"),
         ),
         width="100%",
+        spacing="2",
     )

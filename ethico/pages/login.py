@@ -1,9 +1,8 @@
-
 import reflex as rx
 from ..auth_state import AuthState
 
 
-def login_page():
+def login():
     return rx.center(
         rx.card(
             rx.vstack(

@@ -1,7 +1,7 @@
 import json
 import os
 import pytest
-from src.validator import KantianModel
+from ethico.validator import KantianModel
 
 folder_path = os.path.join(
     os.path.dirname(os.path.dirname(os.path.abspath(__file__))),

@@ -1,7 +1,7 @@
 import json
 import os
 import pytest
-from src.validator import UnifiedModel
+from ethico.validator import UnifiedModel
 
 folder_path = os.path.join(
     os.path.dirname(os.path.dirname(os.path.abspath(__file__))),

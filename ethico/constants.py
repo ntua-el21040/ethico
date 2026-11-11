@@ -437,9 +437,9 @@ OPENAI_TOOLS = [{
                 Every relevant action and consequence must appear as a key.
                 '+' indicates benefit, '-' indicates harm.""",
                 },
-                "strict": False,
-                },
-            }
+            },
+        },
+        "strict": False,
         }
     }
 ]

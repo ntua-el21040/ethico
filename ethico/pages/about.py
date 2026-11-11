@@ -1,5 +1,5 @@
 import reflex as rx
-from src.text_elements import SYSTEM_INFORMATION
+from ethico.constants import SYSTEM_INFORMATION
 from ethico.components import sidebar
 
 def about_content() -> rx.Component:

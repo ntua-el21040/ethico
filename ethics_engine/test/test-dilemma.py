@@ -3,7 +3,7 @@ import os
 import argparse
 from ethics.cam.principles import KantianHumanityPrinciple
 from ethics.cam.semantics import CausalModel
-from src.validator import KantianModel
+from ethico.validator import KantianModel
 
 def evaluate(situation_path):
     with open(situation_path, 'r') as f:
